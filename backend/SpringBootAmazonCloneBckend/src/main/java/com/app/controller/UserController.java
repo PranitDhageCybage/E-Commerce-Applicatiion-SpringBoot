@@ -55,10 +55,10 @@ public class UserController {
         }
     }
 
-    @PostMapping("/UpdateProfile/{id}")
-    public ResponseEntity updateUserProfile(@PathVariable int id, @RequestBody User user) {
+    @PutMapping("/UpdateProfile/{id}")
+    public ResponseEntity updateUserProfile(@PathVariable String id, @RequestBody User user) {
         System.out.println("in user update profile : " + id);
-        return new ResponseEntity(userService.userUpdate(id, user), HttpStatus.OK);
+        return new ResponseEntity(userService.userUpdate(Integer.parseInt(id), user), HttpStatus.OK);
     }
 
 

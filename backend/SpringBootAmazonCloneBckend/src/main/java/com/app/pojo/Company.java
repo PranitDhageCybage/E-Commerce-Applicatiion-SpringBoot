@@ -1,12 +1,11 @@
 package com.app.pojo;
 
-import java.util.List;
-
-import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity

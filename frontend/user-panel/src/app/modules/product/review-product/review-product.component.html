@@ -1,0 +1,41 @@
+<h1 style="text-align: center; margin-bottom: 50px">Review Product Here</h1>
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="form">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="">Review</label>
+            <textarea
+              [(ngModel)]="review"
+              rows="4"
+              class="form-control"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top: 40px">
+        <label for="">Rating</label>
+        <input
+          [(ngModel)]="rating"
+          type="number"
+          max="5"
+          min="1"
+          class="form-control"
+        />
+      </div>
+      <div class="form-group" style="margin-top: 10px">
+        <button (click)="onAddreview()" class="btn btn-success">Submit</button>
+        <a
+          style="float: right"
+          routerLink="/home/order/order-history"
+          class="btn btn-danger"
+          >Cancel</a
+        >
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>

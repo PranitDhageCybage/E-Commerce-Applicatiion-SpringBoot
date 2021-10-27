@@ -1,0 +1,50 @@
+<h1 style="text-align: center; margin-bottom: 50px">
+  {{ brand ? "Update" : "Add" }} Brand Here
+</h1>
+<div class="card">
+  <div class="card-header">
+    <a
+      class="btn btn-secondary btn-sm"
+      routerLink="/brand-list"
+      style="float: right"
+    >
+      Back
+    </a>
+    <h4>{{ brand ? "Update" : "Add" }} Brand</h4>
+  </div>
+  <div class="card-body">
+    <div class="form">
+      <div class="row">
+        <div class="col-md-10">
+          <div class="form--group">
+            <label for="title">Title</label>
+            <input [(ngModel)]="title" type="text" class="form-control" />
+          </div>
+        </div>
+        <div class="row" style="margin-top: 20px">
+          <div class="col-md-11">
+            <div class="form-group">
+              <label for="">Description</label>
+              <textarea
+                [(ngModel)]="description"
+                rows="5"
+                class="form-control"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" style="margin-top: 10px">
+          <button (click)="onUpdate()" class="btn btn-success">
+            {{ brand ? "Update" : "Add" }}
+          </button>
+          <a
+            style="margin-left: 10px"
+            routerLink="/brand-list"
+            class="btn btn-danger"
+            >Cancel</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<h1 style="text-align: center; margin-bottom: 50px">Add Address Here</h1>
+<div class="card">
+  <div class="card-header">
+    <a
+      class="btn btn-secondary btn-sm"
+      routerLink="/home/user/address-list"
+      style="float: right"
+    >
+      Back
+    </a>
+    <h4>Add Address</h4>
+  </div>
+  <div class="card-body">
+    <div class="form">
+      <div class="row" style="margin-top: 20px">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="">Address</label>
+            <textarea
+              [(ngModel)]="address"
+              rows="2"
+              class="form-control"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form--group">
+            <label for="title">City</label>
+            <input [(ngModel)]="city" type="text" class="form-control" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form--group">
+            <label for="price">State</label>
+            <input [(ngModel)]="state" type="text" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form--group">
+            <label for="title">Country</label>
+            <input [(ngModel)]="country" type="text" class="form-control" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form--group">
+            <label for="title">Pin</label>
+            <input [(ngModel)]="pin" type="text" class="form-control" />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top: 10px">
+        <button (click)="onAdd()" class="btn btn-success">Submit</button>
+        <a
+          style="margin-left: 10px"
+          routerLink="/home/user/address-list"
+          class="btn btn-danger"
+          >Cancel</a
+        >
+      </div>
+    </div>
+  </div>
+</div>

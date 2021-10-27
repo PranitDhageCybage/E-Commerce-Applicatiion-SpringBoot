@@ -1,0 +1,50 @@
+<div class="modal-header">
+  <h2>Order Preview</h2>
+  <button
+    routerLink="/home/product/cart"
+    class="btn btn-secondary"
+    style="float: right"
+  >
+    Back
+  </button>
+</div>
+
+<div class="modal-body">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Image</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items; let index = index">
+        <td>{{ index + 1 }}</td>
+        <td>
+          <img
+            class="product-image"
+            src="http://localhost:4000/product/image/{{ item['image'] }}"
+            alt=""
+          />
+        </td>
+        <td>{{ item["title"] }}</td>
+        <td>{{ item["price"] }}</td>
+        <td>{{ item["quantity"] }}</td>
+        <td>{{ item["totalAmount"] }}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="5">Total Amount</th>
+        <th colspan="2">{{ totalAmount }}</th>
+      </tr>
+    </tfoot>
+  </table>
+  <button (click)="placeOrder()" class="btn btn-success" style="float: right">
+    Choose Address
+  </button>
+</div>

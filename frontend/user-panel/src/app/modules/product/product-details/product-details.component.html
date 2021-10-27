@@ -1,0 +1,135 @@
+<div class="modal-header">
+  <h2>Product Details</h2>
+  <button
+    routerLink="/home/product/gallery"
+    class="btn btn-secondary float-right"
+  >
+    Back
+  </button>
+</div>
+<div class="modal-body">
+  <!--Section: Block Content-->
+  <section class="mb-5">
+    <div class="row">
+      <div class="col-md-6 mb-4 mb-md-0">
+        <div class="row mx-1">
+          <div class="col-12 mb-0">
+            <img
+              src="http://localhost:4000/product/image/{{ image }}"
+              class="img-fluid z-depth-1"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h5>{{ product["title"] }}</h5>
+        <div>
+          <img
+            *ngIf="avgRating >= 1"
+            class="star"
+            src="../../../../assets/star.png"
+            alt=""
+          />
+          <img
+            *ngIf="avgRating >= 2"
+            class="star"
+            src="../../../../assets/star.png"
+            alt=""
+          />
+          <img
+            *ngIf="avgRating >= 3"
+            class="star"
+            src="../../../../assets/star.png"
+            alt=""
+          />
+          <img
+            *ngIf="avgRating >= 4"
+            class="star"
+            src="../../../../assets/star.png"
+            alt=""
+          />
+          <img
+            *ngIf="avgRating >= 5"
+            class="star"
+            src="../../../../assets/star.png"
+            alt=""
+          />
+        </div>
+        <div style="margin-top: 10px">
+          <span class="mr-1"
+            ><strong> ₹ {{ price }}</strong></span
+          >
+        </div>
+        <p>{{ description }}</p>
+        <div class="table-responsive">
+          <table class="table table-sm table-borderless mb-0">
+            <tbody>
+              <tr>
+                <th class="pl-0 w-25" scope="row"><strong>Category</strong></th>
+                <td>{{ category }}</td>
+              </tr>
+              <tr>
+                <th class="pl-0 w-25" scope="row"><strong>Brand</strong></th>
+                <td>{{ brand }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button
+          type="button"
+          class="btn btn-info btn-md mr-1 mb-2"
+          (click)="addToCart(product)"
+          style="margin-top: 50px"
+        >
+          Add to cart
+        </button>
+      </div>
+    </div>
+  </section>
+  <hr />
+</div>
+<div class="modal-heder" *ngIf="reviews || reviews.lenght > 0">
+  <h2>Product Reviews</h2>
+</div>
+<div class="modal-body" *ngIf="reviews || reviews.lenght > 0">
+  <div *ngFor="let review of reviews">
+    <div class="mt-1 mb-2">
+      <strong>{{ review["firstName"] }} {{ review["lastName"] }} </strong>
+      <span>– </span><span>{{ review["createdOn"] }}</span>
+      <div style="float: right">
+        <img
+          *ngIf="review['rating'] >= 1"
+          class="star"
+          src="../../../../assets/star.png"
+          alt=""
+        />
+        <img
+          *ngIf="review['rating'] >= 2"
+          class="star"
+          src="../../../../assets/star.png"
+          alt=""
+        />
+        <img
+          *ngIf="review['rating'] >= 3"
+          class="star"
+          src="../../../../assets/star.png"
+          alt=""
+        />
+        <img
+          *ngIf="review['rating'] >= 4"
+          class="star"
+          src="../../../../assets/star.png"
+          alt=""
+        />
+        <img
+          *ngIf="review['rating'] >= 5"
+          class="star"
+          src="../../../../assets/star.png"
+          alt=""
+        />
+      </div>
+    </div>
+    <p>{{ review["review"] }}</p>
+    <hr />
+  </div>
+</div>

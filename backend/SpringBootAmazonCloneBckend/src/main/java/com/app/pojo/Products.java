@@ -10,7 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "product")
 public class Products {
@@ -51,89 +53,5 @@ public class Products {
     @JoinColumn(name = "comp_id", nullable = false)
     @ManyToOne(optional = false)
     private Company company;
-
-
-
-
-
-
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Integer getProdId() {
-        return this.prodId;
-    }
-
-    public void setProdId(Integer prodId) {
-        this.prodId = prodId;
-    }
-
-    public String getProdTitle() {
-        return this.prodTitle;
-    }
-
-    public void setProdTitle(String prodTitle) {
-        this.prodTitle = prodTitle;
-    }
-
-    public String getProdDescription() {
-        return this.prodDescription;
-    }
-
-    public void setProdDescription(String prodDescription) {
-        this.prodDescription = prodDescription;
-    }
-
-    public Float getProdPrice() {
-        return this.prodPrice;
-    }
-
-    public void setProdPrice(Float prodPrice) {
-        this.prodPrice = prodPrice;
-    }
-
-    public Integer getProdQty() {
-        return this.prodQty;
-    }
-
-    public void setProdQty(Integer prodQty) {
-        this.prodQty = prodQty;
-    }
-
-    public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public String getPhoto() {
-        return this.photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-	@Override
-	public String toString() {
-		return "Products [prodId=" + prodId + ", prodTitle=" + prodTitle + ", prodDescription=" + prodDescription
-				+ ", prodPrice=" + prodPrice + ", prodQty=" + prodQty + ", photo=" + photo + ", seller=" + user + "]";
-	}
 
 }

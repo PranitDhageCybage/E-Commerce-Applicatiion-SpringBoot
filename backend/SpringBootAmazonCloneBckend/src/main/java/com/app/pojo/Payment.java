@@ -1,16 +1,10 @@
 package com.app.pojo;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import lombok.Data;
 
+import javax.persistence.*;
+
+@Data
 @Entity
 @Table(name = "payment")
 public class Payment {
@@ -36,59 +30,4 @@ public class Payment {
     @OneToOne(cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
     private Myorder myorder;
 
-
-
-
-
-
-
-
-
-    public Myorder getMyorder() {
-        return myorder;
-    }
-
-    public void setMyorder(Myorder myorder) {
-        this.myorder = myorder;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Integer getPayId() {
-        return this.payId;
-    }
-
-    public void setPayId(Integer payId) {
-        this.payId = payId;
-    }
-
-    public Float getPayAmount() {
-        return this.payAmount;
-    }
-
-    public void setPayAmount(Float payAmount) {
-        this.payAmount = payAmount;
-    }
-
-    public String getPayDate() {
-        return this.payDate;
-    }
-
-    public void setPayDate(String payDate) {
-        this.payDate = payDate;
-    }
-
-    public Integer getPayType() {
-        return this.payType;
-    }
-
-    public void setPayType(Integer payType) {
-        this.payType = payType;
-    }
 }

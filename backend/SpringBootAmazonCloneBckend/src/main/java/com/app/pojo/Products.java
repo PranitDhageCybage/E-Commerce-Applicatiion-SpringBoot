@@ -42,10 +42,6 @@ public class Products {
     @Column(name = "photo")
     private String photo;
 
-    @JoinColumn(name = "user_id", nullable = false)
-    @ManyToOne(optional = false)
-    private User user;
-
     @JoinColumn(name = "cat_id", nullable = false)
     @ManyToOne(optional = false)
     private Category category;

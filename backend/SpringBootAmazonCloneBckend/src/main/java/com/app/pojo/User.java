@@ -77,8 +77,4 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Myorder> myorders;
 
-    @JsonIgnore        // to ignore this property during signin causing lazy init
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Products> products;
-
 }

@@ -40,7 +40,10 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public String deleteProducts(int prodId) {
-        productRepo.deleteById(prodId);
-        return "Product Deleted Successfully";
+        if (productRepo.existsById(prodId)) {
+            productRepo.deleteById(prodId);
+            return "Product Deleted Successfully";
+        }
+        return "Product not Found";
     }
 }

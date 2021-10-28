@@ -27,15 +27,18 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Override
     public Category updateCategory(int cat_id, Category newCategory) {
-       Category oldCategory= categoryRepo.findById(cat_id).get();
+        Category oldCategory = categoryRepo.findById(cat_id).get();
         if (newCategory.getCatTitle() != "") oldCategory.setCatTitle(newCategory.getCatTitle());
         if (newCategory.getCatDescription() != "") oldCategory.setCatDescription(newCategory.getCatDescription());
         return categoryRepo.save(oldCategory);
     }
 
     @Override
-    public String  deleteCategory(int cat_id) {
-         categoryRepo.deleteById(cat_id);
-         return "Category Deleted Successfully";
+    public String deleteCategory(int cat_id) {
+        if (categoryRepo.existsById(cat_id)) {
+            categoryRepo.deleteById(cat_id);
+            return "Category Deleted Successfully";
+        }
+        return "Category not found";
     }
 }

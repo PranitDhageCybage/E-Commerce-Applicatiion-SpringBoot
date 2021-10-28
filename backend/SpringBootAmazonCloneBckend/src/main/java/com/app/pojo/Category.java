@@ -37,7 +37,4 @@ public class Category {
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Products> products;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Company> companies;
 }

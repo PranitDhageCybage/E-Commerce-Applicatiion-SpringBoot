@@ -30,7 +30,6 @@ public class CompanyServiceImpl implements ICompanyService {
         Company oldCompany = companyRepo.findById(compId).get();
         if (newCompany.getCompTitle() != "") oldCompany.setCompTitle(newCompany.getCompTitle());
         if (newCompany.getCompDescription() != "") oldCompany.setCompDescription(newCompany.getCompDescription());
-        if (newCompany.getCategory() != null) oldCompany.setCategory(newCompany.getCategory());
         return companyRepo.save(oldCompany);
     }
 

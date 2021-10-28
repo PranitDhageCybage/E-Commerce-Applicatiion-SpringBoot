@@ -25,10 +25,6 @@ public class Company {
     @JsonProperty("comp_description")
     private String compDescription;
 
-    @JoinColumn(name = "cat_id", nullable = false)
-    @ManyToOne(optional = false)
-    private Category category;
-
     @JsonIgnore
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Products> products;

@@ -1,6 +1,7 @@
 package com.app.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,21 +14,27 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "add_id")
+    @JsonProperty("add_id")
     private Integer addId;
 
     @Column(name = "address")
+    @JsonProperty("address")
     private String address;
 
     @Column(name = "city")
+    @JsonProperty("city")
     private String city;
 
     @Column(name = "state")
+    @JsonProperty("state")
     private String state;
 
     @Column(name = "country")
+    @JsonProperty("country")
     private String country;
 
     @Column(name = "pin")
+    @JsonProperty("pin")
     private String pin;
 
     // userId column

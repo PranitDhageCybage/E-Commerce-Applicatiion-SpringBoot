@@ -35,10 +35,10 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public Cart updateCartItemQty(int cart_id, Cart newItem) {
+    public Cart updateCartItemQty(int cart_id, int item_qty) {
         if (cartRepo.existsById(cart_id)) {
             Cart oldCart = cartRepo.findById(cart_id).get();
-            if (newItem.getCartQuantity() != null) oldCart.setCartQuantity(newItem.getCartQuantity());
+            if (item_qty != oldCart.getCartQuantity()) oldCart.setCartQuantity(item_qty);
             return cartRepo.save(oldCart);
         }
         return null;

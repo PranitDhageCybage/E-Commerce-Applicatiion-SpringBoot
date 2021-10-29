@@ -31,10 +31,10 @@ public class CartController {
         return new ResponseEntity(cartService.addCartItem(cartItem), HttpStatus.OK);
     }
 
-    @PutMapping("/update/{cart_id}")
-    public ResponseEntity updateCartItemQty(@PathVariable String cart_id, @RequestBody Cart cartItem) {
+    @PutMapping("/update/{cart_id}/{cart_quantity}")
+    public ResponseEntity updateCartItemQty(@PathVariable String cart_id, @PathVariable String cart_quantity) {
         System.out.println("in update  cart item quantity");
-        return new ResponseEntity(cartService.updateCartItemQty(Integer.parseInt(cart_id), cartItem), HttpStatus.OK);
+        return new ResponseEntity(cartService.updateCartItemQty(Integer.parseInt(cart_id), Integer.parseInt(cart_quantity)), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{cart_id}")

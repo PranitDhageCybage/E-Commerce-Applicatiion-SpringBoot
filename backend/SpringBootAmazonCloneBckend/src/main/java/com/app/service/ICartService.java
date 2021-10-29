@@ -10,7 +10,7 @@ public interface ICartService {
 
     Cart addCartItem(Cart item);
 
-    Cart updateCartItemQty(int cart_id, Cart item);
+    Cart updateCartItemQty(int cart_id,  int item_qty);
 
     String deleteCartItem(int cart_id);
 

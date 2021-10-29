@@ -1,7 +1,6 @@
 package com.app.controller;
 
 import com.app.pojo.Address;
-import com.app.pojo.User;
 import com.app.service.IAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

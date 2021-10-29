@@ -1,7 +1,6 @@
 package com.app.service;
 
 import com.app.pojo.Address;
-import com.app.pojo.User;
 
 import java.util.List;
 

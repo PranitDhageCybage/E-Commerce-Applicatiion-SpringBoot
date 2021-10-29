@@ -52,4 +52,14 @@ public class CartServiceImpl implements ICartService {
         }
         return "Item not found";
     }
+
+    @Override
+    public String deleteAllCartItemByUser(int user_id) {
+        if (userRepo.existsById(user_id)) {
+            User user = userRepo.findById(user_id).get();
+            cartRepo.deleteAllByUser(user);
+            return "Deleted All items from cart";
+        }
+        return "Item not found";
+    }
 }

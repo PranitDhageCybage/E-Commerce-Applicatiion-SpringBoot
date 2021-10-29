@@ -43,4 +43,9 @@ public class CartController {
         return new ResponseEntity(cartService.deleteCartItem(Integer.parseInt(cart_id)), HttpStatus.OK);
     }
 
+    @DeleteMapping("/deleteAll/{user_id}")
+    public ResponseEntity deleteAllCartItemsByUser(@PathVariable String user_id) {
+        System.out.println("in delete All  cart item");
+        return new ResponseEntity(cartService.deleteAllCartItemByUser(Integer.parseInt(user_id)), HttpStatus.OK);
+    }
 }

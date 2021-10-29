@@ -13,4 +13,6 @@ public interface ICartService {
     Cart updateCartItemQty(int cart_id, Cart item);
 
     String deleteCartItem(int cart_id);
+
+    String deleteAllCartItemByUser(int user_id);
 }

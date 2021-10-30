@@ -7,7 +7,7 @@ import java.util.List;
 public interface IMyOrderService {
     List<Myorder> getAllMyOrders(int user_Id);
 
-    Myorder addMyOrder(Myorder myorder);
+    String addMyOrder(Myorder myorder);
 
     Myorder updateMyOrderStatus(int myOrder_id, String status);
 

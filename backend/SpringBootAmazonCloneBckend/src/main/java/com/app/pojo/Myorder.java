@@ -50,6 +50,6 @@ public class Myorder {
 
     @JsonIgnore
     @OneToMany(mappedBy = "myorder", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Orderdetails> orderDetails;
+    private List<OrderDetails> orderDetails;
 
 }

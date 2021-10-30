@@ -24,7 +24,7 @@ public class MyOrderController {
         return new ResponseEntity(myOrderService.getAllMyOrders(Integer.parseInt(user_id)), HttpStatus.OK);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/checkout")
     public ResponseEntity addNewMyOrder(@RequestBody Myorder myorder) {
         System.out.println("in add new myOrder" + myorder);
         return new ResponseEntity(myOrderService.addMyOrder(myorder), HttpStatus.OK);

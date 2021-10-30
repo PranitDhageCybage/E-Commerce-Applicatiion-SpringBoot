@@ -42,12 +42,22 @@ public class MyOrderImpl implements IMyOrderService {
     }
 
     @Override
-    public String addMyOrder(Myorder myorder) {
+    public String checkoutMyOrder(Myorder myorder) {
         //Get Current User
         User user = myorder.getUser();
 
         //Get all cart items of current user
         List<Cart> cartItems = cartRepo.findAllByUser(user);
+
+        //Calculate total amount
+        double totalAmount = 0.0;
+        for (Cart item: cartItems){
+           totalAmount+=  item.getProduct().getProdPrice() * item.getCartQuantity();
+        }
+
+        //Set total amount and tax to myOrder
+        myorder.setTotalPrice((float) totalAmount);
+        myorder.setTax((float) (totalAmount / 10));
 
         //Save myOrder and get reference
         Myorder myOrderSaved = myOrderRepo.save(myorder);

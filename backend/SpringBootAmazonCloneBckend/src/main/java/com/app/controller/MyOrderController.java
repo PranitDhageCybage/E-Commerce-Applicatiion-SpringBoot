@@ -25,9 +25,9 @@ public class MyOrderController {
     }
 
     @PostMapping("/checkout")
-    public ResponseEntity addNewMyOrder(@RequestBody Myorder myorder) {
+    public ResponseEntity checkoutMyOrder(@RequestBody Myorder myorder) {
         System.out.println("in add new myOrder" + myorder);
-        return new ResponseEntity(myOrderService.addMyOrder(myorder), HttpStatus.OK);
+        return new ResponseEntity(myOrderService.checkoutMyOrder(myorder), HttpStatus.OK);
     }
 
     @PutMapping("/update/{myOrder_id}/{status}")

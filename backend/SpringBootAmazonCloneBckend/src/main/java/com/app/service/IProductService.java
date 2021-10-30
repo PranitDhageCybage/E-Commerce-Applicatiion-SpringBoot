@@ -12,4 +12,6 @@ public interface IProductService {
     Products updateProducts(int prodId, Products product);
 
     String deleteProducts(int prodId);
+
+    Products getProductDetails(int prodId);
 }

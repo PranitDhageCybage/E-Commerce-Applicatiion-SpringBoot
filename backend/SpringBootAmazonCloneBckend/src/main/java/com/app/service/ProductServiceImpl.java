@@ -46,4 +46,12 @@ public class ProductServiceImpl implements IProductService {
         }
         return "Product not Found";
     }
+
+    @Override
+    public Products getProductDetails(int prodId) {
+        if (productRepo.existsById(prodId)) {
+            return productRepo.findById(prodId).get();
+        }
+        return null;
+    }
 }

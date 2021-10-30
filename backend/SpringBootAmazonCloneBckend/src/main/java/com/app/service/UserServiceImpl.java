@@ -45,6 +45,7 @@ public class UserServiceImpl implements IUserService {
     public User userUpdate(int id, User newUser) {
         User user = userRepo.findById(id).get();
         if (newUser.getUserName() != "") user.setUserName(newUser.getUserName());
+        if (newUser.getUserEmail() != "") user.setUserEmail(newUser.getUserEmail());
         if (newUser.getUserPassword() != "") user.setUserPassword(EncryptPassword.getSHA256Hash(newUser.getUserPassword()));
         if (newUser.getUserPhone() != "") user.setUserPhone(newUser.getUserPhone());
         return userRepo.save(user);

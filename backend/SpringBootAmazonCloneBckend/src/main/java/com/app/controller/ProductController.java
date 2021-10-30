@@ -25,6 +25,12 @@ public class ProductController {
         return new ResponseEntity(productService.getAllProducts(), HttpStatus.OK);
     }
 
+    @GetMapping("/details/{prod_id}")
+    public ResponseEntity getProduct(@PathVariable String prod_id) {
+        System.out.println("in  get Product details");
+        return new ResponseEntity(productService.getProductDetails(Integer.parseInt(prod_id)), HttpStatus.OK);
+    }
+
     @PostMapping("/add")
     public ResponseEntity addNewProduct(@RequestBody Products product) {
         System.out.println("in  add new Product : " + product);

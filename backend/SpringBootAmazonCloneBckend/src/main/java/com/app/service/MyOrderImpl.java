@@ -1,13 +1,7 @@
 package com.app.service;
 
-import com.app.dao.CartRepository;
-import com.app.dao.MyOrderRepository;
-import com.app.dao.OrderDetailsRepository;
-import com.app.dao.UserRepository;
-import com.app.pojo.Cart;
-import com.app.pojo.Myorder;
-import com.app.pojo.OrderDetails;
-import com.app.pojo.User;
+import com.app.dao.*;
+import com.app.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +24,9 @@ public class MyOrderImpl implements IMyOrderService {
 
     @Autowired
     OrderDetailsRepository orderDetailsRepo;
+
+    @Autowired
+    ProductRepository productRepo;
 
 
     @Override
@@ -69,6 +66,12 @@ public class MyOrderImpl implements IMyOrderService {
         for (Cart cartItem : cartItems) {
             OrderDetails orderDetails = new OrderDetails(cartItem.getProduct().getProdPrice(), cartItem.getCartQuantity(),
                     (cartItem.getProduct().getProdPrice() * cartItem.getCartQuantity()), myOrderSaved, cartItem.getProduct());
+
+            //Reduce Product Quantity by Purchased Quantity
+            int prodId = cartItem.getProduct().getProdId();
+            Products product = productRepo.findById(prodId).get();
+            product.setProdQty(product.getProdQty() - cartItem.getCartQuantity());
+            productRepo.save(product);
 
             //Add all orderDetails into OrderDetailsList
             orderDetailsList.add(orderDetails);

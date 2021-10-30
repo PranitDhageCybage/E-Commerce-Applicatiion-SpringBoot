@@ -2,8 +2,10 @@ package com.app.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -29,4 +31,9 @@ public class Cart {
     @ManyToOne(optional = false)
     private Products product;
 
+    @CreationTimestamp
+    @JsonProperty("added_on")
+    @Column(name = "added_on", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
 }

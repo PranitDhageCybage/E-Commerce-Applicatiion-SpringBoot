@@ -2,8 +2,10 @@ package com.app.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -27,6 +29,18 @@ public class OrderDetails {
     @ManyToOne(optional = false)
     private Myorder myorder;
 
+
+    @CreationTimestamp
+    @JsonProperty("ordered_on")
+    @Column(name = "ordered_on", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+
+    @JoinColumn(name = "prod_id", nullable = false)
+    @ManyToOne(optional = false)
+    private Products product;
+
+
     public OrderDetails() {
     }
 
@@ -37,9 +51,5 @@ public class OrderDetails {
         this.myorder = myorder;
         this.product = product;
     }
-
-    @JoinColumn(name = "prod_id", nullable = false)
-    @ManyToOne(optional = false)
-    private Products product;
 
 }

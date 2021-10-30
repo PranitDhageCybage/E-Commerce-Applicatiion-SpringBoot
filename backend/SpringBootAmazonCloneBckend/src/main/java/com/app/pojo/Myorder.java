@@ -3,8 +3,10 @@ package com.app.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -38,6 +40,12 @@ public class Myorder {
     @JsonProperty("delivery_status")
     private String deliveryStatus;
 
+    @CreationTimestamp
+    @JsonProperty("ordered_on")
+    @Column(name = "ordered_on", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+
     // userId col
     @JoinColumn(name = "user_id", nullable = false)
     @ManyToOne(optional = false)
@@ -51,5 +59,6 @@ public class Myorder {
     @JsonIgnore
     @OneToMany(mappedBy = "myorder", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderDetails> orderDetails;
+
 
 }

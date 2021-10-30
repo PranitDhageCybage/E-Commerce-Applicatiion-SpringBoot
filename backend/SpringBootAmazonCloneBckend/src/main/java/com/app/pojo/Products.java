@@ -1,16 +1,12 @@
 package com.app.pojo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.util.Date;
 
 @Data
 @Entity
@@ -50,4 +46,13 @@ public class Products {
     @ManyToOne(optional = false)
     private Company company;
 
+    @Column(name = "is_active", columnDefinition = "integer default 1 ")
+    @JsonProperty("is_active")
+    private Integer isActive;
+
+    @CreationTimestamp
+    @JsonProperty("added_on")
+    @Column(name = "added_on", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
 }

@@ -1,24 +1,19 @@
 package com.app.pojo;
 
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+
 @Data
 @Entity
 @Table(name = "user")
@@ -60,6 +55,13 @@ public class User {
     private Role userRole;
 
 
+    @CreationTimestamp
+    @JsonProperty("signedUp_on")
+    @Column(name = "signedUp_on", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+
+
     // FOR P.K in another side
     @JsonIgnore        // to ignore this property during signin causing lazy init
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -68,10 +70,6 @@ public class User {
     @JsonIgnore        // to ignore this property during signin causing lazy init
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Cart> carts;
-
-    @JsonIgnore        // to ignore this property during signin causing lazy init
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Payment> payments;
 
     @JsonIgnore        // to ignore this property during signin causing lazy init
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

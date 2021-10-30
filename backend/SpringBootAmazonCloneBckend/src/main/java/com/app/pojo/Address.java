@@ -3,8 +3,10 @@ package com.app.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -47,4 +49,9 @@ public class Address {
     @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Myorder> myorders;
 
+    @CreationTimestamp
+    @JsonProperty("added_on")
+    @Column(name = "added_on", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
 }

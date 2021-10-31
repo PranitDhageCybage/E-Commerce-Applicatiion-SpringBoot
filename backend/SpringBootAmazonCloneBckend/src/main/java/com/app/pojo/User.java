@@ -1,6 +1,7 @@
 package com.app.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -13,6 +14,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "user")
+@JsonIgnoreProperties(value = {"password"}, allowSetters = true)  //it will not send password to client side
 public class User {
 
     @Id
@@ -36,7 +38,7 @@ public class User {
     @NotNull(message = "Email can not be Null")
     private String userEmail;
 
-    @JsonProperty("password")
+    @JsonProperty(value = "password" )
     @Column(name = "user_password")
     @NotNull(message = "Password can not be Null")
     private String userPassword;

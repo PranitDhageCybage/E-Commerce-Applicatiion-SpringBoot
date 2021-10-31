@@ -1,4 +1,3 @@
-/*
 package com.app.jwttoken.util;
 
 import java.util.Date;
@@ -54,4 +53,3 @@ public class JwtUtil {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 }
-*/

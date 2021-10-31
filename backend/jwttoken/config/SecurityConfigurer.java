@@ -1,4 +1,3 @@
-/*
 package com.app.jwttoken.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,4 +57,3 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 	}
 
 }
-*/

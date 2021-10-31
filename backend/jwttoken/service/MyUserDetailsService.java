@@ -1,6 +1,9 @@
-/*
 package com.app.jwttoken.service;
 
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,16 +20,15 @@ public class MyUserDetailsService implements UserDetailsService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 //	@Autowired
 //	UsersRepository repo;
-//
+//	
 //	@Override
 //	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 //		Users u = repo.findByUserEmail(username);
 //		return new User(u.getUserEmail(), u.getUserPassword(), new ArrayList<>());
 //	}
-//
-
+//	
+	
 }
-*/

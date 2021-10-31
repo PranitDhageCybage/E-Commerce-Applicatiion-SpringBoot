@@ -1,4 +1,3 @@
-/*
 package com.app.jwttoken.filter;
 
 import java.io.IOException;
@@ -32,8 +31,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
 
-*/
-/*
 		final String authorizationHeader = request.getHeader("Authorization");
 
 		String username = null;
@@ -52,16 +49,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
 						userDetails, null, userDetails.getAuthorities());
-
+				
 				usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
+				
 				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 			}
 		}
-*//*
-
-
+		
 		chain.doFilter(request, response);
 	}
 
-}*/
+}

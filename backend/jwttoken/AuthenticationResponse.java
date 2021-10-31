@@ -1,4 +1,3 @@
-/*
 package com.app.jwttoken;
 
 public class AuthenticationResponse {
@@ -16,6 +15,5 @@ public class AuthenticationResponse {
 	public String toString() {
 		return jwt;
 	}
-
+	
 }
-*/

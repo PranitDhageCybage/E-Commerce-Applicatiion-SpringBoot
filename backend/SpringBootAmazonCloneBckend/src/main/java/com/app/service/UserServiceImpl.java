@@ -1,7 +1,9 @@
 package com.app.service;
 
+import com.app.dao.CredentialsRepository;
 import com.app.dao.UserRepository;
 import com.app.dto.SigninDTO;
+import com.app.pojo.Credentials;
 import com.app.pojo.Role;
 import com.app.pojo.User;
 import com.app.utils.EncryptPassword;
@@ -20,6 +22,9 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     UserRepository userRepo;
 
+    @Autowired
+    CredentialsRepository credentialsRepo;
+
     public UserServiceImpl() {
     }
 
@@ -29,10 +34,17 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public Credentials addNewAuth(Credentials credentials) {
+        return credentialsRepo.save(credentials);
+    }
+
+
+    @Override
     public User userSignup(User user) {
         user.setUserPassword(EncryptPassword.getSHA256Hash(user.getUserPassword()));
         user.setUserRole(Role.USER);
         user.setUserStatus(0);
+        addNewAuth(new Credentials(user.getUserEmail(), user.getUserPassword()));       // Add userEmail and Password to credentials table
         return userRepo.save(user);
     }
 
@@ -55,6 +67,7 @@ public class UserServiceImpl implements IUserService {
     public List<User> getUsersListAll() {
         return userRepo.findAllByUserRole(Role.USER);
     }
+
 
 
 }

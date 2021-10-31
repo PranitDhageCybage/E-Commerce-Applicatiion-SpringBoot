@@ -1,6 +1,7 @@
 package com.app.service;
 
 import com.app.dto.SigninDTO;
+import com.app.pojo.Credentials;
 import com.app.pojo.User;
 
 import java.util.List;
@@ -17,4 +18,7 @@ public interface IUserService {
     User userUpdate(int id, User u);
 
     List<User> getUsersListAll();
+
+    Credentials addNewAuth(Credentials credentials);
+
 }

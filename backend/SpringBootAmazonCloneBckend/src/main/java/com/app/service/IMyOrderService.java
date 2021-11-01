@@ -14,4 +14,6 @@ public interface IMyOrderService {
     String deleteMyOrder(int myOrder_id);
 
     List<Myorder> getAllUserOrders();
+
+    String changeUserOrderDeliveryStatus(int myOrder_id, String status);
 }

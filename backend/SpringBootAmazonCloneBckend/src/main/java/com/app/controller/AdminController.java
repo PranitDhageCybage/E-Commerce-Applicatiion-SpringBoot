@@ -28,7 +28,7 @@ public class AdminController {
         return new ResponseEntity(userService.getUsersListAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/userStatus/{user_id}/{status}")
+    @PutMapping("/userStatus/{user_id}/{status}")
     public ResponseEntity changeUserActiveStatus(@PathVariable String user_id, @PathVariable String status) {
         System.out.println("in admin change user active status");
         return new ResponseEntity(userService.changeUserActiveStatus(Integer.parseInt(user_id), Integer.parseInt(status)), HttpStatus.OK);
@@ -38,6 +38,12 @@ public class AdminController {
     public ResponseEntity getAllUserOrders() {
         System.out.println("in admin get all user orders");
         return new ResponseEntity(orderService.getAllUserOrders(), HttpStatus.OK);
+    }
+
+    @PutMapping("/changeDeliveryStatus/{myorder_id}/{status}")
+    public ResponseEntity changeUserOrderDeliveryStatus(@PathVariable String myorder_id, @PathVariable String status) {
+        System.out.println("in admin change user order delivery status status");
+        return new ResponseEntity(orderService.changeUserOrderDeliveryStatus(Integer.parseInt(myorder_id), status), HttpStatus.OK);
     }
 
 }

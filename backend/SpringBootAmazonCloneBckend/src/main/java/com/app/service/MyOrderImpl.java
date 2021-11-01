@@ -109,4 +109,15 @@ public class MyOrderImpl implements IMyOrderService {
     public List<Myorder> getAllUserOrders() {
         return myOrderRepo.findAll();
     }
+
+    @Override
+    public String changeUserOrderDeliveryStatus(int myOrder_id, String status) {
+        if (myOrderRepo.existsById(myOrder_id)) {
+            Myorder myorder = myOrderRepo.findById(myOrder_id).get();
+            myorder.setDeliveryStatus(status);
+            myOrderRepo.save(myorder);
+            return "User order delivery status changed successfully";
+        }
+        return "MyOrder not found";
+    }
 }

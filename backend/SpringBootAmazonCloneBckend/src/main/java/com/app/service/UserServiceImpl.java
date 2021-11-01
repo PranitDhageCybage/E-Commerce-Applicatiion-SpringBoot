@@ -38,6 +38,17 @@ public class UserServiceImpl implements IUserService {
         return credentialsRepo.save(credentials);
     }
 
+    @Override
+    public String changeUserActiveStatus(int user_id, int status) {
+        if (userRepo.existsById(user_id)) {
+            User user = userRepo.findById(user_id).get();
+            user.setUserStatus(status);
+            userRepo.save(user);
+            return "User Active Status Changed Successfully";
+        }
+        return "User does nto exist";
+    }
+
 
     @Override
     public User userSignup(User user) {

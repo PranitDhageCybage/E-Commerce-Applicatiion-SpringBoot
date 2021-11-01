@@ -104,4 +104,9 @@ public class MyOrderImpl implements IMyOrderService {
         }
         return "MyOrder not found";
     }
+
+    @Override
+    public List<Myorder> getAllUserOrders() {
+        return myOrderRepo.findAll();
+    }
 }

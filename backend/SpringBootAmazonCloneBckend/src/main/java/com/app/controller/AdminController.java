@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import com.app.pojo.Myorder;
+import com.app.service.IMyOrderService;
 import com.app.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
     @Autowired
     IUserService userService;
+
+    @Autowired
+    IMyOrderService orderService;
 
     public AdminController() {
         System.out.println("in " + getClass().getName());
@@ -27,6 +32,12 @@ public class AdminController {
     public ResponseEntity changeUserActiveStatus(@PathVariable String user_id, @PathVariable String status) {
         System.out.println("in admin change user active status");
         return new ResponseEntity(userService.changeUserActiveStatus(Integer.parseInt(user_id), Integer.parseInt(status)), HttpStatus.OK);
+    }
+
+    @GetMapping("/allUserOrders")
+    public ResponseEntity getAllUserOrders() {
+        System.out.println("in admin get all user orders");
+        return new ResponseEntity(orderService.getAllUserOrders(), HttpStatus.OK);
     }
 
 }

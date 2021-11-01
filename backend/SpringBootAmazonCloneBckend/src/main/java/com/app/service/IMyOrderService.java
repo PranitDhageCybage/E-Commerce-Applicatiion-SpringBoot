@@ -12,4 +12,6 @@ public interface IMyOrderService {
     Myorder updateMyOrderStatus(int myOrder_id, String status);
 
     String deleteMyOrder(int myOrder_id);
+
+    List<Myorder> getAllUserOrders();
 }

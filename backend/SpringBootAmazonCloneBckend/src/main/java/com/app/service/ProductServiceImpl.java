@@ -54,4 +54,15 @@ public class ProductServiceImpl implements IProductService {
         }
         return null;
     }
+
+    @Override
+    public String changeProductActiveStatus(int prod_id, int status) {
+        if (productRepo.existsById(prod_id)) {
+            Products product = productRepo.findById(prod_id).get();
+            product.setIsActive(status);
+            productRepo.save(product);
+            return "Product Active status changed";
+        }
+        return "Product not found";
+    }
 }

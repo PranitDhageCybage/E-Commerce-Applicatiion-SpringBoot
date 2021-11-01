@@ -1,7 +1,7 @@
 package com.app.controller;
 
-import com.app.pojo.Myorder;
 import com.app.service.IMyOrderService;
+import com.app.service.IProductService;
 import com.app.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +17,9 @@ public class AdminController {
 
     @Autowired
     IMyOrderService orderService;
+
+    @Autowired
+    IProductService productService;
 
     public AdminController() {
         System.out.println("in " + getClass().getName());

@@ -48,4 +48,11 @@ public class ProductController {
         System.out.println("in  Delete Product");
         return new ResponseEntity(productService.deleteProducts(Integer.parseInt(prod_id)), HttpStatus.OK);
     }
+
+    @PutMapping("/isActiveStatus/{prod_id}/{status}")
+    public ResponseEntity changeProductActiveStatus(@PathVariable String prod_id, @PathVariable String status) {
+        System.out.println("in change product active status");
+        return new ResponseEntity(productService.changeProductActiveStatus(Integer.parseInt(prod_id), Integer.parseInt(status)), HttpStatus.OK);
+    }
+
 }

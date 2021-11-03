@@ -1,5 +1,6 @@
 package com.app.centralExceptionHandler;
 
+import com.app.customExceptions.AuthenticationException;
 import com.app.customExceptions.ResourceNotFoundException;
 import com.app.dto.ErrorResponse;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleExceptions(ResourceNotFoundException e) {
+    public ResponseEntity<ErrorResponse> handleResourceNotFoundException(ResourceNotFoundException e) {
         return new ResponseEntity<ErrorResponse>(new ErrorResponse("Item Not Found", e.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<ErrorResponse> handleAuthenticationException(AuthenticationException e) {
+        return new ResponseEntity<ErrorResponse>(new ErrorResponse("Authentication Failed", e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 }

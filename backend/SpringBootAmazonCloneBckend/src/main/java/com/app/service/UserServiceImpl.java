@@ -1,5 +1,6 @@
 package com.app.service;
 
+import com.app.customExceptions.AuthenticationException;
 import com.app.customExceptions.ResourceNotFoundException;
 import com.app.dao.CredentialsRepository;
 import com.app.dao.UserRepository;
@@ -29,8 +30,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User userSign(SigninDTO user) {
-        return userRepo.findByUserEmailAndUserPassword(user.getUser_email(), EncryptPassword.getSHA256Hash(user.getUser_password()));
+    public User userSign(SigninDTO signinDTO) {
+        User usr = userRepo.findByUserEmail(signinDTO.getUser_email());
+        if (usr == null) throw new AuthenticationException("Account does not exist. Please Signup");
+        User user = userRepo.findByUserEmailAndUserPassword(signinDTO.getUser_email(), EncryptPassword.getSHA256Hash(signinDTO.getUser_password()));
+        if (user == null) throw new AuthenticationException("Invalid Password. Enter Correct password");
+        return user;
     }
 
     @Override

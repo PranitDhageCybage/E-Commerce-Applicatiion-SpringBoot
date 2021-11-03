@@ -1,5 +1,6 @@
 package com.app.service;
 
+import com.app.customExceptions.ResourceNotFoundException;
 import com.app.dao.CompanyRepositary;
 import com.app.pojo.Company;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +28,13 @@ public class CompanyServiceImpl implements ICompanyService {
 
     @Override
     public Company updateCompany(int compId, Company newCompany) {
-        Company oldCompany = companyRepo.findById(compId).get();
-        if (newCompany.getCompTitle() != "") oldCompany.setCompTitle(newCompany.getCompTitle());
-        if (newCompany.getCompDescription() != "") oldCompany.setCompDescription(newCompany.getCompDescription());
-        return companyRepo.save(oldCompany);
+        if (companyRepo.existsById(compId)) {
+            Company oldCompany = companyRepo.findById(compId).get();
+            if (newCompany.getCompTitle() != "") oldCompany.setCompTitle(newCompany.getCompTitle());
+            if (newCompany.getCompDescription() != "") oldCompany.setCompDescription(newCompany.getCompDescription());
+            return companyRepo.save(oldCompany);
+        }
+        throw new ResourceNotFoundException("Company not found for given comp Id : " + compId);
     }
 
     @Override
@@ -39,6 +43,6 @@ public class CompanyServiceImpl implements ICompanyService {
             companyRepo.deleteById(compId);
             return "Company Deleted Successfully ";
         }
-        return "Company Not Found";
+        throw new ResourceNotFoundException("Company not found for given comp Id : " + compId);
     }
 }

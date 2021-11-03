@@ -1,5 +1,6 @@
 package com.app.service;
 
+import com.app.customExceptions.ResourceNotFoundException;
 import com.app.dao.CartRepository;
 import com.app.dao.UserRepository;
 import com.app.pojo.Cart;
@@ -26,7 +27,7 @@ public class CartServiceImpl implements ICartService {
             User user = userRepo.findById(user_id).get();
             return cartRepo.findAllByUser(user);
         }
-        return null;
+        throw new ResourceNotFoundException("Cart Item not found for given user Id : " + user_id);
     }
 
     @Override
@@ -41,7 +42,7 @@ public class CartServiceImpl implements ICartService {
             if (item_qty != oldCart.getCartQuantity()) oldCart.setCartQuantity(item_qty);
             return cartRepo.save(oldCart);
         }
-        return null;
+        throw new ResourceNotFoundException("Cart Item not found for given cart Id : " + cart_id);
     }
 
     @Override
@@ -50,7 +51,7 @@ public class CartServiceImpl implements ICartService {
             cartRepo.deleteById(cart_id);
             return "Item deleted successfully";
         }
-        return "Item not found";
+        throw new ResourceNotFoundException("Cart Item not found for given cart Id : " + cart_id);
     }
 
     @Override
@@ -60,6 +61,6 @@ public class CartServiceImpl implements ICartService {
             cartRepo.deleteAllByUser(user);
             return "Deleted All items from cart";
         }
-        return "Item not found";
+        throw new ResourceNotFoundException("Cart items not found for given user Id : " + user_id);
     }
 }

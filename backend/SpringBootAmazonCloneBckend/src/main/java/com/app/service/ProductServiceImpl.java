@@ -1,5 +1,6 @@
 package com.app.service;
 
+import com.app.customExceptions.ResourceNotFoundException;
 import com.app.dao.ProductRepository;
 import com.app.pojo.Products;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +28,18 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public Products updateProducts(int prodId, Products newProduct) {
-        Products oldProduct = productRepo.findById(prodId).get();
-        if (newProduct.getProdTitle() != null) oldProduct.setProdTitle(newProduct.getProdTitle());
-        if (newProduct.getProdDescription() != null) oldProduct.setProdDescription(newProduct.getProdDescription());
-        if (newProduct.getProdPrice() != null) oldProduct.setProdPrice(newProduct.getProdPrice());
-        if (newProduct.getProdQty() != null) oldProduct.setProdQty(newProduct.getProdQty());
-        if (newProduct.getPhoto() != null) oldProduct.setPhoto(newProduct.getPhoto());
-        if (newProduct.getCategory() != null) oldProduct.setCategory(newProduct.getCategory());
-        if (newProduct.getCompany() != null) oldProduct.setCompany(newProduct.getCompany());
-        return productRepo.save(oldProduct);
+        if (productRepo.existsById(prodId)) {
+            Products oldProduct = productRepo.findById(prodId).get();
+            if (newProduct.getProdTitle() != null) oldProduct.setProdTitle(newProduct.getProdTitle());
+            if (newProduct.getProdDescription() != null) oldProduct.setProdDescription(newProduct.getProdDescription());
+            if (newProduct.getProdPrice() != null) oldProduct.setProdPrice(newProduct.getProdPrice());
+            if (newProduct.getProdQty() != null) oldProduct.setProdQty(newProduct.getProdQty());
+            if (newProduct.getPhoto() != null) oldProduct.setPhoto(newProduct.getPhoto());
+            if (newProduct.getCategory() != null) oldProduct.setCategory(newProduct.getCategory());
+            if (newProduct.getCompany() != null) oldProduct.setCompany(newProduct.getCompany());
+            return productRepo.save(oldProduct);
+        }
+        throw new ResourceNotFoundException("Product  not found for given Product Id : " + prodId);
     }
 
     @Override
@@ -44,7 +48,7 @@ public class ProductServiceImpl implements IProductService {
             productRepo.deleteById(prodId);
             return "Product Deleted Successfully";
         }
-        return "Product not Found";
+        throw new ResourceNotFoundException("Product  not found for given Product Id : " + prodId);
     }
 
     @Override
@@ -52,7 +56,7 @@ public class ProductServiceImpl implements IProductService {
         if (productRepo.existsById(prodId)) {
             return productRepo.findById(prodId).get();
         }
-        return null;
+        throw new ResourceNotFoundException("Product  not found for given Product Id : " + prodId);
     }
 
     @Override
@@ -63,6 +67,6 @@ public class ProductServiceImpl implements IProductService {
             productRepo.save(product);
             return "Product Active status changed";
         }
-        return "Product not found";
+        throw new ResourceNotFoundException("Product  not found for given Product Id : " + prod_id);
     }
 }

@@ -5,7 +5,6 @@ import com.app.pojo.Credentials;
 import com.app.pojo.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface IUserService {
 
@@ -13,7 +12,7 @@ public interface IUserService {
 
     User userSign(SigninDTO user);
 
-    Optional<User> getProfile(int id);
+    User getProfile(int id);
 
     User userUpdate(int id, User u);
 

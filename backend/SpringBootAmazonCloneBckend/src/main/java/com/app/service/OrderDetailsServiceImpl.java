@@ -1,5 +1,6 @@
 package com.app.service;
 
+import com.app.customExceptions.ResourceNotFoundException;
 import com.app.dao.MyOrderRepository;
 import com.app.dao.OrderDetailsRepository;
 import com.app.pojo.Myorder;
@@ -27,7 +28,7 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
             Myorder myorder = myOrderRepo.findById(myorder_id).get();
             return orderDetailsRepo.findAllByMyorder(myorder);
         }
-        return null;
+        throw new ResourceNotFoundException("Order Details not found for given myOrder Id : " + myorder_id);
     }
 
     @Override

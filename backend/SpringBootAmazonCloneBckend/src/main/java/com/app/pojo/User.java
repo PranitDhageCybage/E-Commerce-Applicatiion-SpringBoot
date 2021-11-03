@@ -5,9 +5,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.List;
 
@@ -24,23 +27,24 @@ public class User {
     private Integer userId;
 
     @JsonProperty("name")
-    @Column(name = "user_name")
-    @NotNull(message = "User Name can not be Null")
+    @Column(name = "user_name", length = 25)
+    @NotBlank(message = "Name is required")
+    @Length(min = 3, max = 15, message = "Invalid len of Name")
     private String userName;
 
     @JsonProperty("phone")
     @Column(name = "user_phone")
-    @NotNull(message = "Phone can not be Null")
+    @NotBlank(message = "Phone can not be Null")
     private String userPhone;
 
     @JsonProperty("email")
     @Column(name = "user_email")
-    @NotNull(message = "Email can not be Null")
+    @Email(message = "Email can not be Null")
     private String userEmail;
 
-    @JsonProperty(value = "password" )
-    @Column(name = "user_password")
-    @NotNull(message = "Password can not be Null")
+    @JsonProperty(value = "password")
+    @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[#@$*]).{5,20})", message = "Blank or Invalid password")
+    @Column(name = "user_password", length = 20, nullable = false)
     private String userPassword;
 
     @JsonProperty("status")

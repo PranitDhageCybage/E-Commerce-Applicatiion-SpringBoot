@@ -9,8 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @CrossOrigin
 @RequestMapping("/user")
@@ -47,12 +45,7 @@ public class UserController {
     @GetMapping("/profile/{id}")
     public ResponseEntity getUserProfile(@PathVariable int id) {
         System.out.println("in user get profile : " + id);
-        Optional<User> foundUser = userService.getProfile(id);
-        if (foundUser.isPresent()) {
-            return new ResponseEntity(foundUser, HttpStatus.OK);
-        } else {
-            return new ResponseEntity("No User Found", HttpStatus.BAD_REQUEST);
-        }
+            return new ResponseEntity(userService.getProfile(id), HttpStatus.OK);
     }
 
     @PutMapping("/UpdateProfile/{id}")

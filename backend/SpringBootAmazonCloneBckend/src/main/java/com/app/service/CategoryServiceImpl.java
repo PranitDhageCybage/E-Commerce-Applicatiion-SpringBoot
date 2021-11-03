@@ -1,5 +1,6 @@
 package com.app.service;
 
+import com.app.customExceptions.ResourceNotFoundException;
 import com.app.dao.CategoryRepository;
 import com.app.pojo.Category;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +28,13 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Override
     public Category updateCategory(int cat_id, Category newCategory) {
-        Category oldCategory = categoryRepo.findById(cat_id).get();
-        if (newCategory.getCatTitle() != "") oldCategory.setCatTitle(newCategory.getCatTitle());
-        if (newCategory.getCatDescription() != "") oldCategory.setCatDescription(newCategory.getCatDescription());
-        return categoryRepo.save(oldCategory);
+        if (categoryRepo.existsById(cat_id)) {
+            Category oldCategory = categoryRepo.findById(cat_id).get();
+            if (newCategory.getCatTitle() != "") oldCategory.setCatTitle(newCategory.getCatTitle());
+            if (newCategory.getCatDescription() != "") oldCategory.setCatDescription(newCategory.getCatDescription());
+            return categoryRepo.save(oldCategory);
+        }
+        throw new ResourceNotFoundException("Category not found for given cat Id : " + cat_id);
     }
 
     @Override
@@ -39,6 +43,6 @@ public class CategoryServiceImpl implements ICategoryService {
             categoryRepo.deleteById(cat_id);
             return "Category Deleted Successfully";
         }
-        return "Category not found";
+        throw new ResourceNotFoundException("Category not found for given cat Id : " + cat_id);
     }
 }

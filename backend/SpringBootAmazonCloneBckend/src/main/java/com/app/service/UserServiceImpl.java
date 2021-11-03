@@ -1,5 +1,6 @@
 package com.app.service;
 
+import com.app.customExceptions.ResourceNotFoundException;
 import com.app.dao.CredentialsRepository;
 import com.app.dao.UserRepository;
 import com.app.dto.SigninDTO;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -46,7 +46,7 @@ public class UserServiceImpl implements IUserService {
             userRepo.save(user);
             return "User Active Status Changed Successfully";
         }
-        return "User does nto exist";
+        throw new ResourceNotFoundException("User  not found for given user Id : " + user_id);
     }
 
 
@@ -60,25 +60,26 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public Optional<User> getProfile(int id) {
-        return userRepo.findById(id);
+    public User getProfile(int id) {
+        return userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User  not found for given user Id : " + id));
     }
 
     @Override
     public User userUpdate(int id, User newUser) {
-        User user = userRepo.findById(id).get();
-        if (newUser.getUserName() != "") user.setUserName(newUser.getUserName());
-        if (newUser.getUserEmail() != "") user.setUserEmail(newUser.getUserEmail());
-        if (newUser.getUserPassword() != "") user.setUserPassword(EncryptPassword.getSHA256Hash(newUser.getUserPassword()));
-        if (newUser.getUserPhone() != "") user.setUserPhone(newUser.getUserPhone());
-        return userRepo.save(user);
+        if (userRepo.existsById(id)) {
+            User user = userRepo.findById(id).get();
+            if (newUser.getUserName() != "") user.setUserName(newUser.getUserName());
+            if (newUser.getUserEmail() != "") user.setUserEmail(newUser.getUserEmail());
+            if (newUser.getUserPassword() != "") user.setUserPassword(EncryptPassword.getSHA256Hash(newUser.getUserPassword()));
+            if (newUser.getUserPhone() != "") user.setUserPhone(newUser.getUserPhone());
+            return userRepo.save(user);
+        }
+        throw new ResourceNotFoundException("User  not found for given user Id : " + id);
     }
 
     @Override
     public List<User> getUsersListAll() {
         return userRepo.findAllByUserRole(Role.USER);
     }
-
-
 
 }

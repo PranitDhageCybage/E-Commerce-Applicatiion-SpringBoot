@@ -1,11 +1,11 @@
 package com.app.controller;
 
 import com.app.customExceptions.ResourceNotFoundException;
+import com.app.customExceptions.UnexpectedErrorException;
+import com.app.dto.DashboardCountDTO;
 import com.app.pojo.Myorder;
 import com.app.pojo.User;
-import com.app.service.IMyOrderService;
-import com.app.service.IProductService;
-import com.app.service.IUserService;
+import com.app.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +25,12 @@ public class AdminController {
 
     @Autowired
     IProductService productService;
+
+    @Autowired
+    ICompanyService companyService;
+
+    @Autowired
+    ICategoryService categoryService;
 
     public AdminController() {
         System.out.println("in " + getClass().getName());
@@ -61,5 +67,33 @@ public class AdminController {
         System.out.println("in admin change user order delivery status status");
         return new ResponseEntity(orderService.changeUserOrderDeliveryStatus(Integer.parseInt(myorder_id), status), HttpStatus.OK);
     }
+
+    @GetMapping("/dashboard-count")
+    public ResponseEntity getAllEntityDashboardCount() {
+        System.out.println("in admin get all dashboard count");
+        try {
+            DashboardCountDTO countDTO = new DashboardCountDTO();
+            countDTO.setUserCount(userService.countAllUser());
+            countDTO.setProductCount(productService.countAllProduct());
+            countDTO.setMyOrderCount(orderService.countAllUserOrders());
+            countDTO.setActiveOrderCount(orderService.countAllActiveUserOrders());
+            countDTO.setCompanyCount(companyService.countAllCompany());
+            countDTO.setCategoryCount(categoryService.countAllCategory());
+            return new ResponseEntity(countDTO, HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+            throw new UnexpectedErrorException("Error while getting all dashboard count");
+        }
+    }
+
+    // To Be Optimized for Query
+
+/*    @GetMapping("/all-count")
+    public ResponseEntity getDashboardCount() {
+        System.out.println("in admin get all dashboard count");
+
+        return new ResponseEntity(userService.getAllCount(), HttpStatus.OK);
+    }*/
+
 
 }

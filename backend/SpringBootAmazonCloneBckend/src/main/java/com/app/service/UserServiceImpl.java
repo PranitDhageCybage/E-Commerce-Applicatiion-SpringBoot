@@ -4,6 +4,7 @@ import com.app.customExceptions.AuthenticationException;
 import com.app.customExceptions.ResourceNotFoundException;
 import com.app.dao.CredentialsRepository;
 import com.app.dao.UserRepository;
+import com.app.dto.DashboardCountDTO;
 import com.app.dto.SigninDTO;
 import com.app.pojo.Credentials;
 import com.app.pojo.Role;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -52,6 +54,18 @@ public class UserServiceImpl implements IUserService {
             return "User Active Status Changed Successfully";
         }
         throw new ResourceNotFoundException("User  not found for given user Id : " + user_id);
+    }
+
+    @Override
+    public Integer countAllUser() {
+        return userRepo.findAll().stream().filter(user -> user.getUserRole().equals(Role.USER)).collect(Collectors.toList()).size();
+    }
+
+    @Override
+    public Object getAllCount() {
+        Object obj = userRepo.getAllCount();
+        System.out.println(obj.toString());
+        return obj;
     }
 
 

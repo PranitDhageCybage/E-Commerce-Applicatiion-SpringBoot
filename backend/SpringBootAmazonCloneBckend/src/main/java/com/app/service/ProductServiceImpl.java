@@ -69,4 +69,9 @@ public class ProductServiceImpl implements IProductService {
         }
         throw new ResourceNotFoundException("Product  not found for given Product Id : " + prod_id);
     }
+
+    @Override
+    public Integer countAllProduct() {
+        return productRepo.countAllProduct();
+    }
 }

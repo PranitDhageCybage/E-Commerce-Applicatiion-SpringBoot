@@ -45,4 +45,9 @@ public class CategoryServiceImpl implements ICategoryService {
         }
         throw new ResourceNotFoundException("Category not found for given cat Id : " + cat_id);
     }
+
+    @Override
+    public Integer countAllCategory() {
+        return categoryRepo.findAll().size();
+    }
 }

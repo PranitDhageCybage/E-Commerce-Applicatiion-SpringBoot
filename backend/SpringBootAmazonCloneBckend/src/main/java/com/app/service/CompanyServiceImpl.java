@@ -39,10 +39,15 @@ public class CompanyServiceImpl implements ICompanyService {
 
     @Override
     public String deleteCompany(int compId) {
-        if (companyRepo.existsById(compId)){
+        if (companyRepo.existsById(compId)) {
             companyRepo.deleteById(compId);
             return "Company Deleted Successfully ";
         }
         throw new ResourceNotFoundException("Company not found for given comp Id : " + compId);
+    }
+
+    @Override
+    public Integer countAllCompany() {
+        return companyRepo.findAll().size();
     }
 }

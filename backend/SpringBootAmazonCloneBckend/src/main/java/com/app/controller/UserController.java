@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import com.app.customExceptions.ResourceNotFoundException;
+import com.app.customExceptions.UnexpectedErrorException;
 import com.app.dto.SigninDTO;
 import com.app.pojo.User;
 import com.app.service.IUserService;
@@ -45,14 +47,21 @@ public class UserController {
     @GetMapping("/profile/{id}")
     public ResponseEntity getUserProfile(@PathVariable int id) {
         System.out.println("in user get profile : " + id);
-            return new ResponseEntity(userService.getProfile(id), HttpStatus.OK);
+        User foundUser = userService.getProfile(id);
+        if (foundUser != null) {
+            return new ResponseEntity(foundUser, HttpStatus.OK);
+        }
+        throw new ResourceNotFoundException("User not found for given user id");
     }
 
     @PutMapping("/UpdateProfile/{id}")
     public ResponseEntity updateUserProfile(@PathVariable String id, @RequestBody User user) {
         System.out.println("in user update profile : " + id);
-        return new ResponseEntity(userService.userUpdate(Integer.parseInt(id), user), HttpStatus.OK);
+        User updatedUser = userService.userUpdate(Integer.parseInt(id), user);
+        if (updatedUser != null) {
+            return new ResponseEntity("user profile updated successfully", HttpStatus.OK);
+        }
+        throw new UnexpectedErrorException("Error while updating user profile");
     }
-
 
 }

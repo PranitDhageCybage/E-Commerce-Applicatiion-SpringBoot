@@ -43,7 +43,8 @@ public class User {
     private String userEmail;
 
     @JsonProperty(value = "password")
-    @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[#@$*]).{5,20})", message = "Blank or Invalid password")
+//    @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[#@$*]).{5,20})", message = "Blank or Invalid password")
+    @NotBlank(message = "Password can not be Blank")
     @Column(name = "user_password", length = 20, nullable = false)
     private String userPassword;
 

@@ -1,11 +1,14 @@
 package com.app.controller;
 
+import com.app.customExceptions.ResourceNotFoundException;
 import com.app.pojo.Myorder;
 import com.app.service.IMyOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -21,7 +24,11 @@ public class MyOrderController {
     @GetMapping("/list/{user_id}")
     public ResponseEntity getAllMyOrderList(@PathVariable String user_id) {
         System.out.println("in get all myOrder list");
-        return new ResponseEntity(myOrderService.getAllMyOrders(Integer.parseInt(user_id)), HttpStatus.OK);
+       List<Myorder> myorderList = myOrderService.getAllMyOrders(Integer.parseInt(user_id));
+        if (myorderList.size() > 0) {
+            return new ResponseEntity(myorderList, HttpStatus.OK);
+        }
+        throw new ResourceNotFoundException("Myorder list not found for the user");
     }
 
     @PostMapping("/checkout")

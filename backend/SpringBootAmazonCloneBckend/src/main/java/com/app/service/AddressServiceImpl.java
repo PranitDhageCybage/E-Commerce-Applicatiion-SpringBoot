@@ -22,7 +22,10 @@ public class AddressServiceImpl implements IAddressService {
 
     @Override
     public List<Address> getAllAddresses(int user_id) {
-        return addressRepo.findAllByUserUserId(user_id);
+        if (userRepo.existsById(user_id)) {
+            return addressRepo.findAllByUserUserId(user_id);
+        }
+        throw new ResourceNotFoundException("User not found for given user Id : " + user_id);
     }
 
     @Override

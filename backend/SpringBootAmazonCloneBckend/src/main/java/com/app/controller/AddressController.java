@@ -1,11 +1,15 @@
 package com.app.controller;
 
+import com.app.customExceptions.ResourceNotFoundException;
+import com.app.customExceptions.UnexpectedErrorException;
 import com.app.pojo.Address;
 import com.app.service.IAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -21,19 +25,31 @@ public class AddressController {
     @GetMapping("/list/{user_id}")
     public ResponseEntity getAllAddressList(@PathVariable String user_id) {
         System.out.println("in get all address");
-        return new ResponseEntity(addressService.getAllAddresses(Integer.parseInt(user_id)), HttpStatus.OK);
+        List<Address> addressList = addressService.getAllAddresses(Integer.parseInt(user_id));
+        if (addressList.size() > 0) {
+            return new ResponseEntity(addressList, HttpStatus.OK);
+        }
+        throw new ResourceNotFoundException("Addresses not found for user");
     }
 
     @PostMapping("/add")
     public ResponseEntity addNewAddress(@RequestBody Address address) {
         System.out.println("in add new address");
-        return new ResponseEntity(addressService.addAddress(address), HttpStatus.OK);
+        Address add = addressService.addAddress(address);
+        if (add != null) {
+            return new ResponseEntity("Address added successfully", HttpStatus.OK);
+        }
+        throw new UnexpectedErrorException("Error while adding new address");
     }
 
     @PutMapping("/update/{add_id}")
     public ResponseEntity updateAddress(@PathVariable String add_id, @RequestBody Address address) {
         System.out.println("in update  address");
-        return new ResponseEntity(addressService.updateAddress(Integer.parseInt(add_id), address), HttpStatus.OK);
+        Address add = addressService.updateAddress(Integer.parseInt(add_id), address);
+        if (add != null) {
+            return new ResponseEntity("Address Updated successfully", HttpStatus.OK);
+        }
+        throw new UnexpectedErrorException("Error while updating address");
     }
 
     @DeleteMapping("/delete/{add_id}")

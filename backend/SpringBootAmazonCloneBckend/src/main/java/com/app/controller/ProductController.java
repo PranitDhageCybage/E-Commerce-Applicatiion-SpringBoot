@@ -1,12 +1,15 @@
 package com.app.controller;
 
-import com.app.pojo.Category;
+import com.app.customExceptions.ResourceNotFoundException;
+import com.app.customExceptions.UnexpectedErrorException;
 import com.app.pojo.Products;
 import com.app.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -22,25 +25,41 @@ public class ProductController {
     @GetMapping("/list")
     public ResponseEntity getAllProductList() {
         System.out.println("in  get all Product list");
-        return new ResponseEntity(productService.getAllProducts(), HttpStatus.OK);
+        List<Products> productsList = productService.getAllProducts();
+        if (productsList.size() > 0) {
+            return new ResponseEntity(productsList, HttpStatus.OK);
+        }
+        throw new ResourceNotFoundException("Product list not found");
     }
 
     @GetMapping("/details/{prod_id}")
     public ResponseEntity getProduct(@PathVariable String prod_id) {
         System.out.println("in  get Product details");
-        return new ResponseEntity(productService.getProductDetails(Integer.parseInt(prod_id)), HttpStatus.OK);
+        Products product = productService.getProductDetails(Integer.parseInt(prod_id));
+        if (product != null) {
+            return new ResponseEntity(product, HttpStatus.OK);
+        }
+        throw new ResourceNotFoundException("Product not found for given product id");
     }
 
     @PostMapping("/add")
     public ResponseEntity addNewProduct(@RequestBody Products product) {
         System.out.println("in  add new Product : " + product);
-        return new ResponseEntity(productService.addProducts(product), HttpStatus.OK);
+        Products prod = productService.addProducts(product);
+        if (prod != null) {
+            return new ResponseEntity("Product added successfully", HttpStatus.OK);
+        }
+        throw new UnexpectedErrorException("Error while adding new  product");
     }
 
     @PutMapping("/update/{prod_id}")
     public ResponseEntity updateProduct(@RequestBody Products product, @PathVariable String prod_id) {
-        System.out.println("in  update Product : " );
-        return new ResponseEntity(productService.updateProducts(Integer.parseInt(prod_id), product), HttpStatus.OK);
+        System.out.println("in  update Product : ");
+        Products prod = productService.updateProducts(Integer.parseInt(prod_id), product);
+        if (prod != null) {
+            return new ResponseEntity("Product Updated successfully", HttpStatus.OK);
+        }
+        throw new UnexpectedErrorException("Error while Updating  product");
     }
 
     @DeleteMapping("/delete/{prod_id}")

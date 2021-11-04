@@ -1,10 +1,14 @@
 package com.app.controller;
 
+import com.app.customExceptions.ResourceNotFoundException;
+import com.app.pojo.OrderDetails;
 import com.app.service.IOrderDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -21,12 +25,20 @@ public class OrderDetailsController {
     @GetMapping("/list/{myorder_id}")
     public ResponseEntity getAllMyOrderDetailsList(@PathVariable String myorder_id) {
         System.out.println("in get all my order details");
-        return new ResponseEntity(orderDetailsService.getAllMyOrderDetails(Integer.parseInt(myorder_id)), HttpStatus.OK);
+         List<OrderDetails> orderDetailsList = orderDetailsService.getAllMyOrderDetails(Integer.parseInt(myorder_id));
+        if (orderDetailsList.size() > 0) {
+            return new ResponseEntity(orderDetailsList, HttpStatus.OK);
+        }
+        throw new ResourceNotFoundException("order Details list not found for the given myorder id");
     }
 
     @GetMapping("/admin//list")
     public ResponseEntity getAllUserOrderDetailsList() {
         System.out.println("in get all user order details for admin");
-        return new ResponseEntity(orderDetailsService.getAllUserOrderDetails(), HttpStatus.OK);
+        List<OrderDetails> orderDetailsList = orderDetailsService.getAllUserOrderDetails();
+        if (orderDetailsList.size() > 0) {
+            return new ResponseEntity(orderDetailsList, HttpStatus.OK);
+        }
+        return new ResponseEntity("order Details list not found", HttpStatus.BAD_REQUEST);
     }
 }

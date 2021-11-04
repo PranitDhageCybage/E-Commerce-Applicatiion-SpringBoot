@@ -1,5 +1,8 @@
 package com.app.controller;
 
+import com.app.customExceptions.ResourceNotFoundException;
+import com.app.pojo.Myorder;
+import com.app.pojo.User;
 import com.app.service.IMyOrderService;
 import com.app.service.IProductService;
 import com.app.service.IUserService;
@@ -7,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -28,7 +33,11 @@ public class AdminController {
     @GetMapping("/userList")
     public ResponseEntity getAllUserList() {
         System.out.println("in admin get all user list");
-        return new ResponseEntity(userService.getUsersListAll(), HttpStatus.OK);
+        List<User> userList = userService.getUsersListAll();
+        if (userList.size() > 0) {
+            return new ResponseEntity(userList, HttpStatus.OK);
+        }
+        throw new ResourceNotFoundException("User list not found");
     }
 
     @PutMapping("/userStatus/{user_id}/{status}")
@@ -40,7 +49,11 @@ public class AdminController {
     @GetMapping("/allUserOrders")
     public ResponseEntity getAllUserOrders() {
         System.out.println("in admin get all user orders");
-        return new ResponseEntity(orderService.getAllUserOrders(), HttpStatus.OK);
+        List<Myorder> myorderList = orderService.getAllUserOrders();
+        if (myorderList.size() > 0) {
+            return new ResponseEntity(myorderList, HttpStatus.OK);
+        }
+        throw new ResourceNotFoundException("User orders list not found");
     }
 
     @PutMapping("/changeDeliveryStatus/{myorder_id}/{status}")

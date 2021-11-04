@@ -127,4 +127,14 @@ public class MyOrderImpl implements IMyOrderService {
         }
         throw new ResourceNotFoundException("My Order not found for given myOrder Id : " + myOrder_id);
     }
+
+    @Override
+    public Integer countAllUserOrders() {
+        return myOrderRepo.findAll().size();
+    }
+
+    @Override
+    public Integer countAllActiveUserOrders() {
+        return myOrderRepo.findAllActiveUserOrders().size();
+    }
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -52,6 +53,11 @@ public class UserServiceImpl implements IUserService {
             return "User Active Status Changed Successfully";
         }
         throw new ResourceNotFoundException("User  not found for given user Id : " + user_id);
+    }
+
+    @Override
+    public Integer countAllUser() {
+        return userRepo.findAll().stream().filter(user -> user.getUserRole().equals(Role.USER)).collect(Collectors.toList()).size();
     }
 
 

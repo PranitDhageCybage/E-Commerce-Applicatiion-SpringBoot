@@ -16,4 +16,8 @@ public interface IMyOrderService {
     List<Myorder> getAllUserOrders();
 
     String changeUserOrderDeliveryStatus(int myOrder_id, String status);
+
+    Integer countAllUserOrders();
+
+    Integer countAllActiveUserOrders();
 }

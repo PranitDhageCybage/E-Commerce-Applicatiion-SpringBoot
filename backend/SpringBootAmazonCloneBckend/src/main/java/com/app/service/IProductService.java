@@ -16,4 +16,6 @@ public interface IProductService {
     Products getProductDetails(int prodId);
 
     String changeProductActiveStatus(int prod_id, int status);
+
+    Integer countAllProduct();
 }

@@ -13,4 +13,6 @@ public interface ICategoryService {
     Category updateCategory(int cat_id, Category category);
 
     String deleteCategory(int cat_id);
+
+    Integer countAllCategory();
 }

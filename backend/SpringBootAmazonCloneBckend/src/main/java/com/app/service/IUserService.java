@@ -21,4 +21,6 @@ public interface IUserService {
     Credentials addNewAuth(Credentials credentials);
 
     String changeUserActiveStatus(int user_id, int status);
+
+    Integer countAllUser();
 }

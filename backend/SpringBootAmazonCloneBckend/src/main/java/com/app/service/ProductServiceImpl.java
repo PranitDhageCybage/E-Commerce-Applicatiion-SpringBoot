@@ -93,8 +93,4 @@ public class ProductServiceImpl implements IProductService {
         return "Product image deleted successfully";
     }
 
-    @Override
-    public Integer countAllProduct() {
-        return productRepo.findAll().size();
-    }
 }

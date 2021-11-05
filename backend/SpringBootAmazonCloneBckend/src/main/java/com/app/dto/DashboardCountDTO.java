@@ -1,6 +1,7 @@
 package com.app.dto;
 
 import lombok.Data;
+<<<<<<< HEAD
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import javax.persistence.Column;
@@ -19,5 +20,15 @@ public class DashboardCountDTO {
     @Column(name = "companyCount")
     private  Integer companyCount = 0;
     @Column(name = "categoryCount")
+=======
+
+@Data
+public class DashboardCountDTO {
+    private Integer userCount = 0;
+    private Integer productCount = 0;
+    private Integer MyOrderCount = 0;
+    private Integer ActiveOrderCount = 0;
+    private  Integer companyCount = 0;
+>>>>>>> origin/main
     private  Integer categoryCount = 0;
 }

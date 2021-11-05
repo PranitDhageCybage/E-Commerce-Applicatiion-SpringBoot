@@ -92,4 +92,9 @@ public class ProductServiceImpl implements IProductService {
         product.setPhoto(null);
         return "Product image deleted successfully";
     }
+
+    @Override
+    public Integer countAllProduct() {
+        return productRepo.findAll().size();
+    }
 }

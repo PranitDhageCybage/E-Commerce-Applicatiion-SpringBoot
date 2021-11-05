@@ -1,6 +1,5 @@
 package com.app.service;
 
-import com.app.dto.DashboardCountDTO;
 import com.app.dto.SigninDTO;
 import com.app.pojo.Credentials;
 import com.app.pojo.User;
@@ -22,8 +21,4 @@ public interface IUserService {
     Credentials addNewAuth(Credentials credentials);
 
     String changeUserActiveStatus(int user_id, int status);
-
-    Integer countAllUser();
-
-    Object getAllCount();
 }

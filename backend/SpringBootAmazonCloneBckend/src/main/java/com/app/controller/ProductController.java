@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -72,6 +74,24 @@ public class ProductController {
     public ResponseEntity changeProductActiveStatus(@PathVariable String prod_id, @PathVariable String status) {
         System.out.println("in change product active status");
         return new ResponseEntity(productService.changeProductActiveStatus(Integer.parseInt(prod_id), Integer.parseInt(status)), HttpStatus.OK);
+    }
+
+    @GetMapping("/getImage/{prodId}")
+    public ResponseEntity getProductImage(@PathVariable String prodId){
+        System.out.println("in get product image");
+        return new ResponseEntity("", HttpStatus.OK);
+    }
+
+    @PutMapping("/uploadImage/{prodId}")
+    public ResponseEntity uploadProductImage(@PathVariable String prodId, @RequestParam("productImage") MultipartFile multipartFile) throws IOException {
+        System.out.println("in upload product image");
+        return new ResponseEntity(productService.uploadProductImage(Integer.parseInt(prodId), multipartFile), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/imageDelete/{prodId}")
+    public ResponseEntity deleteProductImage(@PathVariable String prodId) throws IOException {
+        System.out.println("in delete product image");
+        return new ResponseEntity(productService.deleteProductImage(Integer.parseInt(prodId)), HttpStatus.OK);
     }
 
 }

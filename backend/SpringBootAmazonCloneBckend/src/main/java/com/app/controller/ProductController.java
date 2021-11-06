@@ -65,7 +65,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete/{prod_id}")
-    public ResponseEntity deleteProduct(@PathVariable String prod_id) {
+    public ResponseEntity deleteProduct(@PathVariable String prod_id) throws IOException {
         System.out.println("in  Delete Product");
         return new ResponseEntity(productService.deleteProducts(Integer.parseInt(prod_id)), HttpStatus.OK);
     }

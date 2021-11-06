@@ -1,7 +1,9 @@
 package com.app.controller;
 
+import com.app.customExceptions.AuthenticationException;
 import com.app.customExceptions.ResourceNotFoundException;
 import com.app.customExceptions.UnexpectedErrorException;
+import com.app.dto.ResponseDTO;
 import com.app.dto.SigninDTO;
 import com.app.pojo.User;
 import com.app.service.IUserService;
@@ -24,14 +26,13 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity userSignin(@RequestBody SigninDTO user) {
+    public ResponseDTO userSignin(@RequestBody SigninDTO user) {
         System.out.println("inside Sign in" + user);
         User foundUser = userService.userSign(user);
         if (foundUser != null) {
-            return new ResponseEntity(foundUser, HttpStatus.OK);
-        } else {
-            return new ResponseEntity("Invalid Email or Password", HttpStatus.BAD_REQUEST);
+            return new ResponseDTO(true, foundUser);
         }
+        throw new AuthenticationException("Invalid Email or Password");
     }
 
     @PostMapping("/signup")

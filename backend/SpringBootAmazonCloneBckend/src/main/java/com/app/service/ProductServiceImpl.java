@@ -47,8 +47,9 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public String deleteProducts(int prodId) {
+    public String deleteProducts(int prodId) throws IOException {
         if (productRepo.existsById(prodId)) {
+            this.deleteProductImage(prodId);
             productRepo.deleteById(prodId);
             return "Product Deleted Successfully";
         }

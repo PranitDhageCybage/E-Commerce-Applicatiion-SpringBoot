@@ -13,7 +13,7 @@ public interface IProductService {
 
     Products updateProducts(int prodId, Products product);
 
-    String deleteProducts(int prodId);
+    String deleteProducts(int prodId) throws IOException;
 
     Products getProductDetails(int prodId);
 

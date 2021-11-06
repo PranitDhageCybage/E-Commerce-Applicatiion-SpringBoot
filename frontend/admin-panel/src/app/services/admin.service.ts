@@ -12,7 +12,7 @@ import {
   providedIn: 'root',
 })
 export class AdminService implements CanActivate {
-  url = 'http://localhost:3000/admin';
+  url = 'http://localhost:8080/user';
 
   constructor(private router: Router, private httpClient: HttpClient) {}
 
@@ -22,7 +22,7 @@ export class AdminService implements CanActivate {
       password: password,
     };
 
-    return this.httpClient.post(this.url + '/signin', body);
+    return this.httpClient.post(this.url + '/login', body);
   }
 
   signup(firstName: string, lastName: String, email: string, password: string) {
@@ -36,7 +36,7 @@ export class AdminService implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (sessionStorage['token']) {
+    if (sessionStorage['name']) { // Temporary name checked, later check for token
       // user is already logged in
       // launch the component
       return true;

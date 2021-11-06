@@ -1,47 +1,35 @@
 package com.app.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.http.HttpStatus;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-
+@Getter
+@Setter
+@ToString
 public class ResponseDTO<T> {
-    private HttpStatus status;
-    private String message;
+    private Boolean success;
+
     @JsonProperty("data")
     private T result;
 
+    @JsonProperty("error")
+    private String error;
+
     public ResponseDTO() {
-        System.out.println("in " + getClass().getName() );
+        System.out.println("in " + getClass().getName());
     }
 
-    public ResponseDTO(HttpStatus status, String message, T result) {
-        super();
-        this.status = status;
-        this.message = message;
+    public ResponseDTO(Boolean success, T result) {
+        this.success = success;
         this.result = result;
     }
 
-    public HttpStatus getStatus() {
-        return status;
-    }
-    public void setStatus(HttpStatus status) {
-        this.status = status;
-    }
-    public String getMessage() {
-        return message;
-    }
-    public void setMessage(String message) {
-        this.message = message;
-    }
-    public T getResult() {
-        return result;
-    }
-    public void setResult(T result) {
+    public ResponseDTO(Boolean success, String error, T result) {
+        this.success = success;
+        this.error = error;
         this.result = result;
     }
 
-    @Override
-    public String toString() {
-        return "ResponseDTO [status=" + status + ", message=" + message + ", result=" + result + "]";
-    }
 }

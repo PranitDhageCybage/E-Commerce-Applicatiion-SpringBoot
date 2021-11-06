@@ -16,18 +16,17 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onLogin() {
-    this.adminService.login(this.email, this.password).subscribe((response : any) => {
-      if (response['status'] == 'success') {
-        const data = response['data'];
-        console.log(data);
-        sessionStorage['token'] = data['token']
-        sessionStorage['firstName'] = data['firstName']
-        sessionStorage['lastName'] = data['lastName']
-
-        this.router.navigate(['/dashboard'])
-      } else {
-        alert('Invalid User Id or Password');
-      }
-    });
+    this.adminService
+      .login(this.email, this.password)
+      .subscribe((response: any) => {
+        if (response['success']) {
+          const data = response['data'];
+          sessionStorage['name'] = data['name'];
+          sessionStorage['email'] = data['email'];
+          this.router.navigate(['/dashboard']);
+        } else {
+          alert(response['error'] + '\n' + response['data']);
+        }
+      });
   }
 }

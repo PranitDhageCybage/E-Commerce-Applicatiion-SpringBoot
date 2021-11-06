@@ -16,17 +16,17 @@ export class UserListComponent implements OnInit {
 
   loadUsers() {
     this.userService.getUsers().subscribe((response: any) => {
-      if (response['status'] == 'success') {
+      if (response['success']) {
         this.users = response['data'];
       } else {
-        console.log(response['error']);
+        console.log(response['error'] + '\n' + response['data']);
       }
     });
   }
 
   toggleActive(user: any) {
     this.userService.toggelActiveStatus(user).subscribe((response: any) => {
-      if (response['status'] == 'success') {
+      if (response['success']) {
         this.loadUsers();
       } else {
         console.log(response['error']);

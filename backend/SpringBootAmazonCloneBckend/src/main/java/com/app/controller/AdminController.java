@@ -33,23 +33,23 @@ public class AdminController {
     ICategoryService categoryService;
 
     public AdminController() {
-        System.out.println("in " + getClass().getName());
+        System.out.println("in AdminController --" + getClass().getName());
     }
 
-    @GetMapping("/userList")
-    public ResponseEntity getAllUserList() {
+    @GetMapping("/userList")/*--------------------------------------------- Admin getAllUserList Done-------------------------------------------------*/
+    public ResponseDTO getAllUserList() {
         System.out.println("in admin get all user list");
         List<User> userList = userService.getUsersListAll();
         if (userList.size() > 0) {
-            return new ResponseEntity(userList, HttpStatus.OK);
+            return new ResponseDTO(true, userList);
         }
         throw new ResourceNotFoundException("User list not found");
     }
 
-    @PutMapping("/userStatus/{user_id}/{status}")
-    public ResponseEntity changeUserActiveStatus(@PathVariable String user_id, @PathVariable String status) {
+    @PutMapping("/userStatus/{user_id}/{status}")/*--------------------------------------------- Admin changeUserActiveStatus Done-------------------------------------------------*/
+    public ResponseDTO changeUserActiveStatus(@PathVariable String user_id, @PathVariable String status) {
         System.out.println("in admin change user active status");
-        return new ResponseEntity(userService.changeUserActiveStatus(Integer.parseInt(user_id), Integer.parseInt(status)), HttpStatus.OK);
+        return new ResponseDTO(true, userService.changeUserActiveStatus(Integer.parseInt(user_id), Integer.parseInt(status)));
     }
 
     @GetMapping("/allUserOrders")

@@ -2,6 +2,7 @@ package com.app.controller;
 
 import com.app.customExceptions.ResourceNotFoundException;
 import com.app.dto.DashboardCountDTO;
+import com.app.dto.ResponseDTO;
 import com.app.pojo.Myorder;
 import com.app.pojo.User;
 import com.app.service.*;
@@ -67,8 +68,8 @@ public class AdminController {
         return new ResponseEntity(orderService.changeUserOrderDeliveryStatus(Integer.parseInt(myorder_id), status), HttpStatus.OK);
     }
 
-    @GetMapping("/dashboard-count")
-    public ResponseEntity getAllDashboardQuantity() {
+    @GetMapping("/dashboard-count") /*--------------------------------------------- Admin getAllDashboardCount Done-------------------------------------------------*/
+    public ResponseDTO getAllDashboardCount() {
         DashboardCountDTO countDTO = new DashboardCountDTO();
         countDTO.setUserCount(userService.getAllUserCount());
         countDTO.setProductCount(productService.countAllProduct());
@@ -76,7 +77,7 @@ public class AdminController {
         countDTO.setActiveOrderCount(orderService.countAllActiveUserOrders());
         countDTO.setCompanyCount(companyService.countAllCompany());
         countDTO.setCategoryCount(categoryService.countAllCategory());
-        return new ResponseEntity(countDTO, HttpStatus.OK);
+        return new ResponseDTO(true, countDTO);
     }
 
 }

@@ -25,7 +25,7 @@ public class UserController {
         System.out.println("in " + getClass().getName());
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login")   /*--------------------------------------------- Admin Login Done-------------------------------------------------*/
     public ResponseDTO userSignin(@RequestBody SigninDTO user) {
         System.out.println("inside Sign in" + user);
         User foundUser = userService.userSign(user);
@@ -36,12 +36,16 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity userSignup(@RequestBody User user, BindingResult bindingResult) {
+    public ResponseDTO userSignup(@RequestBody User user, BindingResult bindingResult) {
         System.out.println("in user signup : " + user);
         if (bindingResult.hasErrors()) {
-            return new ResponseEntity("Invalid Data", HttpStatus.BAD_REQUEST);
+            throw new AuthenticationException("Invalid Data");
         } else {
-            return new ResponseEntity(userService.userSignup(user), HttpStatus.OK);
+            User usr = userService.userSignup(user);
+            if (usr != null) {
+                return new ResponseDTO(true, "Signed Up Successfully");
+            }
+            throw new UnexpectedErrorException("Error While Sign up");
         }
     }
 

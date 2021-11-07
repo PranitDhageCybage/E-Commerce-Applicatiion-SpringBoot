@@ -14,4 +14,6 @@ public interface ICompanyService {
     String deleteCompany(int compId);
 
     Integer countAllCompany();
+
+    Company getCompanyDetailsById(int compId);
 }

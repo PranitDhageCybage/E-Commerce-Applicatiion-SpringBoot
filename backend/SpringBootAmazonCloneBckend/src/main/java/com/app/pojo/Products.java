@@ -36,6 +36,7 @@ public class Products {
     private Integer prodQty;
 
     @Column(name = "photo")
+    @JsonProperty("photo")
     private String photo;
 
     @JoinColumn(name = "cat_id", nullable = false)

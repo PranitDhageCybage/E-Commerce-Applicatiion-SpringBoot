@@ -49,7 +49,7 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public String deleteProducts(int prodId) throws IOException {
         if (productRepo.existsById(prodId)) {
-            this.deleteProductImage(prodId);
+           deleteProductImage(prodId);
             productRepo.deleteById(prodId);
             return "Product Deleted Successfully";
         }
@@ -62,8 +62,8 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public String changeProductActiveStatus(int prod_id, int status) {
-        Products product = productRepo.findById(prod_id).orElseThrow(() -> new ResourceNotFoundException("Product  not found for given Product Id : " + prod_id));
+    public String changeProductActiveStatus(int prodId, int status) {
+        Products product = productRepo.findById(prodId).orElseThrow(() -> new ResourceNotFoundException("Product  not found for given Product Id : " + prodId));
         product.setIsActive(status);
         productRepo.save(product);
         return "Product Active status changed";
@@ -88,10 +88,13 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public String deleteProductImage(int prodId) throws IOException {
         Products product = productRepo.findById(prodId).orElseThrow(() -> new ResourceNotFoundException("Product not found for given product id"));
-        String uploadDir = "src/main/resources/product-photos/";
-        ImageUploadUtils.deleteFile(uploadDir, product.getPhoto());
-        product.setPhoto(null);
-        return "Product image deleted successfully";
+        if (product.getPhoto() != null) {
+            String uploadDir = "src/main/resources/product-photos/";
+            ImageUploadUtils.deleteFile(uploadDir, product.getPhoto());
+            product.setPhoto(null);
+            return "Product image deleted successfully";
+        }
+        return "Product image is not available";
     }
 
 }

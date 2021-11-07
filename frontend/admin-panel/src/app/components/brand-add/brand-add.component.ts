@@ -24,10 +24,10 @@ export class BrandAddComponent implements OnInit {
       // If Id is present, Edit brand
       // else Add brand
       this.brandService.getBrand(id).subscribe((response: any) => {
-        if (response['status'] == 'success') {
-          this.brand = response['data'][0];
-          this.title = this.brand['title'];
-          this.description = this.brand['description'];
+        if (response['success']) {
+          this.brand = response['data'];
+          this.title = this.brand['comp_title'];
+          this.description = this.brand['comp_description'];
         } else {
           console.log(response['error']);
         }
@@ -39,9 +39,9 @@ export class BrandAddComponent implements OnInit {
     if (this.brand) {
       //Edit
       this.brandService
-        .updateBrands(this.brand['id'], this.title, this.description)
+        .updateBrands(this.brand['comp_id'], this.title, this.description)
         .subscribe((response: any) => {
-          if (response['status'] == 'success') {
+          if (response['success']) {
             this.router.navigate(['/brand-list']);
           } else {
           }
@@ -51,7 +51,7 @@ export class BrandAddComponent implements OnInit {
       this.brandService
         .addBrands(this.title, this.description)
         .subscribe((response: any) => {
-          if (response['status'] == 'success') {
+          if (response['success']) {
             this.router.navigate(['/brand-list']);
           } else {
           }

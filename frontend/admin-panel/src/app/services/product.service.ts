@@ -5,17 +5,17 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ProductService {
-  url = 'http://localhost:3000/product';
+  url = 'http://localhost:8080/product';
   constructor(private httpClient: HttpClient) {}
 
   loadProducts() {
     // Add token in header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
-    return this.httpClient.get(this.url + '/details', httpOptions);
+    return this.httpClient.get(this.url + '/list', httpOptions);
   }
   //Get Product Details with Id
   getProduct(id: number) {
@@ -26,7 +26,7 @@ export class ProductService {
       }),
     };
     console.log('Inside get product by id service');
-    
+
     return this.httpClient.get(this.url + '/details/' + id, httpOptions);
   }
 
@@ -34,28 +34,25 @@ export class ProductService {
     // Add token in header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
-
-    const body = {};
+    const is_active = product['is_active'] == 0 ? 1 : 0;
     return this.httpClient.put(
-      this.url +
-        `/update-state/${product['id']}/${product['isActive'] == 0 ? 1 : 0}`,
-      body,
+      this.url + `/isActiveStatus/${product['prod_id']}/${is_active}`,
       httpOptions
     );
   }
 
-  deleteProduct(id: number) {
+  deleteProduct(prod_id: number) {
     // Add token in header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
 
-    return this.httpClient.delete(this.url + `/${id}`, httpOptions);
+    return this.httpClient.delete(this.url + `/delete/${prod_id}`, httpOptions);
   }
 
   updateProduct(
@@ -116,6 +113,10 @@ export class ProductService {
     const body = new FormData();
     body.append('productImage', file);
 
-    return this.httpClient.post(this.url + '/upload-image/' + id, body, httpOptions);
+    return this.httpClient.post(
+      this.url + '/upload-image/' + id,
+      body,
+      httpOptions
+    );
   }
 }

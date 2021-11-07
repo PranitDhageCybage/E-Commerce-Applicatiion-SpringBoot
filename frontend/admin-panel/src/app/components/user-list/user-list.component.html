@@ -14,29 +14,27 @@
       <thead>
         <tr>
           <th style="width: 60px">Sr No</th>
-          <th style="width: 200px">Name</th>
-          <th style="width: 300px">Address</th>
-          <th style="width: 180px">Email</th>
-          <th style="width: 180px">Phone</th>
-          <th style="width: 60px">Active</th>
+          <th style="width: 300px">Name</th>
+          <th style="width: 350px">Email</th>
+          <th style="width: 250px">Phone</th>
+          <th style="width: 100px">Active</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let user of users; let index = index">
           <td>{{ index + 1 }}</td>
-          <td>{{ user["firstName"] }} {{ user["lastName"] }}</td>
-          <td>{{ user["address"] }}</td>
+          <td>{{ user["name"] }}</td>
           <td>{{ user["email"] }}</td>
           <td>{{ user["phone"] }}</td>
-          <td>{{ user["active"] }}</td>
+          <td>{{ user["status"] == 1 ? "Active" : "Inactive" }}</td>
           <td>
             <button
               (click)="toggleActive(user)"
-              [class.btn-success]="user['active'] != 1"
-              [class.btn-danger]="user['active'] == 1"
+              [class.btn-success]="user['status'] != 1"
+              [class.btn-danger]="user['status'] == 1"
             >
-              {{ user["active"] == 1 ? "Suspend" : "Activate" }}
+              {{ user["status"] == 1 ? "Suspend" : "Activate" }}
             </button>
           </td>
         </tr>

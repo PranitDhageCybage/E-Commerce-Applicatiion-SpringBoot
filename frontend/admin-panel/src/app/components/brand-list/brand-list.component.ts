@@ -16,7 +16,7 @@ export class BrandListComponent implements OnInit {
   }
   loadBrandList() {
     this.brandService.getBrands().subscribe((response: any) => {
-      if (response['status'] == 'success') {
+      if (response['success']) {
         this.brands = response['data'];
       } else {
         console.log(response['error']);
@@ -28,16 +28,18 @@ export class BrandListComponent implements OnInit {
   }
   onEdit(brand: any) {
     this.router.navigate(['/brand-add'], {
-      queryParams: { id: brand['id'] },
+      queryParams: { id: brand['comp_id'] },
     });
   }
   onDelete(brand: any) {
-    this.brandService.deleteBrands(brand['id']).subscribe((response: any) => {
-      if (response['status'] == 'success') {
-        this.loadBrandList();
-      } else {
-        console.log(response['error']);
-      }
-    });
+    this.brandService
+      .deleteBrands(brand['comp_id'])
+      .subscribe((response: any) => {
+        if (response['success']) {
+          this.loadBrandList();
+        } else {
+          console.log(response['error']);
+        }
+      });
   }
 }

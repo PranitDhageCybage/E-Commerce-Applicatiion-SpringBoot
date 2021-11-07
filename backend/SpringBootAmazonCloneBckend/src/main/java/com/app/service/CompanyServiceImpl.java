@@ -50,4 +50,9 @@ public class CompanyServiceImpl implements ICompanyService {
     public Integer countAllCompany() {
         return companyRepo.findAll().size();
     }
+
+    @Override
+    public Company getCompanyDetailsById(int compId) {
+        return companyRepo.findById(compId).orElseThrow(() -> new ResourceNotFoundException("Company not found for given comp Id : " + compId));
+    }
 }

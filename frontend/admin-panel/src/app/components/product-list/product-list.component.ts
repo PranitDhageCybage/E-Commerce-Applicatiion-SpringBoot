@@ -8,7 +8,7 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
-  products :any = [];
+  products: any = [];
   constructor(private router: Router, private productService: ProductService) {}
 
   ngOnInit(): void {
@@ -20,7 +20,7 @@ export class ProductListComponent implements OnInit {
   }
   loadProducts() {
     this.productService.loadProducts().subscribe((response: any) => {
-      if (response['status'] == 'success') {
+      if (response['success']) {
         this.products = response['data'];
       } else {
         console.log(response['error']);
@@ -31,7 +31,7 @@ export class ProductListComponent implements OnInit {
     this.productService
       .toggelActiveStatus(product)
       .subscribe((response: any) => {
-        if (response['status'] == 'success') {
+        if (response['success']) {
           this.loadProducts();
         } else {
           console.log(response['error']);
@@ -50,9 +50,9 @@ export class ProductListComponent implements OnInit {
   }
   onDelete(product: any) {
     this.productService
-      .deleteProduct(product['id'])
+      .deleteProduct(product['prod_id'])
       .subscribe((response: any) => {
-        if (response['status'] == 'success') {
+        if (response['success']) {
           this.loadProducts();
         } else {
           console.log(response['error']);

@@ -2,6 +2,7 @@ package com.app.controller;
 
 import com.app.customExceptions.ResourceNotFoundException;
 import com.app.customExceptions.UnexpectedErrorException;
+import com.app.dto.ResponseDTO;
 import com.app.pojo.Products;
 import com.app.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,12 @@ public class ProductController {
         System.out.println("in " + getClass().getName());
     }
 
-    @GetMapping("/list")
-    public ResponseEntity getAllProductList() {
+    @GetMapping("/list") /*--------------------------------------------- Admin get All Product List Done-------------------------------------------------*/
+    public ResponseDTO getAllProductList() {
         System.out.println("in  get all Product list");
         List<Products> productsList = productService.getAllProducts();
         if (productsList.size() > 0) {
-            return new ResponseEntity(productsList, HttpStatus.OK);
+            return new ResponseDTO(true, productsList);
         }
         throw new ResourceNotFoundException("Product list not found");
     }
@@ -64,16 +65,16 @@ public class ProductController {
         throw new UnexpectedErrorException("Error while Updating  product");
     }
 
-    @DeleteMapping("/delete/{prod_id}")
-    public ResponseEntity deleteProduct(@PathVariable String prod_id) throws IOException {
+    @DeleteMapping("/delete/{prod_id}")/*--------------------------------------------- Admin deleteProduct Done-------------------------------------------------*/
+    public ResponseDTO deleteProduct(@PathVariable String prod_id) throws IOException {
         System.out.println("in  Delete Product");
-        return new ResponseEntity(productService.deleteProducts(Integer.parseInt(prod_id)), HttpStatus.OK);
+        return new ResponseDTO(true, productService.deleteProducts(Integer.parseInt(prod_id)));
     }
 
-    @PutMapping("/isActiveStatus/{prod_id}/{status}")
-    public ResponseEntity changeProductActiveStatus(@PathVariable String prod_id, @PathVariable String status) {
+    @PutMapping("/isActiveStatus/{prodId}/{status}") /*--------------------------------------------- Admin changeProductActiveStatus Done-------------------------------------------------*/
+    public ResponseDTO changeProductActiveStatus(@PathVariable String prodId, @PathVariable String status) {
         System.out.println("in change product active status");
-        return new ResponseEntity(productService.changeProductActiveStatus(Integer.parseInt(prod_id), Integer.parseInt(status)), HttpStatus.OK);
+        return new ResponseDTO(true, productService.changeProductActiveStatus(Integer.parseInt(prodId), Integer.parseInt(status)));
     }
 
     @GetMapping("/getImage/{prodId}")

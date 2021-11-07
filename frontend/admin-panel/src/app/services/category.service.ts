@@ -5,64 +5,64 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class CategoryService {
-  url = 'http://localhost:3000/category';
+  url = 'http://localhost:8080/category';
   constructor(private httpClient: HttpClient) {}
 
   getCategories() {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
-    return this.httpClient.get(this.url, httpOptions);
+    return this.httpClient.get(this.url + '/list', httpOptions);
   }
 
   getCategory(id: number) {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
-    return this.httpClient.get(this.url + '/' + id, httpOptions);
+    return this.httpClient.get(this.url + '/details/' + id, httpOptions);
   }
 
   addCategories(title: string, description: string) {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
     const body = {
-      title: title,
-      description: description,
+      cat_title: title,
+      cat_description: description,
     };
-    return this.httpClient.post(this.url, body, httpOptions);
+    return this.httpClient.post(this.url + '/add', body, httpOptions);
   }
 
   updateCategories(id: number, title: string, description: string) {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
     const body = {
-      title: title,
-      description: description,
+      cat_title: title,
+      cat_description: description,
     };
-    return this.httpClient.put(this.url + '/' + id, body, httpOptions);
+    return this.httpClient.put(this.url + '/update/' + id, body, httpOptions);
   }
 
   deleteCategories(id: number) {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
-    return this.httpClient.delete(this.url + '/' + id, httpOptions);
+    return this.httpClient.delete(this.url + '/delete/' + id, httpOptions);
   }
 }

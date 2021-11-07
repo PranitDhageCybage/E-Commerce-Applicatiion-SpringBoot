@@ -19,7 +19,7 @@ export class CategoryListComponent implements OnInit {
   }
   loadCategoryList() {
     this.categoryService.getCategories().subscribe((response: any) => {
-      if (response['status'] == 'success') {
+      if (response['success']) {
         this.categories = response['data'];
       } else {
         console.log(response['error']);
@@ -31,14 +31,14 @@ export class CategoryListComponent implements OnInit {
   }
   onEdit(category: any) {
     this.router.navigate(['/category-add'], {
-      queryParams: { id: category['id'] },
+      queryParams: { id: category['cat_id'] },
     });
   }
   onDelete(category: any) {
     this.categoryService
-      .deleteCategories(category['id'])
+      .deleteCategories(category['cat_id'])
       .subscribe((response: any) => {
-        if (response['status'] == 'success') {
+        if (response['success']) {
           this.loadCategoryList();
         } else {
           console.log(response['error']);

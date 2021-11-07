@@ -24,10 +24,10 @@ export class CategoryAddComponent implements OnInit {
       // If Id is present, Edit brand
       // else Add brand
       this.categoryService.getCategory(id).subscribe((response: any) => {
-        if (response['status'] == 'success') {
-          this.category = response['data'][0];
-          this.title = this.category['title'];
-          this.description = this.category['description'];
+        if (response['success']) {
+          this.category = response['data'];
+          this.title = this.category['cat_title'];
+          this.description = this.category['cat_description'];
         } else {
           console.log(response['error']);
         }
@@ -39,9 +39,9 @@ export class CategoryAddComponent implements OnInit {
     if (this.category) {
       //Edit
       this.categoryService
-        .updateCategories(this.category['id'], this.title, this.description)
+        .updateCategories(this.category['cat_id'], this.title, this.description)
         .subscribe((response: any) => {
-          if (response['status'] == 'success') {
+          if (response['success']) {
             this.router.navigate(['/category-list']);
           } else {
           }
@@ -51,7 +51,7 @@ export class CategoryAddComponent implements OnInit {
       this.categoryService
         .addCategories(this.title, this.description)
         .subscribe((response: any) => {
-          if (response['status'] == 'success') {
+          if (response['success']) {
             this.router.navigate(['/category-list']);
           } else {
           }

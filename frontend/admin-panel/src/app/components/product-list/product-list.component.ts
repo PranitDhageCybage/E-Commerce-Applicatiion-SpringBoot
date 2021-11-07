@@ -40,12 +40,12 @@ export class ProductListComponent implements OnInit {
   }
   onEdit(product: any) {
     this.router.navigate(['/product-add'], {
-      queryParams: { id: product['id'] },
+      queryParams: { id: product['prod_id'] },
     });
   }
   uploadImage(product: any) {
     this.router.navigate(['/product-upload-image'], {
-      queryParams: { id: product['id'] },
+      queryParams: { id: product['prod_id'] },
     });
   }
   onDelete(product: any) {

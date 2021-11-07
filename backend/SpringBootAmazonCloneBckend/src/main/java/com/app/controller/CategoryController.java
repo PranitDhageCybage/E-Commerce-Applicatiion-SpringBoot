@@ -23,7 +23,7 @@ public class CategoryController {
         System.out.println("in " + getClass().getName());
     }
 
-    @GetMapping("/list")
+    @GetMapping("/list")/*------------------------------------------Admin getAllCategoryList Done--------------------------------------------------------*/
     public ResponseDTO getAllCategoryList() {
         System.out.println("in  get all category list");
         List<Category> categoryList = categoryService.getAllCategories();
@@ -33,7 +33,7 @@ public class CategoryController {
         throw new ResourceNotFoundException("Category list not found");
     }
 
-    @GetMapping("/details/{catId}")
+    @GetMapping("/details/{catId}")/*------------------------------------------Admin getCategoryDetailsById Done--------------------------------------------------------*/
     public ResponseDTO getCategoryDetailsById(@PathVariable String catId) {
         System.out.println("in category details");
         Category category = categoryService.getCategoryDetailsById(Integer.parseInt(catId));
@@ -44,7 +44,7 @@ public class CategoryController {
     }
 
 
-    @PostMapping("/add")
+    @PostMapping("/add")/*------------------------------------------Admin addNewCategory Done--------------------------------------------------------*/
     public ResponseDTO addNewCategory(@RequestBody Category category) {
         System.out.println("in  add new category");
         Category cat = categoryService.addCategory(category);
@@ -54,7 +54,7 @@ public class CategoryController {
         throw new UnexpectedErrorException("Error while adding new  category");
     }
 
-    @PutMapping("/update/{cat_id}")
+    @PutMapping("/update/{cat_id}")/*------------------------------------------Admin updateCategory Done--------------------------------------------------------*/
     public ResponseDTO updateCategory(@RequestBody Category category, @PathVariable String cat_id) {
         System.out.println("in  update category");
         Category cat = categoryService.updateCategory(Integer.parseInt(cat_id), category);
@@ -64,7 +64,7 @@ public class CategoryController {
         throw new UnexpectedErrorException("Error while updating  category");
     }
 
-    @DeleteMapping("/delete/{cat_id}")
+    @DeleteMapping("/delete/{cat_id}")/*------------------------------------------Admin deleteCategory Done--------------------------------------------------------*/
     public ResponseDTO deleteCategory(@PathVariable String cat_id) {
         System.out.println("in  Delete category");
         return new ResponseDTO(true, categoryService.deleteCategory(Integer.parseInt(cat_id)));

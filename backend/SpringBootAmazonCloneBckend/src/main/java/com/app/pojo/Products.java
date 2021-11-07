@@ -49,7 +49,7 @@ public class Products {
 
     @Column(name = "is_active", columnDefinition = "integer default 1 ")
     @JsonProperty("is_active")
-    private Integer isActive;
+    private Integer isActive = 0;
 
     @CreationTimestamp
     @JsonProperty("added_on")

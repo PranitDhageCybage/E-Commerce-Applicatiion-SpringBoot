@@ -6,8 +6,6 @@ import com.app.dto.ResponseDTO;
 import com.app.pojo.Products;
 import com.app.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,32 +33,32 @@ public class ProductController {
         throw new ResourceNotFoundException("Product list not found");
     }
 
-    @GetMapping("/details/{prod_id}")
-    public ResponseEntity getProduct(@PathVariable String prod_id) {
+    @GetMapping("/details/{prod_id}")/*--------------------------------------------- Admin getProduct Done-------------------------------------------------*/
+    public ResponseDTO getProduct(@PathVariable String prod_id) {
         System.out.println("in  get Product details");
         Products product = productService.getProductDetails(Integer.parseInt(prod_id));
         if (product != null) {
-            return new ResponseEntity(product, HttpStatus.OK);
+            return new ResponseDTO(true, product);
         }
         throw new ResourceNotFoundException("Product not found for given product id");
     }
 
-    @PostMapping("/add")
-    public ResponseEntity addNewProduct(@RequestBody Products product) {
+    @PostMapping("/add")/*--------------------------------------------- Admin addNewProduct Done-------------------------------------------------*/
+    public ResponseDTO addNewProduct(@RequestBody Products product) {
         System.out.println("in  add new Product : " + product);
         Products prod = productService.addProducts(product);
         if (prod != null) {
-            return new ResponseEntity("Product added successfully", HttpStatus.OK);
+            return new ResponseDTO(true, "Product added successfully");
         }
         throw new UnexpectedErrorException("Error while adding new  product");
     }
 
-    @PutMapping("/update/{prod_id}")
-    public ResponseEntity updateProduct(@RequestBody Products product, @PathVariable String prod_id) {
+    @PutMapping("/update/{prod_id}")/*--------------------------------------------- Admin updateProduct Done-------------------------------------------------*/
+    public ResponseDTO updateProduct(@RequestBody Products product, @PathVariable String prod_id) {
         System.out.println("in  update Product : ");
         Products prod = productService.updateProducts(Integer.parseInt(prod_id), product);
         if (prod != null) {
-            return new ResponseEntity("Product Updated successfully", HttpStatus.OK);
+            return new ResponseDTO(true, "Product Updated successfully");
         }
         throw new UnexpectedErrorException("Error while Updating  product");
     }
@@ -78,21 +76,21 @@ public class ProductController {
     }
 
     @GetMapping("/getImage/{prodId}")
-    public ResponseEntity getProductImage(@PathVariable String prodId){
+    public ResponseDTO getProductImage(@PathVariable String prodId) {
         System.out.println("in get product image");
-        return new ResponseEntity("", HttpStatus.OK);
+        return new ResponseDTO(true, "");
     }
 
     @PutMapping("/uploadImage/{prodId}")
-    public ResponseEntity uploadProductImage(@PathVariable String prodId, @RequestParam("productImage") MultipartFile multipartFile) throws IOException {
+    public ResponseDTO uploadProductImage(@PathVariable String prodId, @RequestParam("productImage") MultipartFile multipartFile) throws IOException {
         System.out.println("in upload product image");
-        return new ResponseEntity(productService.uploadProductImage(Integer.parseInt(prodId), multipartFile), HttpStatus.OK);
+        return new ResponseDTO(true, productService.uploadProductImage(Integer.parseInt(prodId), multipartFile));
     }
 
     @DeleteMapping("/imageDelete/{prodId}")
-    public ResponseEntity deleteProductImage(@PathVariable String prodId) throws IOException {
+    public ResponseDTO deleteProductImage(@PathVariable String prodId) throws IOException {
         System.out.println("in delete product image");
-        return new ResponseEntity(productService.deleteProductImage(Integer.parseInt(prodId)), HttpStatus.OK);
+        return new ResponseDTO(true, productService.deleteProductImage(Integer.parseInt(prodId)));
     }
 
 }

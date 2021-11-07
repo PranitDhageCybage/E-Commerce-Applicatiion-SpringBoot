@@ -22,11 +22,9 @@ export class ProductService {
     // Add token in header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
-    console.log('Inside get product by id service');
-
     return this.httpClient.get(this.url + '/details/' + id, httpOptions);
   }
 
@@ -61,23 +59,25 @@ export class ProductService {
     description: string,
     price: number,
     category: number,
-    brand: number
+    brand: number,
+    quantity: number
   ) {
     // Add token in header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
     const body = {
-      title: title,
-      description: description,
-      price: price,
-      category: category,
-      brand: brand,
+      prod_title: title,
+      prod_description: description,
+      prod_price: price,
+      category: { cat_id: category },
+      company: { comp_id: brand },
+      prod_qty: quantity,
     };
 
-    return this.httpClient.put(this.url + '/' + id, body, httpOptions);
+    return this.httpClient.put(this.url + '/update/' + id, body, httpOptions);
   }
 
   insertProduct(
@@ -85,29 +85,31 @@ export class ProductService {
     description: string,
     price: number,
     category: number,
-    brand: number
+    brand: number,
+    quantity: number
   ) {
     // Add token in header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
     const body = {
-      title: title,
-      description: description,
-      price: price,
-      category: category,
-      brand: brand,
+      prod_title: title,
+      prod_description: description,
+      prod_price: price,
+      category: { cat_id: category },
+      company: { comp_id: brand },
+      prod_qty: quantity,
     };
 
-    return this.httpClient.post(this.url + '/create', body, httpOptions);
+    return this.httpClient.post(this.url + '/add', body, httpOptions);
   }
   uploadImage(id: number, file: any) {
     // Add token in header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
     const body = new FormData();

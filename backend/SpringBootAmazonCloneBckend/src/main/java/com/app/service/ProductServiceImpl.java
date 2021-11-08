@@ -11,7 +11,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @Transactional
@@ -74,14 +79,38 @@ public class ProductServiceImpl implements IProductService {
         return productRepo.countAllProduct();
     }
 
+/*        @Override
+    public ImageDTO getPhotoByName(String photo) throws IOException {
+        String location = "src/main/resources/product-photos/";
+        Path path = Paths.get(location, photo);
+        ImageDTO img = new ImageDTO();
+        img.setName(photo);
+        img.setData(Files.readAllBytes(path));
+        img.setType(Files.probeContentType(path));
+        System.out.println(img.getType());
+        return img;
+    }
+
+
+    }*/
+
+    @Override
+    public byte[] getPhotoByName(String photo) throws IOException {
+        String location = "src/main/resources/product-photos/";
+        Path path = Paths.get(location, photo);
+        return Files.readAllBytes(path);
+    }
+
+
     @Override
     public String uploadProductImage(int prodId, MultipartFile file) throws IOException {
         Products product = productRepo.findById(prodId).orElseThrow(() -> new ResourceNotFoundException("Product  not found for given Product Id : " + prodId));
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        product.setPhoto(fileName);
+//        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        String photo = ImageUploadUtils.generateImageName();    //Generate Random Photo name
+        product.setPhoto(photo);
         productRepo.save(product);
         String uploadDir = "src/main/resources/product-photos/";
-        ImageUploadUtils.saveFile(uploadDir, fileName, file);
+        ImageUploadUtils.saveFile(uploadDir, photo, file);
         return "Image Uploaded Successfully";
     }
 
@@ -94,7 +123,7 @@ public class ProductServiceImpl implements IProductService {
             product.setPhoto(null);
             return "Product image deleted successfully";
         }
-        return "Product image is not available";
+        throw new ResourceNotFoundException( "Product image is not available");
     }
 
 }

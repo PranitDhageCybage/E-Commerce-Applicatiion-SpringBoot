@@ -16,15 +16,21 @@
     <div class="form">
       <div class="row">
         <div class="col-md-6">
-          <div class="form--group">
+          <div class="form-group">
             <label for="title">Title</label>
             <input [(ngModel)]="title" type="text" class="form-control" />
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="form--group">
+        <div class="col-md-4">
+          <div class="form-group">
             <label for="price">Price</label>
             <input [(ngModel)]="price" type="text" class="form-control" />
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input [(ngModel)]="quantity" type="number" class="form-control" />
           </div>
         </div>
       </div>
@@ -34,10 +40,10 @@
             <label for="category">Category</label>
             <select [(ngModel)]="category" class="form-control">
               <option
-                [value]="category['id']"
+                [value]="category['cat_id']"
                 *ngFor="let category of categories"
               >
-                {{ category["title"] }}
+                {{ category["cat_title"] }}
               </option>
             </select>
           </div>
@@ -46,8 +52,8 @@
           <div class="form--group">
             <label for="brand">Brand</label>
             <select [(ngModel)]="brand" class="form-control">
-              <option [value]="brand['id']" *ngFor="let brand of brands">
-                {{ brand["title"] }}
+              <option [value]="brand['comp_id']" *ngFor="let brand of brands">
+                {{ brand["comp_title"] }}
               </option>
             </select>
           </div>

@@ -6,6 +6,8 @@ import com.app.dto.ResponseDTO;
 import com.app.pojo.Products;
 import com.app.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -75,10 +77,10 @@ public class ProductController {
         return new ResponseDTO(true, productService.changeProductActiveStatus(Integer.parseInt(prodId), Integer.parseInt(status)));
     }
 
-    @GetMapping("/getImage/{prodId}")
-    public ResponseDTO getProductImage(@PathVariable String prodId) {
+    @GetMapping("/getImage/{photo}")/*--------------------------------------------- Admin getProductImage Done-------------------------------------------------*/
+    public ResponseEntity<?> getProductImage(@PathVariable String photo) throws IOException {
         System.out.println("in get product image");
-        return new ResponseDTO(true, "");
+        return new ResponseEntity(productService.getPhotoByName(photo), HttpStatus.OK);
     }
 
     @PutMapping("/uploadImage/{prodId}")

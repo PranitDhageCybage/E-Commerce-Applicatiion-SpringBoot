@@ -24,4 +24,6 @@ public interface IProductService {
     String uploadProductImage(int prodId, MultipartFile file) throws IOException;
 
     String deleteProductImage(int prodId) throws IOException;
+
+    byte[] getPhotoByName(String photo) throws IOException;
 }

@@ -106,19 +106,9 @@ export class ProductService {
     return this.httpClient.post(this.url + '/add', body, httpOptions);
   }
   uploadImage(id: number, file: any) {
-    // Add token in header
-    const httpOptions = {
-      headers: new HttpHeaders({
-        // token: sessionStorage['token'],
-      }),
-    };
     const body = new FormData();
     body.append('productImage', file);
 
-    return this.httpClient.post(
-      this.url + '/upload-image/' + id,
-      body,
-      httpOptions
-    );
+    return this.httpClient.put(this.url + '/uploadImage/' + id, body);
   }
 }

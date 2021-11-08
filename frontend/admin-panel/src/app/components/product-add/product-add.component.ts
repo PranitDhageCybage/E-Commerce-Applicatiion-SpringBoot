@@ -21,6 +21,7 @@ export class ProductAddComponent implements OnInit {
   category: number = 1;
   brand: number = 1;
   image: string = '';
+  quantity: number = 1;
 
   constructor(
     private router: Router,
@@ -35,30 +36,26 @@ export class ProductAddComponent implements OnInit {
     if (id) {
       // If Id is present, Edit Product
       // else Add Product
-      this.productService.getProduct(id).subscribe(
-        (response: any) => {
-          if (response['status'] == 'success') {
-            const products = response['data'];
-            // if (products.lenght > 0) {
-            this.product = products[0];
-            this.id = this.product['id'];
-            this.title = this.product['title'];
-            this.description = this.product['description'];
-            this.price = this.product['price'];
-            this.category = this.product['category']['id'];
-            this.brand = this.product['brand']['id'];
-            this.image = this.product['image'];
-          }
+      this.productService.getProduct(id).subscribe((response: any) => {
+        if (response['success']) {
+          this.product = response['data'];
+          this.id = this.product['prod_id'];
+          this.title = this.product['prod_title'];
+          this.description = this.product['prod_description'];
+          this.price = this.product['prod_price'];
+          this.category = this.product['category']['cat_id'];
+          this.brand = this.product['company']['comp_id'];
+          this.image = this.product['photo'];
+          this.quantity = this.product['prod_qty']
         }
-        // }
-      );
+      });
     }
     this.loadBrands();
     this.loadCategories();
   }
   loadBrands() {
     this.brandService.getBrands().subscribe((response: any) => {
-      if (response['status'] == 'success') {
+      if (response['success']) {
         this.brands = response['data'];
       } else {
         console.log(response['error']);
@@ -68,7 +65,7 @@ export class ProductAddComponent implements OnInit {
 
   loadCategories() {
     this.categoryService.getCategories().subscribe((response: any) => {
-      if (response['status'] == 'success') {
+      if (response['success']) {
         this.categories = response['data'];
       } else {
         console.log(response['error']);
@@ -81,15 +78,16 @@ export class ProductAddComponent implements OnInit {
       //Edit
       this.productService
         .updateProduct(
-          this.product['id'],
+          this.id,
           this.title,
           this.description,
           this.price,
           this.category,
-          this.brand
+          this.brand,
+          this.quantity
         )
         .subscribe((response: any) => {
-          if (response['status'] == 'success') {
+          if (response['success']) {
             this.router.navigate(['/product-list']);
           } else {
           }
@@ -102,10 +100,11 @@ export class ProductAddComponent implements OnInit {
           this.description,
           this.price,
           this.category,
-          this.brand
+          this.brand,
+          this.quantity
         )
         .subscribe((response: any) => {
-          if (response['status'] == 'success') {
+          if (response['success']) {
             this.router.navigate(['/product-list']);
           } else {
           }

@@ -68,7 +68,7 @@ export class ProductDetailsComponent implements OnInit {
     } else {
       // Add item to cart
       this.cartService
-        .addCartItem(product['id'], product['price'], 1)
+        .addCartItem(product['id'])
         .subscribe((response: any) => {
           if (response['status'] == 'success') {
             this.toastr.success(`Added ${product['title']} to cart`);

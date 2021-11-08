@@ -10,7 +10,7 @@ import { CartService } from '../cart.service';
 })
 export class CartComponent implements OnInit {
   items = [];
-  totalAmount = 0;
+  totalAmount: number = 0;
 
   constructor(
     private router: Router,
@@ -24,26 +24,27 @@ export class CartComponent implements OnInit {
 
   loadCartItems() {
     this.cartService.getCartItems().subscribe((response: any) => {
-      if (response['status'] == 'success') {
+      if (response['success']) {
         this.items = response['data'];
         this.totalAmount = 0;
-        for (let index = 0; index < this.items.length; index++) {
-          const item = this.items[index];
-          this.totalAmount += parseFloat(item['totalAmount']);
-        }
+        this.items.forEach(
+          (item) =>
+            (this.totalAmount +=
+              item['cart_quantity'] * item['product']['prod_price'])
+        );
       }
     });
   }
 
   updateQuantity(quantity: number, item: any) {
-    const newQuantity = item['quantity'] + quantity;
+    const newQuantity = item['cart_quantity'] + quantity;
     if (newQuantity == 0) {
       this.onDelete(item);
     } else {
       this.cartService
-        .updateCartItem(item['id'], newQuantity, item['price'])
+        .updateCartItem(item['cart_id'], newQuantity)
         .subscribe((response: any) => {
-          if (response['status'] == 'success') {
+          if (response['success']) {
             this.toastr.success('Updated quantity');
             this.loadCartItems();
           }
@@ -52,12 +53,16 @@ export class CartComponent implements OnInit {
   }
 
   onDelete(item: any) {
-    this.cartService.deleteCartItem(item['id']).subscribe((response: any) => {
-      if (response['status'] == 'success') {
-        this.toastr.success(`Deleted ${item['title']} form cart`);
-        this.loadCartItems();
-      }
-    });
+    this.cartService
+      .deleteCartItem(item['cart_id'])
+      .subscribe((response: any) => {
+        if (response['success']) {
+          this.toastr.success(
+            `Deleted ${item['product']['prod_title']} form cart`
+          );
+          this.loadCartItems();
+        }
+      });
   }
 
   placeOrder() {

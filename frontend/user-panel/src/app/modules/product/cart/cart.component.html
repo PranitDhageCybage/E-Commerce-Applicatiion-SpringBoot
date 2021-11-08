@@ -27,12 +27,12 @@
         <td>
           <img
             class="product-image"
-            src="http://localhost:4000/product/image/{{ item['image'] }}"
+            src="http://localhost:8080/product/getImage/{{ item['product']['photo'] }}"
             alt=""
           />
         </td>
-        <td>{{ item["title"] }}</td>
-        <td>{{ item["price"] }}</td>
+        <td>{{ item['product']["prod_title"] }}</td>
+        <td>{{ item['product']["prod_price"] }}</td>
         <th>
           <button
             (click)="updateQuantity(-1, item)"
@@ -40,7 +40,7 @@
           >
             -
           </button>
-          {{ item["quantity"] }}
+          {{ item["cart_quantity"] }}
           <button
             (click)="updateQuantity(1, item)"
             class="btn btn-warning btn-sm"
@@ -48,7 +48,7 @@
             +
           </button>
         </th>
-        <td>{{ item["totalAmount"] }}</td>
+        <td>{{ item["cart_quantity"] * item['product']["prod_price"] }}</td>
         <td>
           <button (click)="onDelete(item)" class="btn btn-danger btn-sm">
             Delete

@@ -2,70 +2,61 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
+  url = 'http://localhost:8080/cart';
 
-  url = 'http://localhost:4000/cart'
+  constructor(private httpClient: HttpClient) {}
 
-  constructor(
-    private httpClient: HttpClient) { }
-  
   getCartItems() {
-     // add the token in the request header
-     const httpOptions = {
+    // add the token in the request header
+    const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token']
-      })
+        // token: sessionStorage['token']
+      }),
     };
-    
-    return this.httpClient.get(this.url + "/user", httpOptions)
+    const id = sessionStorage['user_id'];
+    return this.httpClient.get(this.url + '/list/' + id, httpOptions);
   }
 
-  deleteCartItem(id:number) {
+  deleteCartItem(id: number) {
     // add the token in the request header
     const httpOptions = {
-     headers: new HttpHeaders({
-       token: sessionStorage['token']
-     })
-   };
-   
-   return this.httpClient.delete(this.url + "/" + id, httpOptions)
- }
+      headers: new HttpHeaders({
+        // token: sessionStorage['token'],
+      }),
+    };
 
- updateCartItem(id:number, quantity:number, price:number) {
-  // add the token in the request header
-  const httpOptions = {
-   headers: new HttpHeaders({
-     token: sessionStorage['token']
-   })
- };
+    return this.httpClient.delete(this.url + '/delete/' + id, httpOptions);
+  }
 
- const body = {
-   price: price, 
-   quantity: quantity
- }
- 
- return this.httpClient.put(this.url + "/" + id, body, httpOptions)
-}
-
- 
-
-  addCartItem(productId:number, price: number, quantity: number) {
+  updateCartItem(id: number, quantity: number) {
     // add the token in the request header
     const httpOptions = {
-     headers: new HttpHeaders({
-       token: sessionStorage['token']
-     })
-   };
+      headers: new HttpHeaders({
+        // token: sessionStorage['token'],
+      }),
+    };
 
-   const body = {
-     productId: productId,
-     price: price,
-     quantity: quantity
-   }
-   
-   return this.httpClient.post(this.url + "/user", body, httpOptions)
- }
+    return this.httpClient.put(
+      this.url + '/update/' + id + '/' + quantity,
+      httpOptions
+    );
+  }
 
+  addCartItem(productId: number) {
+    // add the token in the request header
+    const httpOptions = {
+      headers: new HttpHeaders({
+        //  token: sessionStorage['token']
+      }),
+    };
+    const body = {
+      user: { user_id: sessionStorage['user_id'] },
+      product: { prod_id: productId },
+    };
+
+    return this.httpClient.post(this.url + '/add', body, httpOptions);
+  }
 }

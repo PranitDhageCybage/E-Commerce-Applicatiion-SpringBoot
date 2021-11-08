@@ -5,40 +5,43 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class OrderService {
-  url = 'http://localhost:3000/order';
+  url = 'http://localhost:8080/';
   constructor(private httpClient: HttpClient) {}
 
-  getUserOrderDetails() {
+  getAllUserOrderList() {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
-    return this.httpClient.get(this.url + '/user-order', httpOptions);
+    return this.httpClient.get(this.url + 'myOrder/list', httpOptions);
   }
 
   showOrderDetails(id: number) {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
-    return this.httpClient.get(this.url + '/details/' + id, httpOptions);
+    return this.httpClient.get(
+      this.url + 'orderDetails/list/' + id,
+      httpOptions
+    );
   }
 
   changeDeliveryStatus(orderId: number, deliveryStatus: string) {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
 
-    const body = {
-      status: deliveryStatus,
-    };
-    return this.httpClient.put(this.url + '/' + orderId, body, httpOptions);
+    return this.httpClient.put(
+      this.url + '/update/' + orderId + '/' + deliveryStatus,
+      httpOptions
+    );
   }
 }

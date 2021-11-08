@@ -1,9 +1,6 @@
 package com.app.service;
 
-import com.app.customExceptions.ResourceNotFoundException;
-import com.app.dao.MyOrderRepository;
 import com.app.dao.OrderDetailsRepository;
-import com.app.pojo.Myorder;
 import com.app.pojo.OrderDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,22 +15,10 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
     @Autowired
     OrderDetailsRepository orderDetailsRepo;
 
-    @Autowired
-    MyOrderRepository myOrderRepo;
-
-
     @Override
-    public List<OrderDetails> getAllMyOrderDetails(int myorder_id) {
-        if (myOrderRepo.existsById(myorder_id)) {
-            Myorder myorder = myOrderRepo.findById(myorder_id).get();
-            return orderDetailsRepo.findAllByMyorder(myorder);
-        }
-        throw new ResourceNotFoundException("Order Details not found for given myOrder Id : " + myorder_id);
+    public List<OrderDetails> getOrderDetailsList(int myorder_id) {
+        return orderDetailsRepo.findAllByMyorderMyorderId(myorder_id);
     }
 
-    @Override
-    public List<OrderDetails> getAllUserOrderDetails() {
-        return orderDetailsRepo.findAll();
-    }
 
 }

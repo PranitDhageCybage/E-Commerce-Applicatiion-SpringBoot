@@ -13,12 +13,12 @@ export class OrderListComponent implements OnInit {
   constructor(private router: Router, private orderService: OrderService) {}
 
   ngOnInit(): void {
-    this.getUserOrderDetails();
+    this.getAllUserOrderList();
   }
 
-  getUserOrderDetails() {
-    this.orderService.getUserOrderDetails().subscribe((response: any) => {
-      if (response['status'] == 'success') {
+  getAllUserOrderList() {
+    this.orderService.getAllUserOrderList().subscribe((response: any) => {
+      if (response['success']) {
         this.userOrders = response['data'];
       } else {
         console.log(response['error']);
@@ -28,7 +28,7 @@ export class OrderListComponent implements OnInit {
 
   showOrderDetails(order: any) {
     this.router.navigate(['/order-details'], {
-      queryParams: { id: order['id'] },
+      queryParams: { id: order['myorder_id'] },
     });
   }
   changeDeliveryStatus(orderId: number, event: any) {
@@ -36,8 +36,8 @@ export class OrderListComponent implements OnInit {
     this.orderService
       .changeDeliveryStatus(orderId, this.deliveryStatus)
       .subscribe((response: any) => {
-        if (response['status'] == 'success') {
-          this.getUserOrderDetails();
+        if (response['success']) {
+          this.getAllUserOrderList();
         } else {
           console.log(response['error']);
         }

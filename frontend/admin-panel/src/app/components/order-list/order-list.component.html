@@ -27,13 +27,13 @@
       <tbody>
         <tr *ngFor="let order of userOrders; let index = index">
           <td>{{ index + 1 }}</td>
-          <td>{{ order["userId"] }} - {{ order["firstName"] }}</td>
-          <td>{{ order["totalAmount"] }}</td>
+          <td>{{ order["user"]["user_id"] }} - {{ order["user"]["name"] }}</td>
+          <td>{{ order["total_price"] }}</td>
           <td>{{ order["tax"] }}</td>
-          <td>{{ order["paymentType"] }}</td>
-          <td>{{ order["paymentStatus"] }}</td>
-          <td>{{ order["deliveryStatus"] }}</td>
-          <!-- <td>{{ order["createdOn"] }}</td> -->
+          <td>{{ order["payment_type"] }}</td>
+          <td>{{ order["payment_status"] }}</td>
+          <td>{{ order["delivery_status"] }}</td>
+          <!-- <td>{{ order["ordered_on"] }}</td> -->
           <td>
             <button
               (click)="showOrderDetails(order)"
@@ -44,10 +44,10 @@
             </button>
             <select
               *ngIf="
-                order['deliveryStatus'] != 'Cancelled' &&
-                order['deliveryStatus'] != 'Delivered'
+                order['delivery_status'] != 'Cancelled' &&
+                order['delivery_status'] != 'Delivered'
               "
-              (change)="changeDeliveryStatus(order['id'], $event)"
+              (change)="changeDeliveryStatus(order['myorder_id'], $event)"
               class="btn btn-success btn-sm dropdown"
               style="width: 130px"
             >

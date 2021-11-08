@@ -3,7 +3,6 @@ import { ProductService } from './../product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../cart.service';
-import { GalleryComponent } from '../gallery/gallery.component';
 
 @Component({
   selector: 'app-product-details',
@@ -14,7 +13,7 @@ export class ProductDetailsComponent implements OnInit {
   cartItems: any = [];
   product: any = [];
   reviews: any = [];
-  productId: number =0
+  productId: number = 0;
 
   title: string = '';
   description: string = '';

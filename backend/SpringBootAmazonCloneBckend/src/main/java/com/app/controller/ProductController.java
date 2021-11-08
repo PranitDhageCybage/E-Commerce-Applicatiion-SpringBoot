@@ -35,7 +35,18 @@ public class ProductController {
         throw new ResourceNotFoundException("Product list not found");
     }
 
-    @GetMapping("/details/{prod_id}")/*--------------------------------------------- Admin getProduct Done-------------------------------------------------*/
+    @GetMapping("/galleryList") /*--------------------------------------------- User getGalleryProductList Done-------------------------------------------------*/
+    public ResponseDTO getGalleryProductList() {
+        System.out.println("in  get gallery Product list");
+        List<Products> productsList = productService.getGalleryProducts();
+        if (productsList.size() > 0) {
+            return new ResponseDTO(true, productsList);
+        }
+        throw new ResourceNotFoundException("Product list not found");
+    }
+
+
+    @GetMapping("/details/{prod_id}")/*--------------------------------------------- Admin/User getProduct Done-------------------------------------------------*/
     public ResponseDTO getProduct(@PathVariable String prod_id) {
         System.out.println("in  get Product details");
         Products product = productService.getProductDetails(Integer.parseInt(prod_id));

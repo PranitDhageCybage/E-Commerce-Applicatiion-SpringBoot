@@ -26,4 +26,6 @@ public interface IProductService {
     String deleteProductImage(int prodId) throws IOException;
 
     byte[] getPhotoByName(String photo) throws IOException;
+
+    List<Products> getGalleryProducts();
 }

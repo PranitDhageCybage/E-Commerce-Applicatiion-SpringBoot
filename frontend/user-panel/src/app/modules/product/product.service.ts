@@ -18,7 +18,7 @@ export class ProductService {
       }),
     };
 
-    return this.httpClient.get(this.url + '/list', httpOptions);
+    return this.httpClient.get(this.url + '/galleryList', httpOptions);
   }
 
   getProductDetails(id: number) {

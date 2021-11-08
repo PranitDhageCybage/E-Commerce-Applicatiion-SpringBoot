@@ -17,7 +17,10 @@
       <label for="" style="font-weight: bold">Filters</label><br />
       <label for="">Category</label>
       <select class="form-control" (change)="filterProducts($event)">
-        <option [value]="category['cat_id']" *ngFor="let category of categories">
+        <option
+          [value]="category['cat_id']"
+          *ngFor="let category of categories"
+        >
           {{ category["cat_title"] }}
         </option>
       </select>
@@ -38,7 +41,6 @@
           />
           <div class="card-body">
             <h5 class="card-title">{{ product["prod_title"] }}</h5>
-            <!-- <p class="card-text">{{product['description']}}</p> -->
             <div class="price">
               <strong>Price: ₹ </strong>{{ product["prod_price"] }}
             </div>
@@ -48,6 +50,7 @@
             <div class="category">
               <strong>Category: </strong> {{ product["category"]["cat_title"] }}
             </div>
+            <div><h6><strong>Product Quantity :</strong> {{ product["prod_qty"] }}</h6></div>
             <button
               style="margin-top: 10px"
               (click)="addToCart(product)"

@@ -6,17 +6,15 @@ import com.app.pojo.Products;
 import com.app.utils.ImageUploadUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -29,6 +27,12 @@ public class ProductServiceImpl implements IProductService {
     public List<Products> getAllProducts() {
         return productRepo.findAll();
     }
+
+    @Override
+    public List<Products> getGalleryProducts() {
+        return productRepo.findAll().stream().filter(product -> product.getIsActive() != 0 && product.getProdQty() > 0).collect(Collectors.toList());
+    }
+
 
     @Override
     public Products addProducts(Products product) {
@@ -78,21 +82,6 @@ public class ProductServiceImpl implements IProductService {
     public Integer countAllProduct() {
         return productRepo.countAllProduct();
     }
-
-/*        @Override
-    public ImageDTO getPhotoByName(String photo) throws IOException {
-        String location = "src/main/resources/product-photos/";
-        Path path = Paths.get(location, photo);
-        ImageDTO img = new ImageDTO();
-        img.setName(photo);
-        img.setData(Files.readAllBytes(path));
-        img.setType(Files.probeContentType(path));
-        System.out.println(img.getType());
-        return img;
-    }
-
-
-    }*/
 
     @Override
     public byte[] getPhotoByName(String photo) throws IOException {

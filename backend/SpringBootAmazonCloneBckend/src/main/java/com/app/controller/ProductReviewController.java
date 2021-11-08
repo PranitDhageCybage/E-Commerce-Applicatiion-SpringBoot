@@ -23,7 +23,7 @@ public class ProductReviewController {
         System.out.println("in ProductReviewController -- " + getClass().getName());
     }
 
-    @GetMapping("/list/{prod_id}")
+    @GetMapping("/list/{prod_id}")/*-------------------------------------------------------User getAllProductReviewList Done------------------------------------------------ */
     public ResponseDTO getAllProductReviewList(@PathVariable String prod_id) {
         System.out.println("in get all product review list");
         List<ProductReview> productReviewList = reviewService.getAllProductReviews(Integer.parseInt(prod_id));
@@ -33,7 +33,7 @@ public class ProductReviewController {
         throw new ResourceNotFoundException("product Review list not found for given product id");
     }
 
-    @GetMapping("/average/{prod_id}")
+    @GetMapping("/average/{prod_id}")/*-------------------------------------------------------User getAverageProductRating Done------------------------------------------------ */
     public ResponseDTO getAverageProductRating(@PathVariable String prod_id) {
         System.out.println("in get average product rating");
         double avgRating = reviewService.getAverageOfProductReview(Integer.parseInt(prod_id));

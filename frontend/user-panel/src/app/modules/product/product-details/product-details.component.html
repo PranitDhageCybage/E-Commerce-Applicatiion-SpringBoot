@@ -15,14 +15,14 @@
         <div class="row mx-1">
           <div class="col-12 mb-0">
             <img
-              src="http://localhost:4000/product/image/{{ image }}"
+              src="http://localhost:8080/product/getImage/{{ image }}"
               class="img-fluid z-depth-1"
             />
           </div>
         </div>
       </div>
       <div class="col-md-6">
-        <h5>{{ product["title"] }}</h5>
+        <h5><strong> Product Title : </strong>{{ product["prod_title"] }}</h5>
         <div>
           <img
             *ngIf="avgRating >= 1"
@@ -57,10 +57,10 @@
         </div>
         <div style="margin-top: 10px">
           <span class="mr-1"
-            ><strong> ₹ {{ price }}</strong></span
+            ><strong> Price: ₹ {{ price }}</strong></span
           >
         </div>
-        <p>{{ description }}</p>
+        <p><strong> Product Description : </strong>{{ description }}</p>
         <div class="table-responsive">
           <table class="table table-sm table-borderless mb-0">
             <tbody>
@@ -71,6 +71,10 @@
               <tr>
                 <th class="pl-0 w-25" scope="row"><strong>Brand</strong></th>
                 <td>{{ brand }}</td>
+              </tr>
+              <tr>
+                <th class="pl-0 w-25" scope="row"><strong>Quantity</strong></th>
+                <td>{{ product["prod_qty"] }}</td>
               </tr>
             </tbody>
           </table>
@@ -94,8 +98,8 @@
 <div class="modal-body" *ngIf="reviews || reviews.lenght > 0">
   <div *ngFor="let review of reviews">
     <div class="mt-1 mb-2">
-      <strong>{{ review["firstName"] }} {{ review["lastName"] }} </strong>
-      <span>– </span><span>{{ review["createdOn"] }}</span>
+      <strong>{{ review["user"]["name"] }} </strong>
+      <span>– </span><span>{{ review["reviewed_on"] }}</span>
       <div style="float: right">
         <img
           *ngIf="review['rating'] >= 1"

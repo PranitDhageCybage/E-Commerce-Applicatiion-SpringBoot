@@ -54,6 +54,6 @@ public class ImageUploadUtils {
             buffer.append((char) randomLimitedInt);
         }
         String generatedString = buffer.toString();
-        return generatedString + ".png";
+        return generatedString + ".jpg";
     }
 }

@@ -24,11 +24,11 @@
       <tbody>
         <tr *ngFor="let order of orderdetails; let index = index">
           <td>{{ index + 1 }}</td>
-          <td>{{ order["title"] }}</td>
+          <td>{{ order["product"]["prod_title"] }}</td>
           <td>{{ order["price"] }}</td>
           <td>{{ order["quantity"] }}</td>
-          <td>{{ order["totalAmount"] }}</td>
-          <td>{{ order["createdOn"] }}</td>
+          <td>{{ order["total_amount"] }}</td>
+          <td>{{ order["ordered_on"] }}</td>
         </tr>
       </tbody>
     </table>

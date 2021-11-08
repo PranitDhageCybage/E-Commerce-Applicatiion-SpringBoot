@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
@@ -10,7 +10,6 @@ import { OrderService } from 'src/app/services/order.service';
 export class OrderDetailsComponent implements OnInit {
   orderdetails: any = [];
   constructor(
-    private router: Router,
     private orderService: OrderService,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -22,7 +21,7 @@ export class OrderDetailsComponent implements OnInit {
   getOrderDetails() {
     const id = this.activatedRoute.snapshot.queryParams['id'];
     this.orderService.showOrderDetails(id).subscribe((response: any) => {
-      if (response['status'] == 'success') {
+      if (response['success']) {
         this.orderdetails = response['data'];
       } else {
         console.log(response['error']);

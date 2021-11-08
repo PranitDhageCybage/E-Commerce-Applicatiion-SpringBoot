@@ -46,7 +46,7 @@ export class ProductAddComponent implements OnInit {
           this.category = this.product['category']['cat_id'];
           this.brand = this.product['company']['comp_id'];
           this.image = this.product['photo'];
-          this.quantity = this.product['prod_qty']
+          this.quantity = this.product['prod_qty'];
         }
       });
     }
@@ -113,7 +113,7 @@ export class ProductAddComponent implements OnInit {
   }
   onUploadImage() {
     this.router.navigate(['/product-upload-image'], {
-      queryParams: { id: this.product['id'] },
+      queryParams: { id: this.product['prod_id'] },
     });
   }
 }

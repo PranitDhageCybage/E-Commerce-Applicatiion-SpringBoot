@@ -9,8 +9,8 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
-  firstName: string = '';
-  lastName: string = '';
+  name: string = '';
+  phone: string = '';
   email: string = '';
   password: string = '';
 
@@ -26,9 +26,9 @@ export class SignupComponent implements OnInit {
 
   onSignup() {
     this.authService
-      .signup(this.firstName, this.lastName, this.email, this.password)
+      .signup(this.name, this.phone, this.email, this.password)
       .subscribe((response: any) => {
-        if (response['status'] == 'success') {
+        if (response['success']) {
           this.toastr.success('Signed Up Successfully. Login to Continue');
           this.router.navigate(['/auth/login']);
         } else {

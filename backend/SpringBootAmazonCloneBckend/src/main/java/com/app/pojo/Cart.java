@@ -20,7 +20,7 @@ public class Cart {
 
     @Column(name = "cart_quantity")
     @JsonProperty("cart_quantity")
-    private Integer cartQuantity;
+    private Integer cartQuantity = 1;
 
     // userId column
     @JoinColumn(name = "user_id", nullable = false)

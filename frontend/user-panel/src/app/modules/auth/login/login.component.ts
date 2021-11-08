@@ -28,16 +28,11 @@ export class LoginComponent implements OnInit {
       this.authService
         .login(this.email, this.password)
         .subscribe((response: any) => {
-          if (response['status'] == 'success') {
+          if (response['success']) {
             const data = response['data'];
-
-            // cache the user info
-            sessionStorage['token'] = data['token'];
-            sessionStorage['firstName'] = data['firstName'];
-            sessionStorage['lastName'] = data['lastName'];
-
-            this.toastr.success(`Welcome ${data['firstName']} to My Store`);
-
+            sessionStorage['name'] = data['name']; 
+            sessionStorage['user_id'] = data['user_id']; 
+            this.toastr.success(`Welcome ${data['name']} to My Store`);
             // goto the dashboard
             this.router.navigate(['/home/product/gallery']);
           } else {

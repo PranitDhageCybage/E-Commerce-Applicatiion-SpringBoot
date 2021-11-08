@@ -11,7 +11,7 @@ import {
   providedIn: 'root',
 })
 export class AuthService implements CanActivate {
-  url = 'http://localhost:4000/user';
+  url = 'http://localhost:8080/user';
 
   constructor(private router: Router, private httpClient: HttpClient) {}
 
@@ -21,13 +21,13 @@ export class AuthService implements CanActivate {
       password: password,
     };
 
-    return this.httpClient.post(this.url + '/signin', body);
+    return this.httpClient.post(this.url + '/login', body);
   }
 
-  signup(firstName: string, lastName: string, email: string, password: string) {
+  signup(name: string, phone: string, email: string, password: string) {
     const body = {
-      firstName: firstName,
-      lastName: lastName,
+      name: name,
+      phone: phone,
       email: email,
       password: password,
     };
@@ -38,7 +38,7 @@ export class AuthService implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    if (sessionStorage['token']) {
+    if (sessionStorage['name']) {
       // user is already logged in
       // launch the component
       return true;

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ProductService {
-  url = 'http://localhost:4000/product';
+  url = 'http://localhost:8080/product';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -13,11 +13,11 @@ export class ProductService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
 
-    return this.httpClient.get(this.url, httpOptions);
+    return this.httpClient.get(this.url + '/list', httpOptions);
   }
 
   getProductDetails(id: number) {

@@ -34,7 +34,7 @@ export class GalleryComponent implements OnInit {
 
   loadProducts() {
     this.productService.getProducts().subscribe((response: any) => {
-      if (response['status'] == 'success') {
+      if (response['success']) {
         this.allProducts = response['data'];
         this.products = this.allProducts;
       }
@@ -53,20 +53,20 @@ export class GalleryComponent implements OnInit {
   }
   loadCategories() {
     this.categoryService.getCategories().subscribe((response: any) => {
-      if (response['status'] == 'success') {
+      if (response['success']) {
         this.categories = response['data'];
-        this.categories.unshift({ id: -1, title: 'All Categories' }); // Add all categories at the begining of Array
+        this.categories.unshift({ id: -1, cat_title: 'All Categories' }); // Add all categories at the begining of Array
       }
     });
   }
 
   loadCartItems() {
     this.cartService.getCartItems().subscribe((response: any) => {
-      if (response['status'] == 'success') {
+      if (response['success']) {
         // Add product id to cartItem array
         this.cartItems = [];
         response['data'].forEach((item: any) => {
-          this.cartItems.push(item['productId']);
+          this.cartItems.push(item['product']['prod_id']);
         });
       } else {
         console.log(response['error']);
@@ -81,15 +81,16 @@ export class GalleryComponent implements OnInit {
   addToCart(product: any) {
     //Check if product id already present in cartItem array
     //If true then navigate user to cart
-    if (this.cartItems.includes(product['id'])) {
-      this.toastr.success(`${product['title']} present in cart`);
+    if (this.cartItems.includes(product['prod_id'])) {
+      this.toastr.success(`${product['prod_title']} present in cart`);
       this.router.navigate(['/home/product/cart']);
-    } else { // Add item to cart
+    } else {
+      // Add item to cart
       this.cartService
-        .addCartItem(product['id'], product['price'], 1)
+        .addCartItem(product['prod_id'])
         .subscribe((response: any) => {
-          if (response['status'] == 'success') {
-            this.toastr.success(`Added ${product['title']} to cart`);
+          if (response['success']) {
+            this.toastr.success(`Added ${product['prod_title']} to cart`);
             this.loadCartItems();
           }
         });

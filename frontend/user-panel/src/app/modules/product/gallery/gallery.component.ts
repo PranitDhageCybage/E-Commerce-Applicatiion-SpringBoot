@@ -43,11 +43,13 @@ export class GalleryComponent implements OnInit {
   filterProducts(event: any) {
     const categoryId = event.target.value;
     this.products = [];
+    console.log(categoryId);
+
     if (categoryId == -1) {
       this.products = this.allProducts;
     } else {
       this.products = this.allProducts.filter((product: any) => {
-        return product.category['id'] == categoryId;
+        return product.category['cat_id'] == categoryId;
       });
     }
   }
@@ -55,7 +57,7 @@ export class GalleryComponent implements OnInit {
     this.categoryService.getCategories().subscribe((response: any) => {
       if (response['success']) {
         this.categories = response['data'];
-        this.categories.unshift({ id: -1, cat_title: 'All Categories' }); // Add all categories at the begining of Array
+        this.categories.unshift({ cat_id: -1, cat_title: 'All Categories' }); // Add all categories at the begining of Array
       }
     });
   }
@@ -68,8 +70,6 @@ export class GalleryComponent implements OnInit {
         response['data'].forEach((item: any) => {
           this.cartItems.push(item['product']['prod_id']);
         });
-      } else {
-        console.log(response['error']);
       }
     });
   }

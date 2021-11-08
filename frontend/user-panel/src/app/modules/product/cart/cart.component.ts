@@ -57,10 +57,11 @@ export class CartComponent implements OnInit {
       .deleteCartItem(item['cart_id'])
       .subscribe((response: any) => {
         if (response['success']) {
+          this.loadCartItems();
           this.toastr.success(
             `Deleted ${item['product']['prod_title']} form cart`
           );
-          this.loadCartItems();
+          
         }
       });
   }

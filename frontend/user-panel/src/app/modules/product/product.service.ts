@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class ProductService {
   url = 'http://localhost:8080/product';
+  rootUrl = 'http://localhost:8080';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -24,7 +25,7 @@ export class ProductService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
 
@@ -50,21 +51,27 @@ export class ProductService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
 
-    return this.httpClient.get(this.url + '/review/' + id, httpOptions);
+    return this.httpClient.get(
+      this.rootUrl + '/review/list/' + id,
+      httpOptions
+    );
   }
 
   getProductAvgRating(id: number) {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
 
-    return this.httpClient.get(this.url + '/avgRating/' + id, httpOptions);
+    return this.httpClient.get(
+      this.rootUrl + '/review/average/' + id,
+      httpOptions
+    );
   }
 }

@@ -25,7 +25,7 @@ public class UserController {
         System.out.println("in " + getClass().getName());
     }
 
-    @PostMapping("/login")   /*--------------------------------------------- Admin Login Done-------------------------------------------------*/
+    @PostMapping("/login")   /*--------------------------------------------- Admin/User Login Done-------------------------------------------------*/
     public ResponseDTO userSignin(@RequestBody SigninDTO user) {
         System.out.println("inside Sign in" + user);
         User foundUser = userService.userSign(user);
@@ -35,7 +35,7 @@ public class UserController {
         throw new AuthenticationException("Invalid Email or Password");
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/signup") /*--------------------------------------------- User Signup Done-------------------------------------------------*/
     public ResponseDTO userSignup(@RequestBody User user, BindingResult bindingResult) {
         System.out.println("in user signup : " + user);
         if (bindingResult.hasErrors()) {

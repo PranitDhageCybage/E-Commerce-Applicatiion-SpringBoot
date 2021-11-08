@@ -29,7 +29,7 @@ public class User {
     @JsonProperty("name")
     @Column(name = "user_name", length = 25)
     @NotBlank(message = "Name is required")
-    @Length(min = 3, max = 15, message = "Invalid len of Name")
+    @Length(min = 3, max = 25, message = "Invalid len of Name")
     private String userName;
 
     @JsonProperty("phone")

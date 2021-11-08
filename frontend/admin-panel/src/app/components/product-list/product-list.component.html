@@ -24,8 +24,8 @@
           <th style="width: 100px">Photo</th>
           <th style="width: 200px">Title</th>
           <th style="width: 100px">Price</th>
-          <th style="width: 100px">Brand</th>
-          <th style="width: 120px">category</th>
+          <th style="width: 100px">Company</th>
+          <th style="width: 120px">Category</th>
           <th style="width: 60px">Quantity</th>
           <th style="width: 80px">Active</th>
           <th style="text-align: center">Actions</th>
@@ -38,7 +38,8 @@
             <img
               *ngIf="product['photo']"
               class="product-image"
-              src="http://localhost:8080/product/getImage/{{ product['photo'] }}"
+              src="http://localhost:8080/product/getImage/{{ 
+              product['photo'] }}"
               alt=""
             />
             <button

@@ -13,7 +13,7 @@
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
-          <th style="width: 60px">Sr No</th>
+          <th style="width: 80px">Sr No</th>
           <th style="width: 300px">Name</th>
           <th style="width: 350px">Email</th>
           <th style="width: 250px">Phone</th>
@@ -33,6 +33,7 @@
               (click)="toggleActive(user)"
               [class.btn-success]="user['status'] != 1"
               [class.btn-danger]="user['status'] == 1"
+              class="btn btn-sm"
             >
               {{ user["status"] == 1 ? "Suspend" : "Activate" }}
             </button>

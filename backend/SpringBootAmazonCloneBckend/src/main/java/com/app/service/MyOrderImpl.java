@@ -52,7 +52,7 @@ public class MyOrderImpl implements IMyOrderService {
 
             //Set total amount and tax to myOrder
             myorder.setTotalPrice((float) totalAmount);
-            myorder.setTax((float) (totalAmount / 10));
+            myorder.setTax((float) (totalAmount / 20));
 
             //Save myOrder and get reference
             Myorder myOrderSaved = myOrderRepo.save(myorder);

@@ -5,7 +5,7 @@ import com.app.pojo.Myorder;
 import java.util.List;
 
 public interface IMyOrderService {
-    List<Myorder> getAllMyOrders(int user_Id);
+    List<Myorder> getMyOrderList(int user_Id);
 
     String checkoutMyOrder(Myorder myorder);
 

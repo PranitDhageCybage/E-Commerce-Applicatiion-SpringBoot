@@ -31,12 +31,8 @@ public class MyOrderImpl implements IMyOrderService {
 
 
     @Override
-    public List<Myorder> getAllMyOrders(int user_Id) {
-        if (userRepo.existsById(user_Id)) {
-            User user = userRepo.findById(user_Id).get();
-            return myOrderRepo.findAllByUser(user);
-        }
-        throw new ResourceNotFoundException("My Order not found for given user Id : " + user_Id);
+    public List<Myorder> getMyOrderList(int user_Id) {
+            return myOrderRepo.findAllByUserUserId(user_Id);
     }
 
     @Override
@@ -137,4 +133,5 @@ public class MyOrderImpl implements IMyOrderService {
     public Integer countAllActiveUserOrders() {
         return myOrderRepo.countAllActiveUserOrders();
     }
+
 }

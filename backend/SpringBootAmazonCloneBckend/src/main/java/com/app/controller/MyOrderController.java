@@ -1,6 +1,7 @@
 package com.app.controller;
 
 import com.app.customExceptions.ResourceNotFoundException;
+import com.app.dto.ResponseDTO;
 import com.app.pojo.Myorder;
 import com.app.service.IMyOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,32 +22,43 @@ public class MyOrderController {
         System.out.println("in MyOrderController -- " + getClass().getName());
     }
 
-    @GetMapping("/list/{user_id}")
-    public ResponseEntity getAllMyOrderList(@PathVariable String user_id) {
-        System.out.println("in get all myOrder list");
-       List<Myorder> myorderList = myOrderService.getAllMyOrders(Integer.parseInt(user_id));
+    @GetMapping("/list")
+    public ResponseDTO getAllUserOrderList() {
+        System.out.println("in get all user Order list");/*-------------------------------Admin getAllUserOrderList Done-----------------------------------*/
+        List<Myorder> myorderList = myOrderService.getAllUserOrders();
         if (myorderList.size() > 0) {
-            return new ResponseEntity(myorderList, HttpStatus.OK);
+            return new ResponseDTO(true, myorderList);
+        }
+        throw new ResourceNotFoundException("Myorder list not found");
+    }
+
+
+    @GetMapping("/list/{user_id}")
+    public ResponseDTO getMyOrderList(@PathVariable String user_id) {
+        System.out.println("in get all myOrder list");
+       List<Myorder> myorderList = myOrderService.getMyOrderList(Integer.parseInt(user_id));
+        if (myorderList.size() > 0) {
+            return new ResponseDTO(true, myorderList);
         }
         throw new ResourceNotFoundException("Myorder list not found for the user");
     }
 
     @PostMapping("/checkout")
-    public ResponseEntity checkoutMyOrder(@RequestBody Myorder myorder) {
+    public ResponseDTO checkoutMyOrder(@RequestBody Myorder myorder) {
         System.out.println("in add new myOrder" + myorder);
-        return new ResponseEntity(myOrderService.checkoutMyOrder(myorder), HttpStatus.OK);
+        return new ResponseDTO(true, myOrderService.checkoutMyOrder(myorder));
     }
 
-    @PutMapping("/update/{myOrder_id}/{status}")
-    public ResponseEntity updateMyOrderStatus(@PathVariable String myOrder_id, @PathVariable String status) {
+    @PutMapping("/update/{myOrder_id}/{status}")/*-------------------------------Admin updateMyOrderStatus Done-----------------------------------*/
+    public ResponseDTO updateMyOrderStatus(@PathVariable String myOrder_id, @PathVariable String status) {
         System.out.println("in update  update myOrder status");
-        return new ResponseEntity(myOrderService.updateMyOrderStatus(Integer.parseInt(myOrder_id), status), HttpStatus.OK);
+        return new ResponseDTO(true, myOrderService.updateMyOrderStatus(Integer.parseInt(myOrder_id), status));
     }
 
     @DeleteMapping("/delete/{myOrder_id}")
-    public ResponseEntity deleteMyOrder(@PathVariable String myOrder_id) {
+    public ResponseDTO deleteMyOrder(@PathVariable String myOrder_id) {
         System.out.println("in delete  myOrder");
-        return new ResponseEntity(myOrderService.deleteMyOrder(Integer.parseInt(myOrder_id)), HttpStatus.OK);
+        return new ResponseDTO(true, myOrderService.deleteMyOrder(Integer.parseInt(myOrder_id)));
     }
 
 }

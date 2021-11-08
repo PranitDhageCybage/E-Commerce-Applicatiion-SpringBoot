@@ -83,13 +83,13 @@ public class ProductController {
         return new ResponseEntity(productService.getPhotoByName(photo), HttpStatus.OK);
     }
 
-    @PutMapping("/uploadImage/{prodId}")
+    @PutMapping("/uploadImage/{prodId}")/*--------------------------------------------- Admin uploadProductImage Done-------------------------------------------------*/
     public ResponseDTO uploadProductImage(@PathVariable String prodId, @RequestParam("productImage") MultipartFile multipartFile) throws IOException {
         System.out.println("in upload product image");
         return new ResponseDTO(true, productService.uploadProductImage(Integer.parseInt(prodId), multipartFile));
     }
 
-    @DeleteMapping("/imageDelete/{prodId}")
+    @DeleteMapping("/imageDelete/{prodId}")/*--------------------------------------------- Admin deleteProductImage Done-------------------------------------------------*/
     public ResponseDTO deleteProductImage(@PathVariable String prodId) throws IOException {
         System.out.println("in delete product image");
         return new ResponseDTO(true, productService.deleteProductImage(Integer.parseInt(prodId)));

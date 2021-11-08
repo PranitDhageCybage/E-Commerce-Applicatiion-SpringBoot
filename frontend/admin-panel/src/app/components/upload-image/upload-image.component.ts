@@ -27,7 +27,7 @@ export class UploadImageComponent implements OnInit {
     this.productService
       .uploadImage(id, this.selectedFile)
       .subscribe((response: any) => {
-        if (response['status'] == 'success') {
+        if (response['success']) {
           this.router.navigate(['/product-list']);
         } else {
           console.log(response['error']);

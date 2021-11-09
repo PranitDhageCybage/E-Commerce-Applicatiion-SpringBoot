@@ -33,7 +33,7 @@ public class MyOrderController {
     }
 
 
-    @GetMapping("/list/{user_id}")
+    @GetMapping("/list/{user_id}")/*-------------------------------Admin getMyOrderList Done-----------------------------------*/
     public ResponseDTO getMyOrderList(@PathVariable String user_id) {
         System.out.println("in get all myOrder list");
        List<Myorder> myorderList = myOrderService.getMyOrderList(Integer.parseInt(user_id));
@@ -49,7 +49,7 @@ public class MyOrderController {
         return new ResponseDTO(true, myOrderService.checkoutMyOrder(myorder));
     }
 
-    @PutMapping("/update/{myOrder_id}/{status}")/*-------------------------------Admin updateMyOrderStatus Done-----------------------------------*/
+    @PutMapping("/update/{myOrder_id}/{status}")/*-------------------------------Admin/User updateMyOrderStatus Done-----------------------------------*/
     public ResponseDTO updateMyOrderStatus(@PathVariable String myOrder_id, @PathVariable String status) {
         System.out.println("in update  update myOrder status");
         return new ResponseDTO(true, myOrderService.updateMyOrderStatus(Integer.parseInt(myOrder_id), status));

@@ -22,7 +22,7 @@ export class OrderDetailsComponent implements OnInit {
   getOrderDetails() {
     const id = this.activatedRoute.snapshot.params.id;
     this.orderService.showOrderDetails(id).subscribe((response: any) => {
-      if (response['status'] == 'success') {
+      if (response['success']) {
         this.orderdetails = response['data'];
       } else {
         console.log(response['error']);

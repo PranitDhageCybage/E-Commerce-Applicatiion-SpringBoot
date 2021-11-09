@@ -36,7 +36,7 @@ export class AddressListComponent implements OnInit {
 
   loadAddress() {
     this.userService.getAddress().subscribe((response: any) => {
-      if (response['status'] == 'success') {
+      if (response['success']) {
         this.addresses = response['data'];
       } else {
         console.log(response['error']);
@@ -46,14 +46,15 @@ export class AddressListComponent implements OnInit {
 
   loadCart() {
     this.cartService.getCartItems().subscribe((response: any) => {
-      if (response['status'] == 'success') {
+      if (response['success']) {
         this.cartItems = response['data'];
-        this.cartItems.forEach((element: any) => {
-          this.totalAmount += parseFloat(element['totalAmount']);
-        });
-        this.tax = 0.1 * this.totalAmount;
-      } else {
-        console.log(response['error']);
+        this.totalAmount = 0;
+        this.cartItems.forEach(
+          (item: any) =>
+            (this.totalAmount +=
+              item['cart_quantity'] * item['product']['prod_price'])
+        );
+        this.tax = this.totalAmount / 20;
       }
     });
   }
@@ -70,8 +71,8 @@ export class AddressListComponent implements OnInit {
   }
 
   onDelete(address: any) {
-    this.userService.deleteAddress(address['id']).subscribe((response: any) => {
-      if (response['status'] == 'success') {
+    this.userService.deleteAddress(address['add_id']).subscribe((response: any) => {
+      if (response['success']) {
         this.loadAddress();
       } else {
         console.log(response['error']);

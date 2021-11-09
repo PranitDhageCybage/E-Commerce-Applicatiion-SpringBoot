@@ -2,11 +2,10 @@ package com.app.controller;
 
 import com.app.customExceptions.ResourceNotFoundException;
 import com.app.customExceptions.UnexpectedErrorException;
+import com.app.dto.ResponseDTO;
 import com.app.pojo.Address;
 import com.app.service.IAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,39 +21,39 @@ public class AddressController {
         System.out.println("in" + getClass().getName());
     }
 
-    @GetMapping("/list/{user_id}")
-    public ResponseEntity getAllAddressList(@PathVariable String user_id) {
+    @GetMapping("/list/{user_id}")/*------------------------------------------------- User getAllAddressList Done---------------------------------------*/
+    public ResponseDTO getAllAddressList(@PathVariable String user_id) {
         System.out.println("in get all address");
         List<Address> addressList = addressService.getAllAddresses(Integer.parseInt(user_id));
         if (addressList.size() > 0) {
-            return new ResponseEntity(addressList, HttpStatus.OK);
+            return new ResponseDTO(true, addressList);
         }
         throw new ResourceNotFoundException("Addresses not found for user");
     }
 
-    @PostMapping("/add")
-    public ResponseEntity addNewAddress(@RequestBody Address address) {
+    @PostMapping("/add")/*------------------------------------------------- User addNewAddress Done---------------------------------------*/
+    public ResponseDTO addNewAddress(@RequestBody Address address) {
         System.out.println("in add new address");
         Address add = addressService.addAddress(address);
         if (add != null) {
-            return new ResponseEntity("Address added successfully", HttpStatus.OK);
+            return new ResponseDTO(true, "Address added successfully");
         }
         throw new UnexpectedErrorException("Error while adding new address");
     }
 
     @PutMapping("/update/{add_id}")
-    public ResponseEntity updateAddress(@PathVariable String add_id, @RequestBody Address address) {
+    public ResponseDTO updateAddress(@PathVariable String add_id, @RequestBody Address address) {
         System.out.println("in update  address");
         Address add = addressService.updateAddress(Integer.parseInt(add_id), address);
         if (add != null) {
-            return new ResponseEntity("Address Updated successfully", HttpStatus.OK);
+            return new ResponseDTO(true, "Address Updated successfully");
         }
         throw new UnexpectedErrorException("Error while updating address");
     }
 
-    @DeleteMapping("/delete/{add_id}")
-    public ResponseEntity deleteAddress(@PathVariable String add_id) {
+    @DeleteMapping("/delete/{add_id}")/*------------------------------------------------- User deleteAddress Done---------------------------------------*/
+    public ResponseDTO deleteAddress(@PathVariable String add_id) {
         System.out.println("in delete  address");
-        return new ResponseEntity(addressService.deleteAddress(Integer.parseInt(add_id)), HttpStatus.OK);
+        return new ResponseDTO(true, addressService.deleteAddress(Integer.parseInt(add_id)));
     }
 }

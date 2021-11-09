@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class ProductService {
   url = 'http://localhost:8080/product';
   rootUrl = 'http://localhost:8080';
-
+  user_id = JSON.parse( sessionStorage['user']).user_id
   constructor(private httpClient: HttpClient) {}
 
   getProducts() {
@@ -39,12 +39,12 @@ export class ProductService {
         // token: sessionStorage['token'],
       }),
     };
-    const user_id = sessionStorage['user_id'];
+
     const body = {
       review: review,
       rating: rating,
       product: { prod_id: id },
-      user: { user_id: user_id },
+      user: { user_id: this.user_id },
     };
 
     return this.httpClient.post(

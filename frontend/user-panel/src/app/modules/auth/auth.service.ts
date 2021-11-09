@@ -38,7 +38,7 @@ export class AuthService implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    if (sessionStorage['name']) {
+    if (sessionStorage['user']) {
       // user is already logged in
       // launch the component
       return true;

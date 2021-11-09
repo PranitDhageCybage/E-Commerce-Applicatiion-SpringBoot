@@ -8,6 +8,8 @@ export class UserService {
   url: string = 'http://localhost:8080/user';
   rootUrl: string = 'http://localhost:8080';
 
+  user_id = JSON.parse( sessionStorage['user']).user_id
+
   constructor(private httpClient: HttpClient) {}
 
   getUserDetails() {
@@ -17,9 +19,7 @@ export class UserService {
         // token: sessionStorage['token'],
       }),
     };
-    const id = sessionStorage['user_id'];
-
-    return this.httpClient.get(this.url + '/profile/' + id, httpOptions);
+    return this.httpClient.get(this.url + '/profile/' + this.user_id, httpOptions);
   }
 
   edituserProfile(name: string, email: string, phone: string) {
@@ -35,9 +35,8 @@ export class UserService {
       email: email,
       phone: phone,
     };
-    const id = sessionStorage['user_id'];
     return this.httpClient.put(
-      this.url + '/UpdateProfile/' + id,
+      this.url + '/UpdateProfile/' + this.user_id,
       body,
       httpOptions
     );
@@ -50,9 +49,8 @@ export class UserService {
         // token: sessionStorage['token'],
       }),
     };
-    const id = sessionStorage['user_id'];
     return this.httpClient.get(
-      this.rootUrl + '/address/list/' + id,
+      this.rootUrl + '/address/list/' + this.user_id,
       httpOptions
     );
   }
@@ -78,7 +76,7 @@ export class UserService {
       country: country,
       pin: pin,
       user: {
-        user_id: sessionStorage['user_id'],
+        user_id: this.user_id
       },
     };
 

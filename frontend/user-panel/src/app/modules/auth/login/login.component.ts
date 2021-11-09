@@ -30,8 +30,7 @@ export class LoginComponent implements OnInit {
         .subscribe((response: any) => {
           if (response['success']) {
             const data = response['data'];
-            sessionStorage['name'] = data['name']; 
-            sessionStorage['user_id'] = data['user_id']; 
+            sessionStorage['user'] = JSON.stringify(data)
             this.toastr.success(`Welcome ${data['name']} to My Store`);
             // goto the dashboard
             this.router.navigate(['/home/product/gallery']);

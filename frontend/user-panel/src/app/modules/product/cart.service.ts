@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class CartService {
   url = 'http://localhost:8080/cart';
-
+  user_id = JSON.parse( sessionStorage['user']).user_id
   constructor(private httpClient: HttpClient) {}
 
   getCartItems() {
@@ -16,8 +16,7 @@ export class CartService {
         // token: sessionStorage['token']
       }),
     };
-    const id = sessionStorage['user_id'];
-    return this.httpClient.get(this.url + '/list/' + id, httpOptions);
+    return this.httpClient.get(this.url + '/list/' + this.user_id, httpOptions);
   }
 
   deleteCartItem(id: number) {
@@ -53,7 +52,7 @@ export class CartService {
       }),
     };
     const body = {
-      user: { user_id: sessionStorage['user_id'] },
+      user: { user_id: this.user_id },
       product: { prod_id: productId },
     };
 

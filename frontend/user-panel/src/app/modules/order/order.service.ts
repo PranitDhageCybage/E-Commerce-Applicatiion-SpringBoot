@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class OrderService {
   url: string = 'http://localhost:8080/myOrder';
   rootUrl: string = 'http://localhost:8080';
+  user_id = JSON.parse( sessionStorage['user']).user_id
   constructor(private httpClient: HttpClient) {}
 
   placeOrder(
@@ -30,7 +31,7 @@ export class OrderService {
       payment_type: paymentType,
       payment_status: paymentStatus,
       delivery_status: deliveryStatus,
-      user: { user_id: sessionStorage['user_id'] },
+      user: { user_id: this.user_id },
       address: { add_id: addressId },
     };
     return this.httpClient.post(this.url + '/checkout', body, httpOptions);
@@ -43,8 +44,7 @@ export class OrderService {
         // token: sessionStorage['token'],
       }),
     };
-    const id = sessionStorage['user_id'];
-    return this.httpClient.get(this.url + '/list/' + id, httpOptions);
+    return this.httpClient.get(this.url + '/list/' + this.user_id, httpOptions);
   }
 
   cancelMyOrders(id: number, status: string) {

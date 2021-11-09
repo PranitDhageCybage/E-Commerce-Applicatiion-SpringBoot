@@ -91,7 +91,7 @@ export class AddressListComponent implements OnInit {
         this.deliveryStatus
       )
       .subscribe((response: any) => {
-        if (response['status'] == 'success') {
+        if (response['success']) {
           this.toastr.success('Order Placed Successfully');
           this.router.navigate(['/home/order/order-history']);
         } else {

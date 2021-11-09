@@ -26,7 +26,7 @@ export class AddressAddComponent implements OnInit {
     this.userService
       .addAddress(this.address, this.city, this.state, this.country, this.pin)
       .subscribe((response: any) => {
-        if (response['status'] == 'success') {
+        if (response['success']) {
           this.toastr.success('Address Added Successfully');
           this.router.navigate(['/home/user/address-list']);
         } else {

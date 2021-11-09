@@ -18,8 +18,9 @@
       <tr>
         <th style="width: 70px">Choose</th>
         <th style="width: 70px">Sr No</th>
-        <th style="width: 500px">Address</th>
+        <th style="width: 400px">Address</th>
         <th>City</th>
+        <th>State</th>
         <th>Country</th>
         <th>Pin</th>
         <th style="width: 100px">Actions</th>
@@ -33,12 +34,13 @@
             class="form-check-input"
             type="radio"
             name="flexRadioDefault"
-            value="{{ address['id'] }}"
+            value="{{ address['add_id'] }}"
           />
         </td>
         <td>{{ index + 1 }}</td>
         <td>{{ address["address"] }}</td>
         <td>{{ address["city"] }}</td>
+        <td>{{ address["state"] }}</td>
         <td>{{ address["country"] }}</td>
         <td>{{ address["pin"] }}</td>
         <td>
@@ -55,7 +57,7 @@
     <thead>
       <tr>
         <th>Total Amount</th>
-        <th>Tax</th>
+        <th>Tax : 5%</th>
         <th style="width: 300px">Choose Payment Type</th>
         <th style="width: 300px">Choose Payment Status</th>
       </tr>

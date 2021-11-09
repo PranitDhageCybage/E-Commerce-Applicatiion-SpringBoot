@@ -20,22 +20,20 @@ export class OrderService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
 
     const body = {
-      addressId: addressId,
-      totalAmount: totalAmount,
+      total_price: totalAmount,
       tax: tax,
-      paymentType: paymentType,
-      paymentStatus: paymentStatus,
-      deliveryStatus: deliveryStatus,
+      payment_type: paymentType,
+      payment_status: paymentStatus,
+      delivery_status: deliveryStatus,
+      user: { user_id: sessionStorage['user_id'] },
+      address: { add_id: addressId },
     };
-
-    console.log(body);
-
-    return this.httpClient.post(this.url, body, httpOptions);
+    return this.httpClient.post(this.url + '/checkout', body, httpOptions);
   }
 
   getMyOrders() {

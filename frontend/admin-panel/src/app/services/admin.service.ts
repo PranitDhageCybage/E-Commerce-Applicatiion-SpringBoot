@@ -36,7 +36,7 @@ export class AdminService implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (sessionStorage['name']) { // Temporary name checked, later check for token
+    if (sessionStorage['user']) { // Temporary name checked, later check for token
       // user is already logged in
       // launch the component
       return true;

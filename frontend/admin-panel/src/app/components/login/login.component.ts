@@ -21,8 +21,7 @@ export class LoginComponent implements OnInit {
       .subscribe((response: any) => {
         if (response['success']) {
           const data = response['data'];
-          sessionStorage['name'] = data['name'];
-          sessionStorage['email'] = data['email'];
+          sessionStorage['user'] = JSON.stringify(data);
           this.router.navigate(['/dashboard']);
         } else {
           alert(response['error'] + '\n' + response['data']);

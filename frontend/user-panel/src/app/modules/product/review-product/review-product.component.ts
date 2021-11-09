@@ -26,7 +26,7 @@ export class ReviewProductComponent implements OnInit {
     this.productService
       .reviewProduct(id, this.review, this.rating)
       .subscribe((response: any) => {
-        if (response['status'] == 'success') {
+        if (response['success']) {
           this.toastr.success('Product Review Added Successfully');
           this.router.navigate(['/home/order/order-history']);
         } else {

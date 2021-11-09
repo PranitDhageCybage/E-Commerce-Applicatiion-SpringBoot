@@ -25,15 +25,15 @@
       <tbody>
         <tr *ngFor="let order of orderdetails; let index = index">
           <td>{{ index + 1 }}</td>
-          <td>{{ order["title"] }}</td>
+          <td>{{ order['product']["prod_title"] }}</td>
           <td>{{ order["price"] }}</td>
           <td>{{ order["quantity"] }}</td>
-          <td>{{ order["totalAmount"] }}</td>
-          <td>{{ order["createdOn"] }}</td>
+          <td>{{ order["total_amount"] }}</td>
+          <td>{{ order["ordered_on"] }}</td>
           <td>
             <button
               (click)="onReviewProduct(order)"
-              *ngIf="order['deliveryStatus'] == 'Delivered'"
+              *ngIf="order['myorder']['delivery_status'] == 'Delivered'"
               class="btn btn-success btn-sm"
             >
               Add Review

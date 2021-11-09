@@ -23,7 +23,7 @@ public class OrderDetailsController {
         System.out.println("in" + getClass().getName());
     }
 
-    @GetMapping("/list/{myorder_id}")/*---------------------------Admin getOrderDetailsList Done-----------------------------------------------*/
+    @GetMapping("/list/{myorder_id}")/*---------------------------Admin/User getOrderDetailsList Done-----------------------------------------------*/
     public ResponseDTO getOrderDetailsList(@PathVariable String myorder_id) {
         System.out.println("in get all my order details");
          List<OrderDetails> orderDetailsList = orderDetailsService.getOrderDetailsList(Integer.parseInt(myorder_id));

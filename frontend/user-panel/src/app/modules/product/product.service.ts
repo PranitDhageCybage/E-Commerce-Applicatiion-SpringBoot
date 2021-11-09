@@ -36,15 +36,22 @@ export class ProductService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
+    const user_id = sessionStorage['user_id'];
     const body = {
       review: review,
       rating: rating,
+      product: { prod_id: id },
+      user: { user_id: user_id },
     };
 
-    return this.httpClient.post(this.url + '/review/' + id, body, httpOptions);
+    return this.httpClient.post(
+      this.rootUrl + '/review/add',
+      body,
+      httpOptions
+    );
   }
 
   getProductReviews(id: number) {

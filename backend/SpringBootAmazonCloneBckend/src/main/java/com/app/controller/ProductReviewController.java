@@ -43,7 +43,7 @@ public class ProductReviewController {
         throw new UnexpectedErrorException(" Average  product review not found for given product");
     }
 
-    @PostMapping("/add")
+    @PostMapping("/add")/*-------------------------------------------------------User addNewReview Done------------------------------------------------ */
     public ResponseDTO addNewReview(@RequestBody ProductReview review) {
         System.out.println("in add new review");
         ProductReview productReview = reviewService.addNewProductReview(review);

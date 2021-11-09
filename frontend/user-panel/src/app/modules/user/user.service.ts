@@ -5,50 +5,37 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class UserService {
-  url: string = 'http://localhost:4000';
+  url: string = 'http://localhost:8080/user';
   constructor(private httpClient: HttpClient) {}
 
   getUserDetails() {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
+    const id = sessionStorage['user_id'];
 
-    return this.httpClient.get(this.url + '/user', httpOptions);
+    return this.httpClient.get(this.url + '/profile/' + id, httpOptions);
   }
 
-  edituserProfile(
-    firstName: string,
-    lastName: string,
-    address: string,
-    city: string,
-    state: string,
-    country: string,
-    zip: string,
-    phone: string
-  ) {
+  edituserProfile(name: string, email: string, phone: string) {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
 
     const body = {
-      firstName: firstName,
-      lastName: lastName,
-      address: address,
-      city: city,
-      state: state,
-      country: country,
-      zip: zip,
+      name: name,
+      email: email,
       phone: phone,
     };
-
+    const id = sessionStorage['user_id'];
     return this.httpClient.put(
-      this.url + '/user/edit-profile',
+      this.url + '/UpdateProfile/' + id,
       body,
       httpOptions
     );

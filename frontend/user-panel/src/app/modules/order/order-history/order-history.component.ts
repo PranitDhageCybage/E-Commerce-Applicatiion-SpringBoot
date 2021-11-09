@@ -17,7 +17,7 @@ export class OrderHistoryComponent implements OnInit {
 
   loadMyOrders() {
     this.orderService.getMyOrders().subscribe((response: any) => {
-      if ((response['status'] = 'success')) {
+      if ((response['success'])) {
         this.myOrders = response['data'];
       } else {
         console.log(response['error']);
@@ -26,9 +26,9 @@ export class OrderHistoryComponent implements OnInit {
   }
   onCancel(order: any) {
     this.orderService
-      .cancelMyOrders(order['id'], 'Cancelled')
+      .cancelMyOrders(order['myorder_id'], 'Cancelled')
       .subscribe((response: any) => {
-        if ((response['status'] = 'success')) {
+        if ((response['success'])) {
           this.loadMyOrders();
         } else {
           console.log(response['error']);

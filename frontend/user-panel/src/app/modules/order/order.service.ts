@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class OrderService {
-  url: string = 'http://localhost:4000/order';
+  url: string = 'http://localhost:8080/myOrder';
   constructor(private httpClient: HttpClient) {}
 
   placeOrder(
@@ -41,24 +41,24 @@ export class OrderService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
-    return this.httpClient.get(this.url, httpOptions);
+    const id = sessionStorage['user_id'];
+    return this.httpClient.get(this.url + '/list/' + id, httpOptions);
   }
 
   cancelMyOrders(id: number, status: string) {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token'],
+        // token: sessionStorage['token'],
       }),
     };
-
-    const body = {
-      status: status,
-    };
-    return this.httpClient.put(this.url + '/' + id, body, httpOptions);
+    return this.httpClient.put(
+      this.url + '/update/' + id + '/' + status,
+      httpOptions
+    );
   }
 
   showOrderDetails(id: number) {

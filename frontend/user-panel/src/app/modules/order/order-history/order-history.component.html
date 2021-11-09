@@ -26,27 +26,28 @@
       <tr *ngFor="let order of myOrders; let index = index">
         <td>{{ index + 1 }}</td>
         <td>
-          {{ order["address"] }}, {{ order["city"] }}, {{ order["state"] }},
-          {{ order["country"] }}, {{ order["pin"] }}
+          {{ order["address"]["address"] }}, {{ order["address"]["city"] }},
+          {{ order["address"]["state"] }}, {{ order["address"]["country"] }},
+          {{ order["address"]["pin"] }}
         </td>
-        <td>{{ order["totalAmount"] }}</td>
-        <td>{{ order["paymentType"] }}</td>
-        <td>{{ order["paymentStatus"] }}</td>
-        <td>{{ order["deliveryStatus"] }}</td>
-        <td>{{ order["createdOn"] }}</td>
+        <td>{{ order["total_price"] }}</td>
+        <td>{{ order["payment_type"] }}</td>
+        <td>{{ order["payment_status"] }}</td>
+        <td>{{ order["delivery_status"] }}</td>
+        <td>{{ order["ordered_on"] }}</td>
         <td>
           <button
             (click)="onCancel(order)"
             *ngIf="
-              order['deliveryStatus'] != 'Cancelled' &&
-              order['deliveryStatus'] != 'Delivered'
+              order['delivery_status'] != 'Cancelled' &&
+              order['delivery_status'] != 'Delivered'
             "
             class="btn btn-danger btn-sm"
           >
             Cancel
           </button>
           <a
-            routerLink="/home/order/order-details/{{ order['id'] }}"
+            routerLink="/home/order/order-details/{{ order['myorder_id'] }}"
             class="btn btn-primary btn-sm"
             style="margin-left: 5px; float: right"
           >

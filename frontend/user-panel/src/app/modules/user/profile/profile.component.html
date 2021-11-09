@@ -15,14 +15,14 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form--group">
-            <label for="title">First Name</label>
-            <input [(ngModel)]="firstName" type="text" class="form-control" />
+            <label for="title">Name</label>
+            <input [(ngModel)]="name" type="text" class="form-control" />
           </div>
         </div>
         <div class="col-md-6">
           <div class="form--group">
-            <label for="price">Last Name</label>
-            <input [(ngModel)]="lastName" type="text" class="form-control" />
+            <label for="price">Phone</label>
+            <input [(ngModel)]="phone" type="text" class="form-control" />
           </div>
         </div>
       </div>
@@ -30,46 +30,12 @@
       <div class="row" style="margin-top: 20px">
         <div class="col-md-12">
           <div class="form-group">
-            <label for="">Address</label>
+            <label for="">Email</label>
             <textarea
-              [(ngModel)]="address"
+              [(ngModel)]="email"
               rows="2"
-              class="form-control"
+              class="form-control" disabled
             ></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form--group">
-            <label for="title">City</label>
-            <input [(ngModel)]="city" type="text" class="form-control" />
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form--group">
-            <label for="price">State</label>
-            <input [(ngModel)]="state" type="text" class="form-control" />
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="form--group">
-            <label for="title">Country</label>
-            <input [(ngModel)]="country" type="text" class="form-control" />
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form--group">
-            <label for="title">Zip</label>
-            <input [(ngModel)]="zip" type="text" class="form-control" />
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form--group">
-            <label for="title">Phone</label>
-            <input [(ngModel)]="phone" type="text" class="form-control" />
           </div>
         </div>
       </div>

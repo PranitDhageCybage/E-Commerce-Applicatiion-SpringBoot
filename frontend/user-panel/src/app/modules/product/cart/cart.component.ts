@@ -28,7 +28,7 @@ export class CartComponent implements OnInit {
         this.items = response['data'];
         this.totalAmount = 0;
         this.items.forEach(
-          (item) =>
+          (item:any) =>
             (this.totalAmount +=
               item['cart_quantity'] * item['product']['prod_price'])
         );

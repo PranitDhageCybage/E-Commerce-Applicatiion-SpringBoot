@@ -17,13 +17,13 @@ export class PreviewComponent implements OnInit {
   }
   loadCartItems() {
     this.cartService.getCartItems().subscribe((response: any) => {
-      if (response['status'] == 'success') {
+      if (response['success']) {
         this.items = response['data'];
         this.totalAmount = 0;
-        for (let index = 0; index < this.items.length; index++) {
-          const item = this.items[index];
-          this.totalAmount += parseFloat(item['totalAmount']);
-        }
+        this.items.forEach((item:any) =>
+            (this.totalAmount +=
+              item['cart_quantity'] * item['product']['prod_price'])
+        );
       }
     });
   }

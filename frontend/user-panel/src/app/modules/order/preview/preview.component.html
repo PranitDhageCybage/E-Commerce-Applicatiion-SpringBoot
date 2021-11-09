@@ -27,14 +27,14 @@
         <td>
           <img
             class="product-image"
-            src="http://localhost:4000/product/image/{{ item['image'] }}"
+            src="http://localhost:8080/product/getImage/{{ item['product']['photo'] }}"
             alt=""
           />
         </td>
-        <td>{{ item["title"] }}</td>
-        <td>{{ item["price"] }}</td>
-        <td>{{ item["quantity"] }}</td>
-        <td>{{ item["totalAmount"] }}</td>
+        <td>{{ item['product']["prod_title"] }}</td>
+        <td>{{ item['product']["prod_price"] }}</td>
+        <td>{{ item["cart_quantity"] }}</td>
+        <td>{{ item["cart_quantity"] * item['product']["prod_price"] }}</td>
       </tr>
     </tbody>
     <tfoot>

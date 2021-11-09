@@ -43,7 +43,7 @@ public class MyOrderController {
         throw new ResourceNotFoundException("Myorder list not found for the user");
     }
 
-    @PostMapping("/checkout")
+    @PostMapping("/checkout")/*-------------------------------User checkoutMyOrder Done-----------------------------------*/
     public ResponseDTO checkoutMyOrder(@RequestBody Myorder myorder) {
         System.out.println("in add new myOrder" + myorder);
         return new ResponseDTO(true, myOrderService.checkoutMyOrder(myorder));

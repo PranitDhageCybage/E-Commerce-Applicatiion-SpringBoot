@@ -88,7 +88,7 @@ public class ProductController {
         return new ResponseDTO(true, productService.changeProductActiveStatus(Integer.parseInt(prodId), Integer.parseInt(status)));
     }
 
-    @GetMapping("/getImage/{photo}")/*--------------------------------------------- Admin getProductImage Done-------------------------------------------------*/
+    @GetMapping("/getImage/{photo}")/*--------------------------------------------- User getProductImage Done-------------------------------------------------*/
     public ResponseEntity<?> getProductImage(@PathVariable String photo) throws IOException {
         System.out.println("in get product image");
         return new ResponseEntity(productService.getPhotoByName(photo), HttpStatus.OK);

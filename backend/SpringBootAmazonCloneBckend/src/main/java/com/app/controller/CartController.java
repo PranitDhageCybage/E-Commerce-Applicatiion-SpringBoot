@@ -38,7 +38,6 @@ public class CartController {
     public ResponseDTO addNewCartIem(@RequestBody Cart cartItem) {
         System.out.println("in add new cart item");
         Cart cart = cartService.addCartItem(cartItem);
-
         if (cart != null) {
             return new ResponseDTO(true, "Product added into cart successfully");
         }

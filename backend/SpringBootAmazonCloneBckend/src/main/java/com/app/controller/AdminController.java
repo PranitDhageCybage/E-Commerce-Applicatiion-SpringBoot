@@ -52,7 +52,7 @@ public class AdminController {
         return new ResponseDTO(true, userService.changeUserActiveStatus(Integer.parseInt(user_id), Integer.parseInt(status)));
     }
 
-    @GetMapping("/allUserOrders")
+    @GetMapping("/allUserOrders")/*--------------------------------------------- Admin getAllUserOrders Done-------------------------------------------------*/
     public ResponseEntity getAllUserOrders() {
         System.out.println("in admin get all user orders");
         List<Myorder> myorderList = orderService.getAllUserOrders();
@@ -62,7 +62,7 @@ public class AdminController {
         throw new ResourceNotFoundException("User orders list not found");
     }
 
-    @PutMapping("/changeDeliveryStatus/{myorder_id}/{status}")
+    @PutMapping("/changeDeliveryStatus/{myorder_id}/{status}")/*--------------------------------------------- Admin changeUserOrderDeliveryStatus Done-------------------------------------------------*/
     public ResponseEntity changeUserOrderDeliveryStatus(@PathVariable String myorder_id, @PathVariable String status) {
         System.out.println("in admin change user order delivery status status");
         return new ResponseEntity(orderService.changeUserOrderDeliveryStatus(Integer.parseInt(myorder_id), status), HttpStatus.OK);

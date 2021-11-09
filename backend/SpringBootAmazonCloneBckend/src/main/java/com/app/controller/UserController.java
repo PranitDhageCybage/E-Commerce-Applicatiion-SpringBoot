@@ -49,22 +49,22 @@ public class UserController {
         }
     }
 
-    @GetMapping("/profile/{id}")
-    public ResponseEntity getUserProfile(@PathVariable int id) {
+    @GetMapping("/profile/{id}")/*--------------------------------------------- User getUserProfile Done-------------------------------------------------*/
+    public ResponseDTO getUserProfile(@PathVariable int id) {
         System.out.println("in user get profile : " + id);
         User foundUser = userService.getProfile(id);
         if (foundUser != null) {
-            return new ResponseEntity(foundUser, HttpStatus.OK);
+            return new ResponseDTO(true, foundUser);
         }
         throw new ResourceNotFoundException("User not found for given user id");
     }
 
-    @PutMapping("/UpdateProfile/{id}")
-    public ResponseEntity updateUserProfile(@PathVariable String id, @RequestBody User user) {
+    @PutMapping("/UpdateProfile/{id}")/*--------------------------------------------- User updateUserProfile Done-------------------------------------------------*/
+    public ResponseDTO updateUserProfile(@PathVariable String id, @RequestBody User user) {
         System.out.println("in user update profile : " + id);
         User updatedUser = userService.userUpdate(Integer.parseInt(id), user);
         if (updatedUser != null) {
-            return new ResponseEntity("user profile updated successfully", HttpStatus.OK);
+            return new ResponseDTO(true, "user profile updated successfully");
         }
         throw new UnexpectedErrorException("Error while updating user profile");
     }

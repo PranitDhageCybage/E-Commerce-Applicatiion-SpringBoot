@@ -9,13 +9,8 @@ import { UserService } from '../user.service';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  firstName: string = '';
-  lastName: string = '';
-  address: string = '';
-  city: string = '';
-  state: string = '';
-  country: string = '';
-  zip: string = '';
+  name: string = '';
+  email: string = '';
   phone: string = '';
 
   constructor(
@@ -30,16 +25,11 @@ export class ProfileComponent implements OnInit {
 
   loadUserProfile() {
     this.userService.getUserDetails().subscribe((response: any) => {
-      if (response['status'] == 'success') {
-        const user = response['data'][0];
-        this.firstName = user['firstName'];
-        this.lastName = user['lastName'];
-        this.address = user['address'];
-        this.city = user['city'];
-        this.state = user['state'];
-        this.country = user['country'];
-        this.zip = user['zip'];
+      if (response['success']) {
+        const user = response['data'];
+        this.name = user['name'];
         this.phone = user['phone'];
+        this.email = user['email'];
       } else {
         console.log(response['error']);
       }
@@ -47,18 +37,9 @@ export class ProfileComponent implements OnInit {
   }
   onUpdate() {
     this.userService
-      .edituserProfile(
-        this.firstName,
-        this.lastName,
-        this.address,
-        this.city,
-        this.state,
-        this.country,
-        this.zip,
-        this.phone
-      )
+      .edituserProfile(this.name, this.email, this.phone)
       .subscribe((response: any) => {
-        if (response['status'] == 'success') {
+        if (response['success']) {
           this.toastr.success('Profile Updated Successfully');
           this.router.navigate(['/home/product/gallery']);
         } else {

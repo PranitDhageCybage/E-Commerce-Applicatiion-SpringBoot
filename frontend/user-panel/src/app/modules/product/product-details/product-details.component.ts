@@ -60,23 +60,16 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(product: any) {
-    //Check if product id already present in cartItem array
-    //If true then navigate user to cart
-    if (this.cartItems.includes(product['prod_id'])) {
-      this.toastr.success(`${product['prod_title']} present in cart`);
-      this.router.navigate(['/home/product/cart']);
-    } else {
-      // Add item to cart
-      this.cartService
-        .addCartItem(product['prod_id'])
-        .subscribe((response: any) => {
-          if (response['success']) {
-            this.toastr.success(`Added ${product['prod_title']} to cart`);
-            this.loadCartItems();
-          }
-        });
-    }
+    this.cartService
+      .addCartItem(product['prod_id'])
+      .subscribe((response: any) => {
+        if (response['success']) {
+          this.toastr.success(`Added ${product['prod_title']} to cart`);
+          this.loadCartItems();
+        }
+      });
   }
+
   loadCartItems() {
     this.cartService.getCartItems().subscribe((response: any) => {
       if (response['success']) {

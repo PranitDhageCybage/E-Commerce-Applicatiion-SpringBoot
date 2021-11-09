@@ -80,12 +80,20 @@
           </table>
         </div>
         <button
-          type="button"
-          class="btn btn-info btn-md mr-1 mb-2"
+        *ngIf="!cartItems.includes(product['prod_id'])"
+          style="margin-top: 10px"
           (click)="addToCart(product)"
-          style="margin-top: 50px"
+          class="btn btn-success btn-sm"
         >
           Add to cart
+        </button>
+        <button
+        *ngIf="cartItems.includes(product['prod_id'])"
+          style="margin-top: 10px"
+          class="btn btn-primary btn-sm"
+          routerLink="/home/product/cart"
+        >
+          Go to cart
         </button>
       </div>
     </div>

@@ -52,11 +52,20 @@
             </div>
             <div><h6><strong>Product Quantity :</strong> {{ product["prod_qty"] }}</h6></div>
             <button
+            *ngIf="!cartItems.includes(product['prod_id'])"
               style="margin-top: 10px"
               (click)="addToCart(product)"
               class="btn btn-success btn-sm"
             >
               Add to cart
+            </button>
+            <button
+            *ngIf="cartItems.includes(product['prod_id'])"
+              style="margin-top: 10px"
+              class="btn btn-primary btn-sm"
+              routerLink="/home/product/cart"
+            >
+              Go to cart
             </button>
             <a
               routerLink="/home/product/details/{{ product['prod_id'] }}"

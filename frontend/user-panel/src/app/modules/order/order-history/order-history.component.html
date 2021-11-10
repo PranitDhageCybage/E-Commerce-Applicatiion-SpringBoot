@@ -1,15 +1,15 @@
-<div class="modal-header">
+<div class="modal-header bgr-shade">
   <h2>My Order History</h2>
   <button
     routerLink="/home/product/gallery"
-    class="btn btn-secondary float-right"
+    class="btn bgr-shade float-right"
   >
     Back
   </button>
 </div>
 
-<div class="modal-body">
-  <table class="table table-striped table-bordered">
+<div class="modal-body bgm-shade">
+  <table class="table table-striped table-bordered bgb-shade">
     <thead>
       <tr>
         <th>No</th>
@@ -42,13 +42,13 @@
               order['delivery_status'] != 'Cancelled' &&
               order['delivery_status'] != 'Delivered'
             "
-            class="btn btn-danger btn-sm"
+            class="btn bgr-shade btn-sm"
           >
             Cancel
           </button>
           <a
             routerLink="/home/order/order-details/{{ order['myorder_id'] }}"
-            class="btn btn-primary btn-sm"
+            class="btn bgm-shade btn-sm"
             style="margin-left: 5px; float: right"
           >
             Show Details

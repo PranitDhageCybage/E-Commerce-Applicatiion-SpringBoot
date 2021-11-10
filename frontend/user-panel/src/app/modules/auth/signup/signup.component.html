@@ -1,7 +1,7 @@
-<h1 style="text-align: center; margin-bottom: 50px">Sign Up Here</h1>
+<h1 class="bgr-shade" style="text-align: center; margin-bottom: 50px; padding: 20px;">Sign Up Here</h1>
 <div class="row">
   <div class="col-md-4"></div>
-  <div class="col-md-4">
+  <div class="col-md-4 bgb-shade" style="padding: 60px;">
     <div class="form">
       <div class="form-group">
         <label for="">Full Name</label>
@@ -20,8 +20,8 @@
         <input [(ngModel)]="password" type="password" class="form-control" />
       </div>
       <div class="form-group" style="margin-top: 10px">
-        <button (click)="onSignup()" class="btn btn-success">Sign Up</button>
-        <a routerLink="/auth/login" class="btn btn-warning" style="float: right"
+        <button (click)="onSignup()" class="btn bgr-shade">Sign Up</button>
+        <a routerLink="/auth/login" class="btn bgr-shade" style="float: right"
           >login</a
         >
       </div>

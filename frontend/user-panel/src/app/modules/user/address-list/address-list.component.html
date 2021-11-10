@@ -1,19 +1,19 @@
-<div class="modal-header">
+<div class="modal-header bgr-shade">
   <h2>Address List</h2>
-  <button routerLink="/home/user/address-add" class="btn btn-success">
+  <button routerLink="/home/user/address-add" class="btn bgm-shade">
     Add Addresss
   </button>
   <button
     routerLink="/home/order/preview"
-    class="btn btn-secondary"
+    class="btn bgr-shade"
     style="float: right"
   >
     Back
   </button>
 </div>
 
-<div class="modal-body">
-  <table class="table table-striped table-bordered">
+<div class="modal-body bgm-shade">
+  <table class="table table-striped table-bordered bgb-shade">
     <thead>
       <tr>
         <th style="width: 70px">Choose</th>
@@ -44,7 +44,7 @@
         <td>{{ address["country"] }}</td>
         <td>{{ address["pin"] }}</td>
         <td>
-          <button (click)="onDelete(address)" class="btn btn-danger btn-sm">
+          <button (click)="onDelete(address)" class="btn bgr-shade btn-sm">
             Delete
           </button>
         </td>
@@ -53,7 +53,7 @@
   </table>
 </div>
 <div class="modal-body">
-  <table class="table table-striped table-bordered" style="text-align: center">
+  <table class="table table-striped table-bordered bgb-shade" style="text-align: center">
     <thead>
       <tr>
         <th>Total Amount</th>
@@ -92,14 +92,5 @@
   </table>
 </div>
 <div class="modal-footer">
-  <button (click)="placeOrder()" class="btn btn-primary">Place Order</button>
+  <button (click)="placeOrder()" class="btn bgm-shade">Place Order</button>
 </div>
-
-<!-- // {
-  //   "addressId":11,
-  //   "totalAmount":10000,
-  //   "tax":10000,
-  //   "paymentType":"Card",
-  //   "paymentStatus":"Success",
-  //   "deliveryStatus": "Pending"
-  // } -->

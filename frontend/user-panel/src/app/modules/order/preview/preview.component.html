@@ -1,16 +1,16 @@
-<div class="modal-header">
+<div class="modal-header bgr-shade">
   <h2>Order Preview</h2>
   <button
     routerLink="/home/product/cart"
-    class="btn btn-secondary"
+    class="btn bgr-shade"
     style="float: right"
   >
     Back
   </button>
 </div>
 
-<div class="modal-body">
-  <table class="table table-striped table-bordered">
+<div class="modal-body bgm-shade">
+  <table class="table table-striped table-bordered bgb-shade">
     <thead>
       <tr>
         <th>No</th>
@@ -44,7 +44,7 @@
       </tr>
     </tfoot>
   </table>
-  <button (click)="placeOrder()" class="btn btn-success" style="float: right">
+  <button (click)="placeOrder()" class="btn bgb-shade" style="float: right">
     Choose Address
   </button>
 </div>

@@ -10,7 +10,7 @@ public class EncryptPassword {
             byte[] hash = digest.digest(data.getBytes("UTF-8"));
             return bytesToHex(hash); // make it printable
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.err.println(ex.getStackTrace());
         }
         return null;
     }

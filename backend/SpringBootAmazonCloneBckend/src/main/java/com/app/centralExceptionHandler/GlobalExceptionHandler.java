@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.io.IOException;
+
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
@@ -25,5 +27,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(UnexpectedErrorException.class)
     public ResponseEntity<ResponseDTO> handleUnexpectedErrorException(UnexpectedErrorException e) {
         return new ResponseEntity<ResponseDTO>(new ResponseDTO(false,"Unexpected Error Occurred", e.getMessage()), HttpStatus.OK);
+    }
+
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<ResponseDTO> handleIOException(IOException e) {
+        return new ResponseEntity<ResponseDTO>(new ResponseDTO(false,"IO Exception Occurred", e.getMessage()), HttpStatus.OK);
     }
 }

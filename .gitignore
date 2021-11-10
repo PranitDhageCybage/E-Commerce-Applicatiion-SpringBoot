@@ -13,7 +13,6 @@
 /frontend/admin-panel/node_modules/*
 /frontend/user-panel/node_modules/*
 
-/*/.vscode
-/*/.sonar
-/*/.scannerwork/
-
+.vscode
+.sonar
+.scannerwork/

@@ -9,7 +9,7 @@ const crypto = require("crypto-js");
 const fs = require("fs");
 const path = require("path");
 const jwt = require("jsonwebtoken");
-const { Router, response } = require("express");
+const { Router } = require("express");
 
 const router = express.Router();
 // const router = Router();

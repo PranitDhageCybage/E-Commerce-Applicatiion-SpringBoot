@@ -42,6 +42,13 @@
             >
               Order Details
             </button>
+            <button
+            (click)="onDelete(order)"
+            *ngIf="order['delivery_status'] == 'Cancelled'"
+            class="btn bgr-shade btn-sm"
+          >
+            Delete
+          </button>
             <select
               *ngIf="
                 order['delivery_status'] != 'Cancelled' &&

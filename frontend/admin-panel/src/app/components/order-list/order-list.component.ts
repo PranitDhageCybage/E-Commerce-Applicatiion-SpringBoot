@@ -43,4 +43,17 @@ export class OrderListComponent implements OnInit {
         }
       });
   }
+
+  onDelete(order: any) {
+    this.orderService
+      .deleteMyOrders(order['myorder_id'])
+      .subscribe((response: any) => {
+        if ((response['success'])) {
+          this.getAllUserOrderList();
+        } else {
+          console.log(response['error']);
+        }
+      });
+  }
+
 }

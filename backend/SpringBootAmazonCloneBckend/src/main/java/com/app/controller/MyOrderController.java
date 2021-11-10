@@ -55,7 +55,7 @@ public class MyOrderController {
         return new ResponseDTO(true, myOrderService.updateMyOrderStatus(Integer.parseInt(myOrder_id), status));
     }
 
-    @DeleteMapping("/delete/{myOrder_id}")/*-------------------------------User deleteMyOrder Done-----------------------------------*/
+    @DeleteMapping("/delete/{myOrder_id}")/*-------------------------------Admin/User deleteMyOrder Done-----------------------------------*/
     public ResponseDTO deleteMyOrder(@PathVariable String myOrder_id) {
         System.out.println("in delete  myOrder");
         return new ResponseDTO(true, myOrderService.deleteMyOrder(Integer.parseInt(myOrder_id)));

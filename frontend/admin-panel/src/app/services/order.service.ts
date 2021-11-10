@@ -32,6 +32,17 @@ export class OrderService {
     );
   }
 
+  deleteMyOrders(id: number) {
+    // add the token in the request header
+    const httpOptions = {
+      headers: new HttpHeaders({
+        // token: sessionStorage['token'],
+      }),
+    };
+    return this.httpClient.delete(this.url + 'myOrder/delete/' + id, httpOptions);
+  }
+
+
   showOrderDetails(id: number) {
     // add the token in the request header
     const httpOptions = {

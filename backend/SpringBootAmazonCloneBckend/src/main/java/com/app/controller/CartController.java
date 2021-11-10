@@ -27,11 +27,7 @@ public class CartController {
     @GetMapping("/list/{user_id}")/*--------------------------------------------User getAllCartItemList Done-----------------------------------------------*/
     public ResponseDTO getAllCartItemList(@PathVariable String user_id) {
         System.out.println("in get all cart item list");
-        List<Cart> cartItems = cartService.getAllCartItems(Integer.parseInt(user_id));
-        if (cartItems.size() > 0) {
-            return new ResponseDTO(true, cartItems);
-        }
-        throw new ResourceNotFoundException("Cart items not found for user");
+        return new ResponseDTO(true, cartService.getAllCartItems(Integer.parseInt(user_id)));
     }
 
     @PostMapping("/add")/*--------------------------------------------User addNewCartIem Done-----------------------------------------------*/

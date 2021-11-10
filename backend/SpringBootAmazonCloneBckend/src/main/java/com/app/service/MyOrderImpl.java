@@ -39,10 +39,10 @@ public class MyOrderImpl implements IMyOrderService {
     public String checkoutMyOrder(Myorder myorder) {
         try {
             //Get Current User
-            User user = myorder.getUser();
+            Integer user_id = myorder.getUser().getUserId();
 
             //Get all cart items of current user
-            List<Cart> cartItems = cartRepo.findAllByUser(user);
+            List<Cart> cartItems = cartRepo.findAllByUserUserId(user_id);
 
             //Calculate total amount
             double totalAmount = 0.0;
@@ -79,7 +79,7 @@ public class MyOrderImpl implements IMyOrderService {
             orderDetailsRepo.saveAll(orderDetailsList);
 
             //Empty cart for Current user
-            cartRepo.deleteAllByUser(user);
+            cartRepo.deleteAllByUserUserId(user_id);
 
             return "Order Placed Successfully";
 

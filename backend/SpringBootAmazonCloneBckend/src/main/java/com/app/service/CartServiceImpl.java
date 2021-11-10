@@ -2,9 +2,7 @@ package com.app.service;
 
 import com.app.customExceptions.ResourceNotFoundException;
 import com.app.dao.CartRepository;
-import com.app.dao.UserRepository;
 import com.app.pojo.Cart;
-import com.app.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,16 +16,9 @@ public class CartServiceImpl implements ICartService {
     @Autowired
     CartRepository cartRepo;
 
-    @Autowired
-    UserRepository userRepo;
-
     @Override
     public List<Cart> getAllCartItems(int user_id) {
-        if (userRepo.existsById(user_id)) {
-            User user = userRepo.findById(user_id).get();
-            return cartRepo.findAllByUser(user);
-        }
-        throw new ResourceNotFoundException("Cart Item not found for given user Id : " + user_id);
+        return cartRepo.findAllByUserUserId(user_id);
     }
 
     @Override
@@ -56,11 +47,7 @@ public class CartServiceImpl implements ICartService {
 
     @Override
     public String deleteAllCartItemByUser(int user_id) {
-        if (userRepo.existsById(user_id)) {
-            User user = userRepo.findById(user_id).get();
-            cartRepo.deleteAllByUser(user);
-            return "Deleted All items from cart";
-        }
-        throw new ResourceNotFoundException("Cart items not found for given user Id : " + user_id);
+        cartRepo.deleteAllByUserUserId(user_id);
+        return "Deleted All items from cart";
     }
 }

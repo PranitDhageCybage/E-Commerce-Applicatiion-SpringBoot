@@ -28,7 +28,7 @@ export class CartComponent implements OnInit {
         this.items = response['data'];
         this.totalAmount = 0;
         this.items.forEach(
-          (item:any) =>
+          (item: any) =>
             (this.totalAmount +=
               item['cart_quantity'] * item['product']['prod_price'])
         );
@@ -41,14 +41,22 @@ export class CartComponent implements OnInit {
     if (newQuantity == 0) {
       this.onDelete(item);
     } else {
-      this.cartService
-        .updateCartItem(item['cart_id'], newQuantity)
-        .subscribe((response: any) => {
-          if (response['success']) {
-            this.toastr.success('Updated quantity');
-            this.loadCartItems();
-          }
-        });
+      if (item['cart_quantity'] >= item['product']['prod_qty']) {
+        this.toastr.error('No more product available');
+      } else {
+        if (item['cart_quantity'] >= 5 && quantity != -1) {
+          this.toastr.error('Maximun 5 products can be bought at a time');
+        } else {
+          this.cartService
+            .updateCartItem(item['cart_id'], newQuantity)
+            .subscribe((response: any) => {
+              if (response['success']) {
+                this.toastr.success('Updated quantity');
+                this.loadCartItems();
+              }
+            });
+        }
+      }
     }
   }
 
@@ -57,11 +65,10 @@ export class CartComponent implements OnInit {
       .deleteCartItem(item['cart_id'])
       .subscribe((response: any) => {
         if (response['success']) {
-          this.loadCartItems();
+          this.ngOnInit();
           this.toastr.success(
             `Deleted ${item['product']['prod_title']} form cart`
           );
-          
         }
       });
   }

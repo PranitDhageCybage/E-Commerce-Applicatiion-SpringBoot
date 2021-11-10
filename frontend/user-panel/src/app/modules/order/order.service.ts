@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class OrderService {
   url: string = 'http://localhost:8080/myOrder';
   rootUrl: string = 'http://localhost:8080';
-  user_id = JSON.parse( sessionStorage['user']).user_id
+  user_id = JSON.parse(sessionStorage['user']).user_id;
   constructor(private httpClient: HttpClient) {}
 
   placeOrder(
@@ -58,6 +58,16 @@ export class OrderService {
       this.url + '/update/' + id + '/' + status,
       httpOptions
     );
+  }
+
+  deleteMyOrders(id: number) {
+    // add the token in the request header
+    const httpOptions = {
+      headers: new HttpHeaders({
+        // token: sessionStorage['token'],
+      }),
+    };
+    return this.httpClient.delete(this.url + '/delete/' + id, httpOptions);
   }
 
   showOrderDetails(id: number) {

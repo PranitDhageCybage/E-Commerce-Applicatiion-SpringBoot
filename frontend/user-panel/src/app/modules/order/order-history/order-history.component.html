@@ -1,9 +1,6 @@
 <div class="modal-header bgr-shade">
   <h2>My Order History</h2>
-  <button
-    routerLink="/home/product/gallery"
-    class="btn bgr-shade float-right"
-  >
+  <button routerLink="/home/product/gallery" class="btn bgr-shade float-right">
     Back
   </button>
 </div>
@@ -42,13 +39,20 @@
               order['delivery_status'] != 'Cancelled' &&
               order['delivery_status'] != 'Delivered'
             "
-            class="btn bgr-shade btn-sm"
+            class="btn bgm-shade btn-sm"
           >
             Cancel
           </button>
+          <button
+            (click)="onDelete(order)"
+            *ngIf="order['delivery_status'] == 'Cancelled'"
+            class="btn bgr-shade btn-sm"
+          >
+            Delete
+          </button>
           <a
             routerLink="/home/order/order-details/{{ order['myorder_id'] }}"
-            class="btn bgm-shade btn-sm"
+            class="btn bgb-shade btn-sm"
             style="margin-left: 5px; float: right"
           >
             Show Details

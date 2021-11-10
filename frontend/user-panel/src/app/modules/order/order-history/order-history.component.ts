@@ -36,4 +36,16 @@ export class OrderHistoryComponent implements OnInit {
       });
   }
 
+  onDelete(order: any) {
+    this.orderService
+      .deleteMyOrders(order['myorder_id'])
+      .subscribe((response: any) => {
+        if ((response['success'])) {
+          this.loadMyOrders();
+        } else {
+          console.log(response['error']);
+        }
+      });
+  }
+
 }

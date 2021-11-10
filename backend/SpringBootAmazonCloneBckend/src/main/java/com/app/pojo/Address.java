@@ -1,5 +1,6 @@
 package com.app.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -49,6 +50,7 @@ public class Address {
     @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Myorder> myorders;
 
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     @CreationTimestamp
     @JsonProperty("added_on")
     @Column(name = "added_on", nullable = false)

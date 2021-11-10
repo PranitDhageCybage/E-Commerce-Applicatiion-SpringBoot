@@ -1,5 +1,6 @@
 package com.app.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -29,7 +30,7 @@ public class OrderDetails {
     @ManyToOne(optional = false)
     private Myorder myorder;
 
-
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     @CreationTimestamp
     @JsonProperty("ordered_on")
     @Column(name = "ordered_on", nullable = false)

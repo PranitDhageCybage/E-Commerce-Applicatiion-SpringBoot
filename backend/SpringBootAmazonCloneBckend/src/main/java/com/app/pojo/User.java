@@ -1,5 +1,6 @@
 package com.app.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -57,7 +58,7 @@ public class User {
     @Column(name = "user_role", columnDefinition = "varchar(30) default 'USER'")
     private Role userRole;
 
-
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     @CreationTimestamp
     @JsonProperty("signedUp_on")
     @Column(name = "signedUp_on", nullable = false)

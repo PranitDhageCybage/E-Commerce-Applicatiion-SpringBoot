@@ -1,5 +1,6 @@
 package com.app.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -34,6 +35,7 @@ public class ProductReview {
     @Column(name = "rating")
     private  Integer rating;
 
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     @CreationTimestamp
     @JsonProperty("reviewed_on")
     @Column(name = "reviewed_on", nullable = false)

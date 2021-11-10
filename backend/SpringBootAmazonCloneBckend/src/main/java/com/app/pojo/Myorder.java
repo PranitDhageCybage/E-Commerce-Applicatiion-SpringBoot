@@ -1,5 +1,6 @@
 package com.app.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -40,6 +41,7 @@ public class Myorder {
     @JsonProperty("delivery_status")
     private String deliveryStatus;
 
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     @CreationTimestamp
     @JsonProperty("ordered_on")
     @Column(name = "ordered_on", nullable = false)

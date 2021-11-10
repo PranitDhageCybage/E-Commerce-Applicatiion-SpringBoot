@@ -1,10 +1,10 @@
-<h1 style="text-align: center; margin-bottom: 50px">
+<h1 class="bgr-shade" style="text-align: center; margin-bottom: 50px; padding: 20px;">
   {{ brand ? "Update" : "Add" }} Company Here
 </h1>
 <div class="card">
-  <div class="card-header">
+  <div class="card-header bgr-shade">
     <a
-      class="btn btn-secondary btn-sm"
+      class="btn bgr-shade btn-sm"
       routerLink="/brand-list"
       style="float: right"
     >
@@ -12,17 +12,17 @@
     </a>
     <h4>{{ brand ? "Update" : "Add" }} Company</h4>
   </div>
-  <div class="card-body">
+  <div class="card-body bgb-shade">
     <div class="form">
       <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-11">
           <div class="form--group">
             <label for="title">Title</label>
             <input [(ngModel)]="title" type="text" class="form-control" />
           </div>
         </div>
         <div class="row" style="margin-top: 20px">
-          <div class="col-md-11">
+          <div class="col-md-12">
             <div class="form-group">
               <label for="">Description</label>
               <textarea
@@ -34,13 +34,13 @@
           </div>
         </div>
         <div class="form-group" style="margin-top: 10px">
-          <button (click)="onUpdate()" class="btn btn-success">
+          <button (click)="onUpdate()" class="btn bgm-shade">
             {{ brand ? "Update" : "Add" }}
           </button>
           <a
             style="margin-left: 10px"
             routerLink="/brand-list"
-            class="btn btn-danger"
+            class="btn bgr-shade"
             >Cancel</a
           >
         </div>

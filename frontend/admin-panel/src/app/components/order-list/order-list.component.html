@@ -1,7 +1,7 @@
 <div class="card">
-  <div class="card-header">
+  <div class="card-header bgr-shade">
     <a
-      class="btn btn-secondary btn-sm"
+      class="btn bgr-shade"
       routerLink="/dashboard"
       style="float: right"
     >
@@ -9,7 +9,7 @@
     </a>
     <h3>User's Order List</h3>
   </div>
-  <div class="card-body" *ngIf="userOrders.length > 0">
+  <div class="card-body bgb-shade" *ngIf="userOrders.length > 0">
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
@@ -20,7 +20,7 @@
           <th>Payment Type</th>
           <th>Payment Status</th>
           <th>Delivery Status</th>
-          <!-- <th>Ordered On</th> -->
+          <th>Ordered On</th>
           <th style="width: 260px; text-align: center">Actions</th>
         </tr>
       </thead>
@@ -33,11 +33,11 @@
           <td>{{ order["payment_type"] }}</td>
           <td>{{ order["payment_status"] }}</td>
           <td>{{ order["delivery_status"] }}</td>
-          <!-- <td>{{ order["ordered_on"] }}</td> -->
+          <td>{{ order["ordered_on"] }}</td>
           <td>
             <button
               (click)="showOrderDetails(order)"
-              class="btn btn-info btn-sm"
+              class="btn bgm-shade btn-sm"
               style="margin-left: 10px; float: right"
             >
               Order Details
@@ -47,7 +47,7 @@
             *ngIf="order['delivery_status'] == 'Cancelled'"
             class="btn bgr-shade btn-sm"
           >
-            Delete
+            Delete Order
           </button>
             <select
               *ngIf="
@@ -55,7 +55,7 @@
                 order['delivery_status'] != 'Delivered'
               "
               (change)="changeDeliveryStatus(order['myorder_id'], $event)"
-              class="btn btn-success btn-sm dropdown"
+              class="btn bgb-shade btn-sm dropdown"
               style="width: 130px"
             >
               <option>Change Status</option>

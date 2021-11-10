@@ -1,10 +1,10 @@
-<h1 style="text-align: center; margin-bottom: 50px">
+<h1 class="bgr-shade" style="text-align: center; margin-bottom: 20px; padding: 20px;">
   {{ product ? "Update" : "Add" }} Product Here
 </h1>
 <div class="card">
-  <div class="card-header">
+  <div class="card-header bgr-shade">
     <a
-      class="btn btn-secondary btn-sm"
+      class="btn bgr-shade"
       routerLink="/product-list"
       style="float: right"
     >
@@ -12,7 +12,7 @@
     </a>
     <h4>{{ product ? "Update" : "Add" }} Product</h4>
   </div>
-  <div class="card-body">
+  <div class="card-body bgb-shade">
     <div class="form">
       <div class="row">
         <div class="col-md-6">
@@ -65,27 +65,27 @@
             <label for="">Description</label>
             <textarea
               [(ngModel)]="description"
-              rows="10"
+              rows="4"
               class="form-control"
             ></textarea>
           </div>
         </div>
       </div>
       <div class="form-group" style="margin-top: 10px">
-        <button (click)="onUpdate()" class="btn btn-success">
+        <button (click)="onUpdate()" class="btn bgm-shade">
           {{ product ? "Update" : "Add" }}
         </button>
         <a
           style="margin-left: 10px"
           routerLink="/product-list"
-          class="btn btn-danger"
+          class="btn bgr-shade"
           >Cancel</a
         >
 
         <button
           *ngIf="!image"
           (click)="onUploadImage()"
-          class="btn btn-info float-right"
+          class="btn bgm-shade float-right"
           style="margin-left: 10px"
         >
           Upload Image

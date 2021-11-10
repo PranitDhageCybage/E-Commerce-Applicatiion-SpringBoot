@@ -1,7 +1,7 @@
 <div class="card">
-  <div class="card-header">
+  <div class="card-header bgr-shade">
     <a
-      class="btn btn-secondary btn-sm"
+      class="btn bgr-shade"
       routerLink="/dashboard"
       style="float: right"
     >
@@ -9,7 +9,7 @@
     </a>
     <h4>List of Application Users</h4>
   </div>
-  <div class="card-body">
+  <div class="card-body bgb-shade">
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
@@ -31,9 +31,9 @@
           <td>
             <button
               (click)="toggleActive(user)"
-              [class.btn-success]="user['status'] != 1"
-              [class.btn-danger]="user['status'] == 1"
-              class="btn btn-sm"
+              [class.bgm-shade]="user['status'] != 1"
+              [class.bgr-shade]="user['status'] == 1"
+              class="btn"
             >
               {{ user["status"] == 1 ? "Suspend" : "Activate" }}
             </button>

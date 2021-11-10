@@ -1,4 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  background-color: #edeaea;
+  background: #ce5937;
+  background: -moz-linear-gradient(
+    -45deg,
+    #ce5937 0%,
+    #1c6ea4 50%,
+    #c59237 100%
+  );
+  background: -webkit-linear-gradient(
+    -45deg,
+    #ce5937 0%,
+    #1c6ea4 50%,
+    #c59237 100%
+  );
+  background: linear-gradient(135deg, #ce5937 0%, #1c6ea4 50%, #c59237 100%);
+}
+
+.bgm-shade {
+  background: #ce5937;
+  background: -moz-linear-gradient(
+    -45deg,
+    #ce5937 0%,
+    #1c6ea4 50%,
+    #c59237 100%
+  );
+  background: -webkit-linear-gradient(
+    -45deg,
+    #ce5937 0%,
+    #1c6ea4 50%,
+    #c59237 100%
+  );
+  background: linear-gradient(135deg, #ce5937 0%, #1c6ea4 50%, #c59237 100%);
+  border-radius: 5px;
+  color: black;
+}
+.bgr-shade {
+  background-color: #f8002f;
+  background-image: linear-gradient(326deg, #f8002f 0%, #000c14 74%);
+  border-radius: 5px;
+  color: white;
+}
+
+.bgb-shade {
+  background-color: #ffcfdf;
+  background-image: linear-gradient(315deg, #ffcfdf 0%, #b0f3f1 74%);
+  border-radius: 5px;
+  color: black;
+}
+
+input, textarea {
+
 }

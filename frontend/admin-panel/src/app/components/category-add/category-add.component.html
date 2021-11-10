@@ -1,10 +1,10 @@
-<h1 style="text-align: center; margin-bottom: 50px">
+<h1 class="bgr-shade" style="text-align: center; margin-bottom: 50px; padding: 20px;">
   {{ category ? "Update" : "Add" }} Category Here
 </h1>
 <div class="card">
-  <div class="card-header">
+  <div class="card-header bgr-shade">
     <a
-      class="btn btn-secondary btn-sm"
+      class="btn bgr-shade"
       routerLink="/category-list"
       style="float: right"
     >
@@ -12,7 +12,7 @@
     </a>
     <h4>{{ category ? "Update" : "Add" }} Category</h4>
   </div>
-  <div class="card-body">
+  <div class="card-body bgb-shade">
     <div class="form">
       <div class="row">
         <div class="col-md-10">
@@ -34,13 +34,13 @@
           </div>
         </div>
         <div class="form-group" style="margin-top: 10px">
-          <button (click)="onUpdate()" class="btn btn-success">
+          <button (click)="onUpdate()" class="btn bgm-shade">
             {{ category ? "Update" : "Add" }}
           </button>
           <a
             style="margin-left: 10px"
             routerLink="/category-list"
-            class="btn btn-danger"
+            class="btn bgr-shade"
             >Cancel</a
           >
         </div>

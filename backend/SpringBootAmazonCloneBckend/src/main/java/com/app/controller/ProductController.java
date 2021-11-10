@@ -28,21 +28,13 @@ public class ProductController {
     @GetMapping("/list") /*--------------------------------------------- Admin get All Product List Done-------------------------------------------------*/
     public ResponseDTO getAllProductList() {
         System.out.println("in  get all Product list");
-        List<Products> productsList = productService.getAllProducts();
-        if (productsList.size() > 0) {
-            return new ResponseDTO(true, productsList);
-        }
-        throw new ResourceNotFoundException("Product list not found");
+            return new ResponseDTO(true, productService.getAllProducts());
     }
 
     @GetMapping("/galleryList") /*--------------------------------------------- User getGalleryProductList Done-------------------------------------------------*/
     public ResponseDTO getGalleryProductList() {
         System.out.println("in  get gallery Product list");
-        List<Products> productsList = productService.getGalleryProducts();
-        if (productsList.size() > 0) {
-            return new ResponseDTO(true, productsList);
-        }
-        throw new ResourceNotFoundException("Product list not found");
+            return new ResponseDTO(true,  productService.getGalleryProducts());
     }
 
 

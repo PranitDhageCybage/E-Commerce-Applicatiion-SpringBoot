@@ -39,11 +39,7 @@ public class AdminController {
     @GetMapping("/userList")/*--------------------------------------------- Admin getAllUserList Done-------------------------------------------------*/
     public ResponseDTO getAllUserList() {
         System.out.println("in admin get all user list");
-        List<User> userList = userService.getUsersListAll();
-        if (userList.size() > 0) {
-            return new ResponseDTO(true, userList);
-        }
-        throw new ResourceNotFoundException("User list not found");
+            return new ResponseDTO(true, userService.getUsersListAll());
     }
 
     @PutMapping("/userStatus/{user_id}/{status}")/*--------------------------------------------- Admin changeUserActiveStatus Done-------------------------------------------------*/
@@ -53,19 +49,15 @@ public class AdminController {
     }
 
     @GetMapping("/allUserOrders")/*--------------------------------------------- Admin getAllUserOrders Done-------------------------------------------------*/
-    public ResponseEntity getAllUserOrders() {
+    public ResponseDTO getAllUserOrders() {
         System.out.println("in admin get all user orders");
-        List<Myorder> myorderList = orderService.getAllUserOrders();
-        if (myorderList.size() > 0) {
-            return new ResponseEntity(myorderList, HttpStatus.OK);
-        }
-        throw new ResourceNotFoundException("User orders list not found");
+            return new ResponseDTO(true, orderService.getAllUserOrders());
     }
 
     @PutMapping("/changeDeliveryStatus/{myorder_id}/{status}")/*--------------------------------------------- Admin changeUserOrderDeliveryStatus Done-------------------------------------------------*/
-    public ResponseEntity changeUserOrderDeliveryStatus(@PathVariable String myorder_id, @PathVariable String status) {
+    public ResponseDTO changeUserOrderDeliveryStatus(@PathVariable String myorder_id, @PathVariable String status) {
         System.out.println("in admin change user order delivery status status");
-        return new ResponseEntity(orderService.changeUserOrderDeliveryStatus(Integer.parseInt(myorder_id), status), HttpStatus.OK);
+        return new ResponseDTO(true, orderService.changeUserOrderDeliveryStatus(Integer.parseInt(myorder_id), status));
     }
 
     @GetMapping("/dashboard-count") /*--------------------------------------------- Admin getAllDashboardCount Done-------------------------------------------------*/

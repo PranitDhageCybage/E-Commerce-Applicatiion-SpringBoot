@@ -26,11 +26,7 @@ public class ProductReviewController {
     @GetMapping("/list/{prod_id}")/*-------------------------------------------------------User getAllProductReviewList Done------------------------------------------------ */
     public ResponseDTO getAllProductReviewList(@PathVariable String prod_id) {
         System.out.println("in get all product review list");
-        List<ProductReview> productReviewList = reviewService.getAllProductReviews(Integer.parseInt(prod_id));
-        if (productReviewList.size() > 0) {
-            return new ResponseDTO(true, productReviewList);
-        }
-        throw new ResourceNotFoundException("product Review list not found for given product id");
+            return new ResponseDTO(true, reviewService.getAllProductReviews(Integer.parseInt(prod_id)));
     }
 
     @GetMapping("/average/{prod_id}")/*-------------------------------------------------------User getAverageProductRating Done------------------------------------------------ */

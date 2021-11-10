@@ -26,11 +26,7 @@ public class CategoryController {
     @GetMapping("/list")/*------------------------------------------Admin getAllCategoryList Done--------------------------------------------------------*/
     public ResponseDTO getAllCategoryList() {
         System.out.println("in  get all category list");
-        List<Category> categoryList = categoryService.getAllCategories();
-        if (categoryList.size() > 0) {
-            return new ResponseDTO(true, categoryList);
-        }
-        throw new ResourceNotFoundException("Category list not found");
+            return new ResponseDTO(true, categoryService.getAllCategories());
     }
 
     @GetMapping("/details/{catId}")/*------------------------------------------Admin getCategoryDetailsById Done--------------------------------------------------------*/

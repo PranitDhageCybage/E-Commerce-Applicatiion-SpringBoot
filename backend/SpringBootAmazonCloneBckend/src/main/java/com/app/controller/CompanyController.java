@@ -26,11 +26,7 @@ public class CompanyController {
     @GetMapping("/list")  /*----------------------------------------------------- Admin get All Company List Done*--------------------------------------------------*/
     public ResponseDTO getAllCompanyList() {
         System.out.println("in  get all company list");
-        List<Company> companyList = companyService.getAllCompanies();
-        if (companyList.size() > 0) {
-            return new ResponseDTO(true, companyList);
-        }
-        throw new ResourceNotFoundException("Company list not found");
+            return new ResponseDTO(true, companyService.getAllCompanies());
     }
 
     @GetMapping("/details/{compId}") /*---------------------------------- Admin get Company Details Done*--------------------------------------*/

@@ -41,7 +41,10 @@ export class CartComponent implements OnInit {
     if (newQuantity == 0) {
       this.onDelete(item);
     } else {
-      if (item['cart_quantity'] >= item['product']['prod_qty']) {
+      if (
+        item['cart_quantity'] >= item['product']['prod_qty'] &&
+        quantity != -1
+      ) {
         this.toastr.error('No more product available');
       } else {
         if (item['cart_quantity'] >= 5 && quantity != -1) {

@@ -1,14 +1,11 @@
 package com.app.controller;
 
-import com.app.customExceptions.ResourceNotFoundException;
 import com.app.customExceptions.UnexpectedErrorException;
 import com.app.dto.ResponseDTO;
 import com.app.pojo.Address;
 import com.app.service.IAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -24,11 +21,7 @@ public class AddressController {
     @GetMapping("/list/{user_id}")/*------------------------------------------------- User getAllAddressList Done---------------------------------------*/
     public ResponseDTO getAllAddressList(@PathVariable String user_id) {
         System.out.println("in get all address");
-        List<Address> addressList = addressService.getAllAddresses(Integer.parseInt(user_id));
-        if (addressList.size() > 0) {
-            return new ResponseDTO(true, addressList);
-        }
-        throw new ResourceNotFoundException("Addresses not found for user");
+            return new ResponseDTO(true, addressService.getAllAddresses(Integer.parseInt(user_id)));
     }
 
     @PostMapping("/add")/*------------------------------------------------- User addNewAddress Done---------------------------------------*/

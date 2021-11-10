@@ -17,26 +17,14 @@ public class ProductReviewServiceImpl implements IProductReviewService{
     @Autowired
     ProductReviewRepository reviewRepo;
 
-    @Autowired
-    ProductRepository productRepo;
-
     @Override
     public List<ProductReview> getAllProductReviews(int prodId) {
-        if (productRepo.existsById(prodId)) {
-            Products product = productRepo.findById(prodId).get();
-            return reviewRepo.findAllByProduct(product);
-        }
-        throw new ResourceNotFoundException("Product Reviews not found for given Product Id : " + prodId);
+            return reviewRepo.findAllByProductProdId(prodId);
     }
 
     @Override
     public double getAverageOfProductReview(int prodId) {
-        try {
             return reviewRepo.getAverageOfProductReview(prodId);
-        } catch (Exception e) {
-            System.out.println(e.getStackTrace());
-            throw new ResourceNotFoundException("Product Rating Average not found for given Product Id : " + prodId);
-        }
     }
 
     @Override

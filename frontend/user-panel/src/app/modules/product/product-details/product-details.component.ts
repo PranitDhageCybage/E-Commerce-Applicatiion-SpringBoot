@@ -22,7 +22,7 @@ export class ProductDetailsComponent implements OnInit {
   price: string = '';
   image: string = 'NoImgAvail.jpg';
 
-  avgRating: number = 1;
+  avgRating: number = 0;
 
   constructor(
     private router: Router,

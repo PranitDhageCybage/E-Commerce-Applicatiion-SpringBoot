@@ -25,22 +25,14 @@ public class MyOrderController {
     @GetMapping("/list")
     public ResponseDTO getAllUserOrderList() {
         System.out.println("in get all user Order list");/*-------------------------------Admin getAllUserOrderList Done-----------------------------------*/
-        List<Myorder> myorderList = myOrderService.getAllUserOrders();
-        if (myorderList.size() > 0) {
-            return new ResponseDTO(true, myorderList);
-        }
-        throw new ResourceNotFoundException("Myorder list not found");
+            return new ResponseDTO(true, myOrderService.getAllUserOrders());
     }
 
 
     @GetMapping("/list/{user_id}")/*-------------------------------Admin getMyOrderList Done-----------------------------------*/
     public ResponseDTO getMyOrderList(@PathVariable String user_id) {
         System.out.println("in get all myOrder list");
-       List<Myorder> myorderList = myOrderService.getMyOrderList(Integer.parseInt(user_id));
-        if (myorderList.size() > 0) {
-            return new ResponseDTO(true, myorderList);
-        }
-        throw new ResourceNotFoundException("Myorder list not found for the user");
+            return new ResponseDTO(true, myOrderService.getMyOrderList(Integer.parseInt(user_id)));
     }
 
     @PostMapping("/checkout")/*-------------------------------User checkoutMyOrder Done-----------------------------------*/

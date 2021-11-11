@@ -32,8 +32,8 @@ public class ProductReview {
     private Products product;
 
     @JsonProperty("rating")
-    @Column(name = "rating")
-    private  Integer rating;
+    @Column(name = "rating", columnDefinition = "Integer default 0")
+    private  Integer rating ;
 
     @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     @CreationTimestamp

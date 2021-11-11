@@ -1,13 +1,14 @@
 package com.app.utils;
 
 import javax.xml.bind.DatatypeConverter;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
 public class EncryptPassword {
     public static String getSHA256Hash(String data) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(data.getBytes("UTF-8"));
+            byte[] hash = digest.digest(data.getBytes(StandardCharsets.UTF_8));
             return bytesToHex(hash); // make it printable
         } catch (Exception ex) {
             System.err.println(ex.getStackTrace());

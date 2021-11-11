@@ -25,12 +25,12 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public List<Products> getAllProducts() {
-        return productRepo.findAll();
+        return productRepo.findAllProducts();
     }
 
     @Override
     public List<Products> getGalleryProducts() {
-        return productRepo.findAll().stream().filter(product -> product.getIsActive() != 0 && product.getProdQty() > 0).collect(Collectors.toList());
+        return productRepo.findAllProducts().stream().filter(product -> product.getIsActive() != 0 && product.getProdQty() > 0).collect(Collectors.toList());
     }
 
 
@@ -41,8 +41,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public Products updateProducts(int prodId, Products newProduct) {
-        if (productRepo.existsById(prodId)) {
-            Products oldProduct = productRepo.findById(prodId).get();
+            Products oldProduct = productRepo.findById(prodId).orElseThrow(() -> new ResourceNotFoundException("Product  not found for given Product Id : " + prodId));
             if (newProduct.getProdTitle() != null) oldProduct.setProdTitle(newProduct.getProdTitle());
             if (newProduct.getProdDescription() != null) oldProduct.setProdDescription(newProduct.getProdDescription());
             if (newProduct.getProdPrice() != null) oldProduct.setProdPrice(newProduct.getProdPrice());
@@ -51,8 +50,6 @@ public class ProductServiceImpl implements IProductService {
             if (newProduct.getCategory() != null) oldProduct.setCategory(newProduct.getCategory());
             if (newProduct.getCompany() != null) oldProduct.setCompany(newProduct.getCompany());
             return productRepo.save(oldProduct);
-        }
-        throw new ResourceNotFoundException("Product  not found for given Product Id : " + prodId);
     }
 
     @Override
@@ -112,7 +109,7 @@ public class ProductServiceImpl implements IProductService {
             product.setPhoto(null);
             return "Product image deleted successfully";
         }
-        throw new ResourceNotFoundException( "Product image is not available");
+        return "Product image is not available";
     }
 
 }

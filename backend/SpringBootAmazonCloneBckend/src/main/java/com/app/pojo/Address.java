@@ -42,7 +42,7 @@ public class Address {
 
     // userId column
     @JoinColumn(name = "user_id", nullable = false)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User user;
 
     // F.K in opposite

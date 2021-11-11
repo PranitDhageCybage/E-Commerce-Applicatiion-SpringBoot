@@ -32,16 +32,13 @@ public class AddressServiceImpl implements IAddressService {
 
     @Override
     public Address updateAddress(int add_id, Address newAddress) {
-        if (addressRepo.existsById(add_id)) {
-            Address oldAddress = addressRepo.findById(add_id).get();
-            if (newAddress.getAddress() != null) oldAddress.setAddress(newAddress.getAddress());
-            if (newAddress.getCity() != null) oldAddress.setCity(newAddress.getCity());
-            if (newAddress.getState() != null) oldAddress.setState(newAddress.getState());
-            if (newAddress.getCountry() != null) oldAddress.setCountry(newAddress.getCountry());
-            if (newAddress.getPin() != null) oldAddress.setPin(newAddress.getPin());
-            return addressRepo.save(oldAddress);
-        }
-        throw new ResourceNotFoundException("Address not found for given address Id : " + add_id);
+        Address oldAddress = addressRepo.findById(add_id).orElseThrow(() -> new ResourceNotFoundException("Address not found for given address Id : " + add_id));
+        if (newAddress.getAddress() != null) oldAddress.setAddress(newAddress.getAddress());
+        if (newAddress.getCity() != null) oldAddress.setCity(newAddress.getCity());
+        if (newAddress.getState() != null) oldAddress.setState(newAddress.getState());
+        if (newAddress.getCountry() != null) oldAddress.setCountry(newAddress.getCountry());
+        if (newAddress.getPin() != null) oldAddress.setPin(newAddress.getPin());
+        return addressRepo.save(oldAddress);
     }
 
     @Override

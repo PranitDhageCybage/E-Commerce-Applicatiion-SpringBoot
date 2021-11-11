@@ -12,13 +12,10 @@ import java.util.List;
 
 @Service
 @Transactional
-public class MyOrderImpl implements IMyOrderService {
+public class MyOrderServiceImpl implements IMyOrderService {
 
     @Autowired
     MyOrderRepository myOrderRepo;
-
-    @Autowired
-    UserRepository userRepo;
 
     @Autowired
     CartRepository cartRepo;
@@ -67,7 +64,7 @@ public class MyOrderImpl implements IMyOrderService {
 
                 //Reduce Product Quantity by Purchased Quantity
                 int prodId = cartItem.getProduct().getProdId();
-                Products product = productRepo.findById(prodId).get();
+                Products product = productRepo.findById(prodId).orElseThrow(() -> new ResourceNotFoundException("Product not found for given Product Id"));
                 product.setProdQty(product.getProdQty() - cartItem.getCartQuantity());
                 productRepo.save(product);
 
@@ -91,12 +88,9 @@ public class MyOrderImpl implements IMyOrderService {
 
     @Override
     public Myorder updateMyOrderStatus(int myOrder_id, String status) {
-        if (myOrderRepo.existsById(myOrder_id)) {
-            Myorder myorder = myOrderRepo.findById(myOrder_id).get();
+            Myorder myorder = myOrderRepo.findById(myOrder_id).orElseThrow(() -> new ResourceNotFoundException("My Order not found for given myOrder Id : " + myOrder_id));
             if (status != myorder.getDeliveryStatus()) myorder.setDeliveryStatus(status);
             return myOrderRepo.save(myorder);
-        }
-        throw new ResourceNotFoundException("My Order not found for given myOrder Id : " + myOrder_id);
     }
 
     @Override
@@ -110,18 +104,15 @@ public class MyOrderImpl implements IMyOrderService {
 
     @Override
     public List<Myorder> getAllUserOrders() {
-        return myOrderRepo.findAll();
+        return myOrderRepo.findAllUserOrders();
     }
 
     @Override
     public String changeUserOrderDeliveryStatus(int myOrder_id, String status) {
-        if (myOrderRepo.existsById(myOrder_id)) {
-            Myorder myorder = myOrderRepo.findById(myOrder_id).get();
+            Myorder myorder = myOrderRepo.findById(myOrder_id).orElseThrow(() -> new ResourceNotFoundException("My Order not found for given myOrder Id : " + myOrder_id));
             myorder.setDeliveryStatus(status);
             myOrderRepo.save(myorder);
             return "User order delivery status changed successfully";
-        }
-        throw new ResourceNotFoundException("My Order not found for given myOrder Id : " + myOrder_id);
     }
 
     @Override

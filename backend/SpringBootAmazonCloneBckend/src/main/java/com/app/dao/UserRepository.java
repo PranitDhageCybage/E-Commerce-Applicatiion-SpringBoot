@@ -1,6 +1,5 @@
 package com.app.dao;
 
-import com.app.dto.DashboardCountDTO;
 import com.app.pojo.Role;
 import com.app.pojo.User;
 import org.springframework.data.jpa.repository.JpaRepository;

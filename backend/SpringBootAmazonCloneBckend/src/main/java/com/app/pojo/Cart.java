@@ -25,11 +25,11 @@ public class Cart {
 
     // userId column
     @JoinColumn(name = "user_id", nullable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User user;
 
     @JoinColumn(name = "prod_id", nullable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Products product;
 
     @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")

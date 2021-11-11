@@ -28,13 +28,10 @@ public class CartServiceImpl implements ICartService {
 
     @Override
     public Cart updateCartItemQty(int cart_id, int item_qty) {
-        if (cartRepo.existsById(cart_id)) {
-            Cart oldCart = cartRepo.findById(cart_id).get();
+        Cart oldCart = cartRepo.findById(cart_id).orElseThrow(() -> new ResourceNotFoundException("Cart Item not found for given cart Id : " + cart_id));
             if (item_qty != oldCart.getCartQuantity()) oldCart.setCartQuantity(item_qty);
             return cartRepo.save(oldCart);
         }
-        throw new ResourceNotFoundException("Cart Item not found for given cart Id : " + cart_id);
-    }
 
     @Override
     public String deleteCartItem(int cart_id) {

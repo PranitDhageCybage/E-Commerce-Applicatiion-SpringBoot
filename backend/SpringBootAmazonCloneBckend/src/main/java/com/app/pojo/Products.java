@@ -41,11 +41,11 @@ public class Products {
     private String photo;
 
     @JoinColumn(name = "cat_id", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     private Category category;
 
     @JoinColumn(name = "comp_id", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     private Company company;
 
     @Column(name = "is_active", columnDefinition = "integer default 1 ")

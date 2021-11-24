@@ -7,6 +7,7 @@ import com.app.service.ICartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,12 +23,14 @@ public class CartController {
     }
 
     @GetMapping("/list/{user_id}")/*--------------------------------------------User getAllCartItemList Done-----------------------------------------------*/
+    @PreAuthorize("hasRole('USER')")
     public ResponseDTO getAllCartItemList(@PathVariable String user_id) {
         System.out.println("in get all cart item list");
         return new ResponseDTO(true, cartService.getAllCartItems(Integer.parseInt(user_id)));
     }
 
     @PostMapping("/add")/*--------------------------------------------User addNewCartIem Done-----------------------------------------------*/
+    @PreAuthorize("hasRole('USER')")
     public ResponseDTO addNewCartIem(@RequestBody Cart cartItem) {
         System.out.println("in add new cart item");
         Cart cart = cartService.addCartItem(cartItem);
@@ -38,6 +41,7 @@ public class CartController {
     }
 
     @PutMapping("/update/{cart_id}/{cart_quantity}")/*--------------------------------------------User updateCartItemQty Done-----------------------------------------------*/
+    @PreAuthorize("hasRole('USER')")
     public ResponseDTO updateCartItemQty(@PathVariable String cart_id, @PathVariable String cart_quantity) {
         System.out.println("in update  cart item quantity");
         Cart cart = cartService.updateCartItemQty(Integer.parseInt(cart_id), Integer.parseInt(cart_quantity));
@@ -48,6 +52,7 @@ public class CartController {
     }
 
     @DeleteMapping("/delete/{cart_id}")/*--------------------------------------------User deleteCartItem Done-----------------------------------------------*/
+    @PreAuthorize("hasRole('USER')")
     public ResponseDTO deleteCartItem(@PathVariable String cart_id) {
         System.out.println("in delete  cart item");
         return new ResponseDTO(true, cartService.deleteCartItem(Integer.parseInt(cart_id)));

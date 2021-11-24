@@ -6,6 +6,7 @@ import com.app.dto.ResponseDTO;
 import com.app.models.Category;
 import com.app.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,16 +17,18 @@ public class CategoryController {
     ICategoryService categoryService;
 
     public CategoryController() {
-        System.out.println("in " + getClass().getName());
+        System.out.println("in CategoryController -- " + getClass().getName());
     }
 
     @GetMapping("/list")/*------------------------------------------Admin getAllCategoryList Done--------------------------------------------------------*/
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseDTO getAllCategoryList() {
         System.out.println("in  get all category list");
-            return new ResponseDTO(true, categoryService.getAllCategories());
+        return new ResponseDTO(true, categoryService.getAllCategories());
     }
 
     @GetMapping("/details/{catId}")/*------------------------------------------Admin getCategoryDetailsById Done--------------------------------------------------------*/
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseDTO getCategoryDetailsById(@PathVariable String catId) {
         System.out.println("in category details");
         Category category = categoryService.getCategoryDetailsById(Integer.parseInt(catId));
@@ -37,6 +40,7 @@ public class CategoryController {
 
 
     @PostMapping("/add")/*------------------------------------------Admin addNewCategory Done--------------------------------------------------------*/
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseDTO addNewCategory(@RequestBody Category category) {
         System.out.println("in  add new category");
         Category cat = categoryService.addCategory(category);
@@ -47,6 +51,7 @@ public class CategoryController {
     }
 
     @PutMapping("/update/{cat_id}")/*------------------------------------------Admin updateCategory Done--------------------------------------------------------*/
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseDTO updateCategory(@RequestBody Category category, @PathVariable String cat_id) {
         System.out.println("in  update category");
         Category cat = categoryService.updateCategory(Integer.parseInt(cat_id), category);
@@ -57,6 +62,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/delete/{cat_id}")/*------------------------------------------Admin deleteCategory Done--------------------------------------------------------*/
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseDTO deleteCategory(@PathVariable String cat_id) {
         System.out.println("in  Delete category");
         return new ResponseDTO(true, categoryService.deleteCategory(Integer.parseInt(cat_id)));

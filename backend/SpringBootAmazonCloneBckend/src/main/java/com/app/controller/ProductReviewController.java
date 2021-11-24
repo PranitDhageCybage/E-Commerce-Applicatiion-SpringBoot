@@ -5,6 +5,7 @@ import com.app.dto.ResponseDTO;
 import com.app.models.ProductReview;
 import com.app.service.IProductReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,13 +19,13 @@ public class ProductReviewController {
         System.out.println("in ProductReviewController -- " + getClass().getName());
     }
 
-    @GetMapping("/list/{prod_id}")/*-------------------------------------------------------User getAllProductReviewList Done------------------------------------------------ */
+    @GetMapping("/list/{prod_id}")/*-------------------------------------------------------getAllProductReviewList Done------------------------------------------------ */
     public ResponseDTO getAllProductReviewList(@PathVariable String prod_id) {
         System.out.println("in get all product review list");
-            return new ResponseDTO(true, reviewService.getAllProductReviews(Integer.parseInt(prod_id)));
+        return new ResponseDTO(true, reviewService.getAllProductReviews(Integer.parseInt(prod_id)));
     }
 
-    @GetMapping("/average/{prod_id}")/*-------------------------------------------------------User getAverageProductRating Done------------------------------------------------ */
+    @GetMapping("/average/{prod_id}")/*-------------------------------------------------------getAverageProductRating Done------------------------------------------------ */
     public ResponseDTO getAverageProductRating(@PathVariable String prod_id) {
         System.out.println("in get average product rating");
         double avgRating = reviewService.getAverageOfProductReview(Integer.parseInt(prod_id));
@@ -35,6 +36,7 @@ public class ProductReviewController {
     }
 
     @PostMapping("/add")/*-------------------------------------------------------User addNewReview Done------------------------------------------------ */
+    @PreAuthorize("hasRole('USER')")
     public ResponseDTO addNewReview(@RequestBody ProductReview review) {
         System.out.println("in add new review");
         ProductReview productReview = reviewService.addNewProductReview(review);

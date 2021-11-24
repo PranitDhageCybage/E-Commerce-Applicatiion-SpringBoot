@@ -46,6 +46,10 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
+    public AuthController() {
+        System.out.println("In AuthController -- " + getClass().getName());
+    }
+
     @PostMapping("/signin")
     public ResponseDTO authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 

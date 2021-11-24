@@ -8,6 +8,7 @@ import com.app.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,23 +22,24 @@ public class ProductController {
     IProductService productService;
 
     public ProductController() {
-        System.out.println("in " + getClass().getName());
+        System.out.println("in ProductController -- " + getClass().getName());
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/list") /*--------------------------------------------- Admin get All Product List Done-------------------------------------------------*/
     public ResponseDTO getAllProductList() {
         System.out.println("in  get all Product list");
-            return new ResponseDTO(true, productService.getAllProducts());
+        return new ResponseDTO(true, productService.getAllProducts());
     }
 
-    @GetMapping("/galleryList") /*--------------------------------------------- User getGalleryProductList Done-------------------------------------------------*/
+    @GetMapping("/galleryList") /*---------------------------------------------getGalleryProductList Done-------------------------------------------------*/
     public ResponseDTO getGalleryProductList() {
         System.out.println("in  get gallery Product list");
-            return new ResponseDTO(true,  productService.getGalleryProducts());
+        return new ResponseDTO(true, productService.getGalleryProducts());
     }
 
 
-    @GetMapping("/details/{prod_id}")/*--------------------------------------------- Admin/User getProduct Done-------------------------------------------------*/
+    @GetMapping("/details/{prod_id}")/*---------------------------------------------getProduct Done-------------------------------------------------*/
     public ResponseDTO getProduct(@PathVariable String prod_id) {
         System.out.println("in  get Product details");
         Products product = productService.getProductDetails(Integer.parseInt(prod_id));
@@ -48,6 +50,7 @@ public class ProductController {
     }
 
     @PostMapping("/add")/*--------------------------------------------- Admin addNewProduct Done-------------------------------------------------*/
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseDTO addNewProduct(@RequestBody Products product) {
         System.out.println("in  add new Product : " + product);
         Products prod = productService.addProducts(product);
@@ -58,6 +61,7 @@ public class ProductController {
     }
 
     @PutMapping("/update/{prod_id}")/*--------------------------------------------- Admin updateProduct Done-------------------------------------------------*/
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseDTO updateProduct(@RequestBody Products product, @PathVariable String prod_id) {
         System.out.println("in  update Product : ");
         Products prod = productService.updateProducts(Integer.parseInt(prod_id), product);
@@ -68,12 +72,14 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete/{prod_id}")/*--------------------------------------------- Admin deleteProduct Done-------------------------------------------------*/
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseDTO deleteProduct(@PathVariable String prod_id) throws IOException {
         System.out.println("in  Delete Product");
         return new ResponseDTO(true, productService.deleteProducts(Integer.parseInt(prod_id)));
     }
 
     @PutMapping("/isActiveStatus/{prodId}/{status}") /*--------------------------------------------- Admin changeProductActiveStatus Done-------------------------------------------------*/
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseDTO changeProductActiveStatus(@PathVariable String prodId, @PathVariable String status) {
         System.out.println("in change product active status");
         return new ResponseDTO(true, productService.changeProductActiveStatus(Integer.parseInt(prodId), Integer.parseInt(status)));
@@ -86,12 +92,14 @@ public class ProductController {
     }
 
     @PutMapping("/uploadImage/{prodId}")/*--------------------------------------------- Admin uploadProductImage Done-------------------------------------------------*/
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseDTO uploadProductImage(@PathVariable String prodId, @RequestParam("productImage") MultipartFile multipartFile) throws IOException {
         System.out.println("in upload product image");
         return new ResponseDTO(true, productService.uploadProductImage(Integer.parseInt(prodId), multipartFile));
     }
 
     @DeleteMapping("/imageDelete/{prodId}")/*--------------------------------------------- Admin deleteProductImage Done-------------------------------------------------*/
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseDTO deleteProductImage(@PathVariable String prodId) throws IOException {
         System.out.println("in delete product image");
         return new ResponseDTO(true, productService.deleteProductImage(Integer.parseInt(prodId)));

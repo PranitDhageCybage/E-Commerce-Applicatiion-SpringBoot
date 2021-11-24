@@ -1,6 +1,6 @@
-package com.app.dao;
+package com.app.repository;
 
-import com.app.pojo.Credentials;
+import com.app.models.Credentials;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

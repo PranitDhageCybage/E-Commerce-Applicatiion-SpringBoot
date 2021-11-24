@@ -1,4 +1,4 @@
-package com.app.pojo;
+package com.app.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,11 +12,17 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "user")
+@Table(	name = "user",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "user_name"),
+                @UniqueConstraint(columnNames = "user_email")
+        })
 @JsonIgnoreProperties(value = {"password"}, allowSetters = true)  //it will not send password to client side
 public class User {
 
@@ -45,17 +51,24 @@ public class User {
     @JsonProperty(value = "password")
 //    @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[#@$*]).{5,20})", message = "Blank or Invalid password")
     @NotBlank(message = "Password can not be Blank")
-    @Column(name = "user_password", length = 20, nullable = false)
+    @Column(name = "user_password", length = 100, nullable = false)
     private String userPassword;
 
     @JsonProperty("status")
-    @Column(name = "user_status")
+    @Column(name = "user_status", columnDefinition = "integer default 1")
     private Integer userStatus;
 
+/*
     @Enumerated(value = EnumType.STRING)
     @JsonProperty("role")
     @Column(name = "user_role", columnDefinition = "varchar(30) default 'USER'")
-    private Role userRole;
+    private ERole userERole;
+*/
+@ManyToMany(fetch = FetchType.EAGER)
+@JoinTable(	name = "user_roles",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id"))
+private Set<Role> roles = new HashSet<>();
 
     @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     @CreationTimestamp
@@ -78,4 +91,29 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Myorder> myorders;
 
+    public User() {
+    }
+
+    public User(Integer userId, String userName, String userPhone, String userEmail, String userPassword, Integer userStatus,
+                Set<Role> roles, Date date, List<Address> addresses, List<Cart> carts, List<Myorder> myorders) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userPhone = userPhone;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.userStatus = userStatus;
+        this.roles = roles;
+        this.date = date;
+        this.addresses = addresses;
+        this.carts = carts;
+        this.myorders = myorders;
+    }
+
+    public User(String username, String email, String phone,  String encode) {
+        this.userName = username;
+        this.userEmail = email;
+        this.userPhone = phone;
+        this.userPassword = encode;
+        this.userStatus = 1;
+    }
 }

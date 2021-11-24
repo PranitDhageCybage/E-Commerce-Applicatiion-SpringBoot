@@ -1,8 +1,8 @@
 package com.app.service;
 
 import com.app.customExceptions.ResourceNotFoundException;
-import com.app.dao.*;
-import com.app.pojo.*;
+import com.app.repository.*;
+import com.app.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

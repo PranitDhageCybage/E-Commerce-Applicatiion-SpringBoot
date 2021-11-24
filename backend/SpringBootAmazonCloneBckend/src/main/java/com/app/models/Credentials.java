@@ -1,4 +1,4 @@
-package com.app.pojo;
+package com.app.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

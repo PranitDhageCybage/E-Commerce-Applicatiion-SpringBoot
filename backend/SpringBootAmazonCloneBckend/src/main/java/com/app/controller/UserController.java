@@ -5,7 +5,7 @@ import com.app.customExceptions.ResourceNotFoundException;
 import com.app.customExceptions.UnexpectedErrorException;
 import com.app.dto.ResponseDTO;
 import com.app.dto.SigninDTO;
-import com.app.pojo.User;
+import com.app.models.User;
 import com.app.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;

@@ -1,4 +1,4 @@
-package com.app.pojo;
+package com.app.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,32 +10,36 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "cart")
-public class Cart {
+@Table(name = "product_review")
+public class ProductReview {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cart_id")
-    @JsonProperty("cart_id")
-    private Integer cartId;
+    @JsonProperty("review_id")
+    @Column(name = "review_id")
+    private Integer userId;
 
-    @Column(name = "cart_quantity")
-    @JsonProperty("cart_quantity")
-    private Integer cartQuantity = 1;
+    @JsonProperty("review")
+    @Column(name = "review")
+    private  String review;
 
-    // userId column
     @JoinColumn(name = "user_id", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     private User user;
 
     @JoinColumn(name = "prod_id", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     private Products product;
+
+    @JsonProperty("rating")
+    @Column(name = "rating", columnDefinition = "Integer default 0")
+    private  Integer rating ;
 
     @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     @CreationTimestamp
-    @JsonProperty("added_on")
-    @Column(name = "added_on", nullable = false)
+    @JsonProperty("reviewed_on")
+    @Column(name = "reviewed_on", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
+
 }

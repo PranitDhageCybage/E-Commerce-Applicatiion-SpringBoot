@@ -1,12 +1,11 @@
-package com.app.dao;
+package com.app.repository;
 
-import com.app.pojo.Role;
-import com.app.pojo.User;
+import com.app.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -15,7 +14,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     User findByUserEmail(String user_email);
 
-    List<User> findAllByUserRole(Role role);
+    //    List<User> findAllByUserRole(ERole ERole);
+    /*--------------------------------------------------------------------------------------------*/
+    Optional<User> findByUserName(String username);
+
+    Boolean existsByUserName(String username);
+
+    Boolean existsByUserEmail(String email);
 
     @Query(value = "SELECT \n" +
             "(SELECT COUNT(*) FROM user) as userCount,\n" +

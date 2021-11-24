@@ -1,6 +1,6 @@
 package com.app.dto;
 
-import com.app.pojo.Role;
+import com.app.models.ERole;
 import lombok.Data;
 
 import java.util.Date;
@@ -17,7 +17,7 @@ public class UserDTO {
 
     private Integer userStatus;
 
-    private Role userRole;
+    private ERole userERole;
 
     private Date date;
 

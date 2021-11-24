@@ -3,14 +3,10 @@ package com.app.controller;
 import com.app.customExceptions.ResourceNotFoundException;
 import com.app.customExceptions.UnexpectedErrorException;
 import com.app.dto.ResponseDTO;
-import com.app.pojo.Category;
+import com.app.models.Category;
 import com.app.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin

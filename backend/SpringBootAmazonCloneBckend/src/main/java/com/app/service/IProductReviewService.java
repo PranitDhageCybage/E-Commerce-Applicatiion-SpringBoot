@@ -1,6 +1,6 @@
 package com.app.service;
 
-import com.app.pojo.ProductReview;
+import com.app.models.ProductReview;
 
 import java.util.List;
 

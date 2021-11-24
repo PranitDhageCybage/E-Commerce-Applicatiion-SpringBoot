@@ -3,7 +3,7 @@ package com.app.controller;
 import com.app.customExceptions.ResourceNotFoundException;
 import com.app.customExceptions.UnexpectedErrorException;
 import com.app.dto.ResponseDTO;
-import com.app.pojo.Products;
+import com.app.models.Products;
 import com.app.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
 
 @RestController
 @CrossOrigin

@@ -2,7 +2,7 @@ package com.app.controller;
 
 import com.app.customExceptions.UnexpectedErrorException;
 import com.app.dto.ResponseDTO;
-import com.app.pojo.Address;
+import com.app.models.Address;
 import com.app.service.IAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,8 +1,7 @@
-package com.app.dao;
+package com.app.repository;
 
-import com.app.pojo.Category;
+import com.app.models.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository

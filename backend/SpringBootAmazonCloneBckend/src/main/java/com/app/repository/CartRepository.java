@@ -1,7 +1,6 @@
-package com.app.dao;
+package com.app.repository;
 
-import com.app.pojo.Cart;
-import com.app.pojo.User;
+import com.app.models.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

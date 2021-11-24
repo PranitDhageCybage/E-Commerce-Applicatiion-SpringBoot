@@ -1,7 +1,6 @@
-package com.app.dao;
+package com.app.repository;
 
-import com.app.pojo.ProductReview;
-import com.app.pojo.Products;
+import com.app.models.ProductReview;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

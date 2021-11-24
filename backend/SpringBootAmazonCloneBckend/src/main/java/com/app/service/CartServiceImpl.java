@@ -1,8 +1,8 @@
 package com.app.service;
 
 import com.app.customExceptions.ResourceNotFoundException;
-import com.app.dao.CartRepository;
-import com.app.pojo.Cart;
+import com.app.repository.CartRepository;
+import com.app.models.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,17 +1,10 @@
 package com.app.controller;
 
-import com.app.customExceptions.ResourceNotFoundException;
 import com.app.dto.DashboardCountDTO;
 import com.app.dto.ResponseDTO;
-import com.app.pojo.Myorder;
-import com.app.pojo.User;
 import com.app.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin

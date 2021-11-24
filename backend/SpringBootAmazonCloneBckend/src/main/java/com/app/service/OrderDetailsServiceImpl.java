@@ -1,7 +1,7 @@
 package com.app.service;
 
-import com.app.dao.OrderDetailsRepository;
-import com.app.pojo.OrderDetails;
+import com.app.repository.OrderDetailsRepository;
+import com.app.models.OrderDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

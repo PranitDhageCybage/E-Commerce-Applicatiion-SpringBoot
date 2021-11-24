@@ -1,7 +1,7 @@
 package com.app.service;
 
-import com.app.dao.ProductReviewRepository;
-import com.app.pojo.ProductReview;
+import com.app.repository.ProductReviewRepository;
+import com.app.models.ProductReview;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

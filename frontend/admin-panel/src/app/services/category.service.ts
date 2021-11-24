@@ -12,7 +12,7 @@ export class CategoryService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     return this.httpClient.get(this.url + '/list', httpOptions);
@@ -22,7 +22,7 @@ export class CategoryService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     return this.httpClient.get(this.url + '/details/' + id, httpOptions);
@@ -32,7 +32,7 @@ export class CategoryService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     const body = {
@@ -46,7 +46,7 @@ export class CategoryService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     const body = {
@@ -60,7 +60,7 @@ export class CategoryService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     return this.httpClient.delete(this.url + '/delete/' + id, httpOptions);

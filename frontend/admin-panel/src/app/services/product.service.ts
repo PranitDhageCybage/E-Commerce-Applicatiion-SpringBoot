@@ -12,7 +12,7 @@ export class ProductService {
     // Add token in header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     return this.httpClient.get(this.url + '/list', httpOptions);
@@ -22,7 +22,7 @@ export class ProductService {
     // Add token in header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     return this.httpClient.get(this.url + '/details/' + id, httpOptions);
@@ -32,7 +32,7 @@ export class ProductService {
     // Add token in header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     const is_active = product['is_active'] == 0 ? 1 : 0;
@@ -46,7 +46,7 @@ export class ProductService {
     // Add token in header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
 
@@ -65,7 +65,7 @@ export class ProductService {
     // Add token in header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     const body = {
@@ -91,7 +91,7 @@ export class ProductService {
     // Add token in header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     const body = {
@@ -105,10 +105,18 @@ export class ProductService {
 
     return this.httpClient.post(this.url + '/add', body, httpOptions);
   }
+
   uploadImage(id: number, file: any) {
+        // Add token in header
+        const httpOptions = {
+          headers: new HttpHeaders({
+            token: sessionStorage['token'],
+          }),
+        };
+
     const body = new FormData();
     body.append('productImage', file);
 
-    return this.httpClient.put(this.url + '/uploadImage/' + id, body);
+    return this.httpClient.put(this.url + '/uploadImage/' + id, body, httpOptions);
   }
 }

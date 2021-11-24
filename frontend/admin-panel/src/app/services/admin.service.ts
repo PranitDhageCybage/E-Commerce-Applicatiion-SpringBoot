@@ -12,31 +12,32 @@ import {
   providedIn: 'root',
 })
 export class AdminService implements CanActivate {
-  url = 'http://localhost:8080/user';
+  url = 'http://localhost:8080/api/auth';
 
   constructor(private router: Router, private httpClient: HttpClient) {}
 
-  login(email: string, password: string) {
+  login(username: string, password: string) {
     const body = {
-      email: email,
+      username: username,
       password: password,
     };
 
-    return this.httpClient.post(this.url + '/login', body);
+    return this.httpClient.post(this.url + '/signin', body);
   }
 
-  signup(firstName: string, lastName: String, email: string, password: string) {
+  signup(username: string, phone: String, email: string, password: string) {
     const body = {
-      firstName: firstName,
-      lastName: lastName,
+      username: username,
+      phone: phone,
       email: email,
       password: password,
+      role: ['admin'],
     };
     return this.httpClient.post(this.url + '/signup', body);
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (sessionStorage['user']) { // Temporary name checked, later check for token
+    if (sessionStorage['token']) {
       // user is already logged in
       // launch the component
       return true;

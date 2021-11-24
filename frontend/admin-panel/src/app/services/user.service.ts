@@ -12,7 +12,7 @@ export class UserService {
     //Add token in request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     return this.httpClient.get(this.url + '/userList', httpOptions);
@@ -21,7 +21,7 @@ export class UserService {
     //Add token in request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
 

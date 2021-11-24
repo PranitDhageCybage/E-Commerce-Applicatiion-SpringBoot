@@ -8,8 +8,8 @@ import { AdminService } from 'src/app/services/admin.service';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
-  firstName: string = '';
-  lastName: string = '';
+  username: string = '';
+  phone: string = '';
   email: string = '';
   password: string = '';
 
@@ -21,9 +21,9 @@ export class SignupComponent implements OnInit {
 
   onSignup() {
     this.adminService
-      .signup(this.firstName, this.lastName, this.email, this.password)
+      .signup(this.username, this.phone, this.email, this.password)
       .subscribe((response: any) => {
-        if (response['status'] == 'success') {
+        if (response['success']){
           alert('Signed Up Successfully. Login to Continue');
           this.router.navigate(['/login']);
         } else {

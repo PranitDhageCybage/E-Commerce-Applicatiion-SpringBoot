@@ -37,9 +37,9 @@ public class AdminController {
         return new ResponseDTO(true, userService.getUsersListAll());
     }
 
-    @PutMapping("/userStatus/{user_id}/{status}")/*--------------------------------------------- Admin changeUserActiveStatus Done-------------------------------------------------*/
+    @PutMapping("/userStatus")/*--------------------------------------------- Admin changeUserActiveStatus Done-------------------------------------------------*/
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseDTO changeUserActiveStatus(@PathVariable String user_id, @PathVariable String status) {
+    public ResponseDTO changeUserActiveStatus(@RequestParam String user_id, @RequestParam String status) {
         System.out.println("in admin change user active status");
         return new ResponseDTO(true, userService.changeUserActiveStatus(Integer.parseInt(user_id), Integer.parseInt(status)));
     }
@@ -51,10 +51,9 @@ public class AdminController {
         return new ResponseDTO(true, orderService.getAllUserOrders());
     }
 
-    @PutMapping("/changeDeliveryStatus/{myorder_id}/{status}")/*--------------------------------------------- Admin changeUserOrderDeliveryStatus Done-------------------------------------------------*/
-
+    @PutMapping("/changeDeliveryStatus")/*--------------------------------------------- Admin changeUserOrderDeliveryStatus Done-------------------------------------------------*/
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseDTO changeUserOrderDeliveryStatus(@PathVariable String myorder_id, @PathVariable String status) {
+    public ResponseDTO changeUserOrderDeliveryStatus(@RequestParam String myorder_id, @RequestParam String status) {
         System.out.println("in admin change user order delivery status status");
         return new ResponseDTO(true, orderService.changeUserOrderDeliveryStatus(Integer.parseInt(myorder_id), status));
     }

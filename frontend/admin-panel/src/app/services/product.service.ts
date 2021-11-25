@@ -35,9 +35,11 @@ export class ProductService {
         token: sessionStorage['token'],
       }),
     };
+    const body = {};
     const is_active = product['is_active'] == 0 ? 1 : 0;
     return this.httpClient.put(
       this.url + `/isActiveStatus/${product['prod_id']}/${is_active}`,
+      body,
       httpOptions
     );
   }
@@ -107,16 +109,20 @@ export class ProductService {
   }
 
   uploadImage(id: number, file: any) {
-        // Add token in header
-        const httpOptions = {
-          headers: new HttpHeaders({
-            token: sessionStorage['token'],
-          }),
-        };
+    // Add token in header
+    const httpOptions = {
+      headers: new HttpHeaders({
+        token: sessionStorage['token'],
+      }),
+    };
 
     const body = new FormData();
     body.append('productImage', file);
 
-    return this.httpClient.put(this.url + '/uploadImage/' + id, body, httpOptions);
+    return this.httpClient.put(
+      this.url + '/uploadImage/' + id,
+      body,
+      httpOptions
+    );
   }
 }

@@ -25,9 +25,11 @@ export class OrderService {
         token: sessionStorage['token'],
       }),
     };
-
+    const body = {};
     return this.httpClient.put(
-      this.url + '/myOrder/update/' + orderId + '/' + deliveryStatus,
+      this.url +
+        `admin/changeDeliveryStatus?myorder_id=${orderId}&status=${deliveryStatus}`,
+      body,
       httpOptions
     );
   }
@@ -39,9 +41,11 @@ export class OrderService {
         token: sessionStorage['token'],
       }),
     };
-    return this.httpClient.delete(this.url + 'myOrder/delete/' + id, httpOptions);
+    return this.httpClient.delete(
+      this.url + 'myOrder/delete/' + id,
+      httpOptions
+    );
   }
-
 
   showOrderDetails(id: number) {
     // add the token in the request header

@@ -26,9 +26,10 @@ export class UserService {
     };
 
     const status = user['status'] == 1 ? 0 : 1;
-
+const body = {}
     return this.httpClient.put(
-      this.url + '/userStatus/' + user['user_id'] + '/' + status,
+      this.url + `/userStatus?user_id=${user['user_id']}&status=${status}`,
+      body,
       httpOptions
     );
   }

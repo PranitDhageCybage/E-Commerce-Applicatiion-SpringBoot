@@ -8,7 +8,7 @@ export class UserService {
   url: string = 'http://localhost:8080/user';
   rootUrl: string = 'http://localhost:8080';
 
-  user_id = JSON.parse( sessionStorage['user']).user_id
+  user_id = JSON.parse( sessionStorage['user']).id
 
   constructor(private httpClient: HttpClient) {}
 
@@ -16,7 +16,7 @@ export class UserService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     return this.httpClient.get(this.url + '/profile/' + this.user_id, httpOptions);
@@ -26,7 +26,7 @@ export class UserService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
 
@@ -46,7 +46,7 @@ export class UserService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     return this.httpClient.get(
@@ -65,7 +65,7 @@ export class UserService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
 
@@ -91,7 +91,7 @@ export class UserService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
 

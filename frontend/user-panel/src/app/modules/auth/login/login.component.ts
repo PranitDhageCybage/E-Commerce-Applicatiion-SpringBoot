@@ -9,7 +9,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  email = '';
+  username = '';
   password = '';
   constructor(
     private toastr: ToastrService,
@@ -20,18 +20,21 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onLogin() {
-    if (this.email.length == 0) {
+    if (this.username.length == 0) {
       this.toastr.error('please enter email');
     } else if (this.password.length == 0) {
       this.toastr.error('please enter password');
     } else {
       this.authService
-        .login(this.email, this.password)
+        .login(this.username, this.password)
         .subscribe((response: any) => {
           if (response['success']) {
             const data = response['data'];
             sessionStorage['user'] = JSON.stringify(data)
-            this.toastr.success(`Welcome ${data['name']} to My Store`);
+            sessionStorage['token'] = data['token']
+            console.log(data);
+
+            this.toastr.success(`Welcome ${data['username']} to My Store`);
             // goto the dashboard
             this.router.navigate(['/home/product/gallery']);
           } else {

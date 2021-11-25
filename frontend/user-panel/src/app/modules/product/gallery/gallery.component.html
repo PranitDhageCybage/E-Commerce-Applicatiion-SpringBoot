@@ -28,8 +28,15 @@
   >
     <div class="card bgb-shade">
       <img
+      *ngIf="product['photo'] != null"
         class="card-img-top"
         src="http://localhost:8080/product/getImage/{{ product['photo'] }}"
+        alt=""
+      />
+      <img
+      *ngIf="product['photo'] == null"
+        class="card-img-top"
+        src="http://localhost:8080/product/getImage/NoImgAvail.jpg"
         alt=""
       />
       <div class="card-body">

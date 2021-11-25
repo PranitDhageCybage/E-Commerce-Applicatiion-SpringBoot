@@ -2,12 +2,12 @@ package com.app.service;
 
 import com.app.customExceptions.AuthenticationException;
 import com.app.customExceptions.ResourceNotFoundException;
-import com.app.dao.CredentialsRepository;
-import com.app.dao.UserRepository;
+import com.app.repository.CredentialsRepository;
+import com.app.repository.UserRepository;
 import com.app.dto.SigninDTO;
-import com.app.pojo.Credentials;
-import com.app.pojo.Role;
-import com.app.pojo.User;
+import com.app.models.Credentials;
+import com.app.models.ERole;
+import com.app.models.User;
 import com.app.utils.EncryptPassword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,14 +57,15 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public Integer getAllUserCount() {
-        return userRepo.findAll().stream().filter(user -> user.getUserRole().equals(Role.USER)).collect(Collectors.toList()).size();
+        return userRepo.findAll()/*.stream().filter(user -> user.getUserERole().equals(ERole.USER)).collect(Collectors.toList())*/
+                .size();
     }
 
 
     @Override
     public User userSignup(User user) {
         user.setUserPassword(EncryptPassword.getSHA256Hash(user.getUserPassword()));
-        user.setUserRole(Role.USER);
+//        user.setUserERole(ERole.USER);
         user.setUserStatus(0);
         addNewAuth(new Credentials(user.getUserEmail(), user.getUserPassword()));       // Add userEmail and Password to credentials table
         return userRepo.save(user);
@@ -89,7 +90,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public List<User> getUsersListAll() {
-        return userRepo.findAllByUserRole(Role.USER);
+        return userRepo
+                .findAll();/*findAllByUserRole(ERole.USER);*/
     }
 
 }

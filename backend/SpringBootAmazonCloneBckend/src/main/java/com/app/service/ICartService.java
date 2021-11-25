@@ -1,7 +1,6 @@
 package com.app.service;
 
-import com.app.pojo.Cart;
-import com.app.pojo.User;
+import com.app.models.Cart;
 
 import java.util.List;
 

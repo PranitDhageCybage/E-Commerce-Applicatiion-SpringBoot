@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class OrderService {
   url: string = 'http://localhost:8080/myOrder';
   rootUrl: string = 'http://localhost:8080';
-  user_id = JSON.parse(sessionStorage['user']).user_id;
+  user_id = JSON.parse(sessionStorage['user']).id;
   constructor(private httpClient: HttpClient) {}
 
   placeOrder(
@@ -21,7 +21,7 @@ export class OrderService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
 
@@ -41,7 +41,7 @@ export class OrderService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     return this.httpClient.get(this.url + '/list/' + this.user_id, httpOptions);
@@ -51,7 +51,7 @@ export class OrderService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     return this.httpClient.put(
@@ -64,7 +64,7 @@ export class OrderService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     return this.httpClient.delete(this.url + '/delete/' + id, httpOptions);
@@ -74,7 +74,7 @@ export class OrderService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     return this.httpClient.get(

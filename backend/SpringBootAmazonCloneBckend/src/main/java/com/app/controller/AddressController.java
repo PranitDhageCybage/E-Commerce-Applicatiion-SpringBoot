@@ -2,9 +2,10 @@ package com.app.controller;
 
 import com.app.customExceptions.UnexpectedErrorException;
 import com.app.dto.ResponseDTO;
-import com.app.pojo.Address;
+import com.app.models.Address;
 import com.app.service.IAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,16 +16,18 @@ public class AddressController {
     IAddressService addressService;
 
     public AddressController() {
-        System.out.println("in" + getClass().getName());
+        System.out.println("in AddressController -- " + getClass().getName());
     }
 
     @GetMapping("/list/{user_id}")/*------------------------------------------------- User getAllAddressList Done---------------------------------------*/
+    @PreAuthorize("hasRole('USER')")
     public ResponseDTO getAllAddressList(@PathVariable String user_id) {
         System.out.println("in get all address");
             return new ResponseDTO(true, addressService.getAllAddresses(Integer.parseInt(user_id)));
     }
 
     @PostMapping("/add")/*------------------------------------------------- User addNewAddress Done---------------------------------------*/
+    @PreAuthorize("hasRole('USER')")
     public ResponseDTO addNewAddress(@RequestBody Address address) {
         System.out.println("in add new address");
         Address add = addressService.addAddress(address);
@@ -35,6 +38,7 @@ public class AddressController {
     }
 
     @PutMapping("/update/{add_id}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseDTO updateAddress(@PathVariable String add_id, @RequestBody Address address) {
         System.out.println("in update  address");
         Address add = addressService.updateAddress(Integer.parseInt(add_id), address);
@@ -45,6 +49,7 @@ public class AddressController {
     }
 
     @DeleteMapping("/delete/{add_id}")/*------------------------------------------------- User deleteAddress Done---------------------------------------*/
+    @PreAuthorize("hasRole('USER')")
     public ResponseDTO deleteAddress(@PathVariable String add_id) {
         System.out.println("in delete  address");
         return new ResponseDTO(true, addressService.deleteAddress(Integer.parseInt(add_id)));

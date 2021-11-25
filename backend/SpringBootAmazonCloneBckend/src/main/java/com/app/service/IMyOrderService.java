@@ -1,6 +1,6 @@
 package com.app.service;
 
-import com.app.pojo.Myorder;
+import com.app.models.Myorder;
 
 import java.util.List;
 

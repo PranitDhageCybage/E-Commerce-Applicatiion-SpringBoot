@@ -1,17 +1,11 @@
 package com.app.controller;
 
-import com.app.customExceptions.ResourceNotFoundException;
 import com.app.dto.DashboardCountDTO;
 import com.app.dto.ResponseDTO;
-import com.app.pojo.Myorder;
-import com.app.pojo.User;
 import com.app.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -37,30 +31,36 @@ public class AdminController {
     }
 
     @GetMapping("/userList")/*--------------------------------------------- Admin getAllUserList Done-------------------------------------------------*/
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseDTO getAllUserList() {
         System.out.println("in admin get all user list");
-            return new ResponseDTO(true, userService.getUsersListAll());
+        return new ResponseDTO(true, userService.getUsersListAll());
     }
 
     @PutMapping("/userStatus/{user_id}/{status}")/*--------------------------------------------- Admin changeUserActiveStatus Done-------------------------------------------------*/
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseDTO changeUserActiveStatus(@PathVariable String user_id, @PathVariable String status) {
         System.out.println("in admin change user active status");
         return new ResponseDTO(true, userService.changeUserActiveStatus(Integer.parseInt(user_id), Integer.parseInt(status)));
     }
 
     @GetMapping("/allUserOrders")/*--------------------------------------------- Admin getAllUserOrders Done-------------------------------------------------*/
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseDTO getAllUserOrders() {
         System.out.println("in admin get all user orders");
-            return new ResponseDTO(true, orderService.getAllUserOrders());
+        return new ResponseDTO(true, orderService.getAllUserOrders());
     }
 
     @PutMapping("/changeDeliveryStatus/{myorder_id}/{status}")/*--------------------------------------------- Admin changeUserOrderDeliveryStatus Done-------------------------------------------------*/
+
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseDTO changeUserOrderDeliveryStatus(@PathVariable String myorder_id, @PathVariable String status) {
         System.out.println("in admin change user order delivery status status");
         return new ResponseDTO(true, orderService.changeUserOrderDeliveryStatus(Integer.parseInt(myorder_id), status));
     }
 
     @GetMapping("/dashboard-count") /*--------------------------------------------- Admin getAllDashboardCount Done-------------------------------------------------*/
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseDTO getAllDashboardCount() {
         DashboardCountDTO countDTO = new DashboardCountDTO();
         countDTO.setUserCount(userService.getAllUserCount());

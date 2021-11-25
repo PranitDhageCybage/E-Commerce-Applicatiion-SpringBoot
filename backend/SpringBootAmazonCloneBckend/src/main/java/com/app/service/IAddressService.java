@@ -1,6 +1,6 @@
 package com.app.service;
 
-import com.app.pojo.Address;
+import com.app.models.Address;
 
 import java.util.List;
 

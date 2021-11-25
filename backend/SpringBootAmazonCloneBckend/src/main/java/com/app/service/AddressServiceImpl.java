@@ -1,9 +1,9 @@
 package com.app.service;
 
 import com.app.customExceptions.ResourceNotFoundException;
-import com.app.dao.AddressRepository;
-import com.app.dao.UserRepository;
-import com.app.pojo.Address;
+import com.app.repository.AddressRepository;
+import com.app.repository.UserRepository;
+import com.app.models.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

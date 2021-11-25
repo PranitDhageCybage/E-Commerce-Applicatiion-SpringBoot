@@ -1,3 +1,8 @@
 .product-image {
-  height: 40px;
+  height: 60px;
+  width: 80px;
+  transition: 0.5s;
+}
+.product-image:hover {
+  transform: scale(2);
 }

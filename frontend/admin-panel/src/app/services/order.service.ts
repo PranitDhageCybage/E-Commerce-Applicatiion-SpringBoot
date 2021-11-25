@@ -12,7 +12,7 @@ export class OrderService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     return this.httpClient.get(this.url + 'myOrder/list', httpOptions);
@@ -22,7 +22,7 @@ export class OrderService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
 
@@ -36,7 +36,7 @@ export class OrderService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     return this.httpClient.delete(this.url + 'myOrder/delete/' + id, httpOptions);
@@ -47,7 +47,7 @@ export class OrderService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
     return this.httpClient.get(

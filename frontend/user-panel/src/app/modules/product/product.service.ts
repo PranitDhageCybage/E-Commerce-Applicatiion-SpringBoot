@@ -7,14 +7,14 @@ import { Injectable } from '@angular/core';
 export class ProductService {
   url = 'http://localhost:8080/product';
   rootUrl = 'http://localhost:8080';
-  user_id = JSON.parse( sessionStorage['user']).user_id
+  user_id = JSON.parse( sessionStorage['user']).id
   constructor(private httpClient: HttpClient) {}
 
   getProducts() {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
 
@@ -25,7 +25,7 @@ export class ProductService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
 
@@ -36,7 +36,7 @@ export class ProductService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
 
@@ -58,7 +58,7 @@ export class ProductService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
 
@@ -72,7 +72,7 @@ export class ProductService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        // token: sessionStorage['token'],
+        token: sessionStorage['token'],
       }),
     };
 

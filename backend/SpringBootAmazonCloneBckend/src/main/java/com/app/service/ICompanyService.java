@@ -1,6 +1,6 @@
 package com.app.service;
 
-import com.app.pojo.Company;
+import com.app.models.Company;
 
 import java.util.List;
 

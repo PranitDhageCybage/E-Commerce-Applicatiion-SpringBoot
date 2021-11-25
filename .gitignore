@@ -11,7 +11,9 @@
 /backend/Ref-online-spring-boot/.settings/*
 
 /frontend/admin-panel/node_modules/*
+/frontend/admin-panel/.angular/*
 /frontend/user-panel/node_modules/*
+/frontend/user-panel/.angular/*
 
 .vscode
 .sonar

@@ -6,14 +6,14 @@ import { Injectable } from '@angular/core';
 })
 export class CartService {
   url = 'http://localhost:8080/cart';
-  user_id = JSON.parse( sessionStorage['user']).id
+  user_id = JSON.parse(sessionStorage['user']).id;
   constructor(private httpClient: HttpClient) {}
 
   getCartItems() {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-        token: sessionStorage['token']
+        token: sessionStorage['token'],
       }),
     };
     return this.httpClient.get(this.url + '/list/' + this.user_id, httpOptions);
@@ -37,9 +37,10 @@ export class CartService {
         token: sessionStorage['token'],
       }),
     };
-
+    const body = {};
     return this.httpClient.put(
-      this.url + '/update/' + id + '/' + quantity,
+      this.url + `/update?cart_id=${id}&cart_quantity=${quantity}`,
+      body,
       httpOptions
     );
   }
@@ -48,7 +49,7 @@ export class CartService {
     // add the token in the request header
     const httpOptions = {
       headers: new HttpHeaders({
-         token: sessionStorage['token']
+        token: sessionStorage['token'],
       }),
     };
     const body = {

@@ -32,8 +32,6 @@ export class LoginComponent implements OnInit {
             const data = response['data'];
             sessionStorage['user'] = JSON.stringify(data)
             sessionStorage['token'] = data['token']
-            console.log(data);
-
             this.toastr.success(`Welcome ${data['username']} to My Store`);
             // goto the dashboard
             this.router.navigate(['/home/product/gallery']);

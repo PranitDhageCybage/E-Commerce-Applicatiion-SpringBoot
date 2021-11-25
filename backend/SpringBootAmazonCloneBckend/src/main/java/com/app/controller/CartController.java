@@ -40,9 +40,9 @@ public class CartController {
         throw new UnexpectedErrorException("Error while adding new  product to cart");
     }
 
-    @PutMapping("/update/{cart_id}/{cart_quantity}")/*--------------------------------------------User updateCartItemQty Done-----------------------------------------------*/
+    @PutMapping("/update")/*--------------------------------------------User updateCartItemQty Done-----------------------------------------------*/
     @PreAuthorize("hasRole('USER')")
-    public ResponseDTO updateCartItemQty(@PathVariable String cart_id, @PathVariable String cart_quantity) {
+    public ResponseDTO updateCartItemQty(@RequestParam String cart_id, @RequestParam String cart_quantity) {
         System.out.println("in update  cart item quantity");
         Cart cart = cartService.updateCartItemQty(Integer.parseInt(cart_id), Integer.parseInt(cart_quantity));
         if (cart != null) {

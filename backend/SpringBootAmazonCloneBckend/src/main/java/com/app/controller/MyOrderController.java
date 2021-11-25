@@ -40,9 +40,9 @@ public class MyOrderController {
         return new ResponseDTO(true, myOrderService.checkoutMyOrder(myorder));
     }
 
-    @PutMapping("/update/{myOrder_id}/{status}")/*-------------------------------Admin/User updateMyOrderStatus Done-----------------------------------*/
+    @PutMapping("/update")/*-------------------------------Admin/User updateMyOrderStatus Done-----------------------------------*/
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseDTO updateMyOrderStatus(@PathVariable String myOrder_id, @PathVariable String status) {
+    public ResponseDTO updateMyOrderStatus(@RequestParam String myOrder_id, @RequestParam String status) {
         System.out.println("in update  update myOrder status");
         return new ResponseDTO(true, myOrderService.updateMyOrderStatus(Integer.parseInt(myOrder_id), status));
     }

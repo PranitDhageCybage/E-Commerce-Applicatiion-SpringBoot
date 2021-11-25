@@ -54,8 +54,10 @@ export class OrderService {
         token: sessionStorage['token'],
       }),
     };
+
+    const body = {}
     return this.httpClient.put(
-      this.url + '/update/' + id + '/' + status,
+      this.url + `/update?myOrder_id=${id}&status=${status}`, body,
       httpOptions
     );
   }

@@ -26,7 +26,7 @@ export class AuthService implements CanActivate {
 
   signup(name: string, phone: string, email: string, password: string) {
     const body = {
-      name: name,
+      username: name,
       phone: phone,
       email: email,
       password: password,

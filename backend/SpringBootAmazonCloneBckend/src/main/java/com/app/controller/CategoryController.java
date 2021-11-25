@@ -20,8 +20,8 @@ public class CategoryController {
         System.out.println("in CategoryController -- " + getClass().getName());
     }
 
-    @GetMapping("/list")/*------------------------------------------Admin getAllCategoryList Done--------------------------------------------------------*/
-    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/list")/*------------------------------------------Admin/User getAllCategoryList Done--------------------------------------------------------*/
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public ResponseDTO getAllCategoryList() {
         System.out.println("in  get all category list");
         return new ResponseDTO(true, categoryService.getAllCategories());

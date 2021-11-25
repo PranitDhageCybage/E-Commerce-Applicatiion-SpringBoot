@@ -17,7 +17,7 @@ public class ProductReview {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("review_id")
     @Column(name = "review_id")
-    private Integer userId;
+    private Integer Id;
 
     @JsonProperty("review")
     @Column(name = "review")

@@ -43,8 +43,6 @@ export class GalleryComponent implements OnInit {
   filterProducts(event: any) {
     const categoryId = event.target.value;
     this.products = [];
-    console.log(categoryId);
-
     if (categoryId == -1) {
       this.products = this.allProducts;
     } else {

@@ -83,7 +83,7 @@
         >
 
         <button
-          *ngIf="!image"
+          *ngIf="!image && product != null"
           (click)="onUploadImage()"
           class="btn bgm-shade float-right"
           style="margin-left: 10px"
